@@ -1,0 +1,92 @@
+class0101
+	BinaryBruteForce.java		1.1.38	 	蛮力对决二叉	相差大约730倍
+	CircleRanLine.java			1.1.31		均匀分布点事件连线
+	Histogram.java				1.1.32		直方图
+	PrepareVSData				1.1.38		准备对决数据
+	ShowDice.java				1.1.35		模拟两个骰子的投掷结果概率
+	Test.java					1.1.0		起始测试
+class0102
+	FindClosestPair.java		1.2.1		随机点的距离最近两点
+	Interval1DTest.java			1.2.2		找到随机分布一维点的最近一组，并找出相交段
+	Interval2DTest.java			1.2.3		按最大最小值生成矩形，找到相交图 包含图
+	Rational.java				1.2.16		有理数加减乘除判断，无误差方法
+	SmartDate.java				1.2.12		智能日期，添加找星期\相差年月数功能
+	VisualCounter.java			1.2.9		累加器，设置最大操作数和最大累加值
+class0103
+	AddLeftParentheses.java		1.3.9		字符串表达式运算
+	CircularQueue.java			1.3.29		循环队列仅保留队尾引用
+	CopyFromQueue.java			1.3.41		构造器复制另一队列、互不影响
+	CopyFromStack.java			1.3.42		构造器复制另一栈、互不影响
+	CopyStack.java				1.3.12		实现迭代器后的复制，静态方法和clone方法
+	DequeDLink.java				1.3.33		双端队列双向链表实现
+	DequeRArray.java			1.3.33		双端队列变长数组实现
+	DoubleNode.java				1.3.31		双向链表的实现头尾增删、任意位置增删
+	Josephus.java				1.3.37		约瑟夫杀人环循环队列实现
+	LinkReverse.java			1.3.30		链表反转
+	ListingFiles.java			1.3.43		队列展示文件夹目录结构
+	FixedCapacityStack.java		1.3.1		定长栈
+	GeneralizedAQueue.java		1.3.38		常规队列数组实现
+	GeneralizedLQueue.java		1.3.38		常规队列链表实现
+	MaximumKey.java				1.3.27/28	循环递归查找最大Key
+	MoveToFront.java			1.3.40		向前移动策略，多用于压缩、最近打开等等
+	ParenthesesBalance.java		1.3.4		括号平衡判断
+	PopPushSequence.java		1.3.3		栈的弹压顺序判断
+	RandomBag.java				1.3.34		随机包，继承自可变长数组包
+	RandomQueue.java			1.3.35		随机队列出队、取样、迭代时将队列随机化
+	ResizeStack.java			1.3.0  		基础类
+	StackGenerability.java		1.3.45		一串数字的混合弹压栈可能性验证
+	Steque.java					1.3.32		可入列栈/A stack-ended queue
+	TextEditorBuffer.java		1.3.44		双栈模拟文本缓冲编辑
+class0104
+	Birthday.java				1.4.44		重复周期出现概率√pai*N/2 验证
+	BitonicSearch.java			1.4.20		双调搜索，3*LogN
+	ClosestPair.java			1.4.16		最接近俩数，线性增长级
+	Coupon.java					1.4.45		找到所有可能性所需长度N*HN验证
+	DoublingRatio.java			1.4.43		可变数组、链表性能对比
+	DrawDoubleTest.java			1.4.3		模拟三数相加时间增长规模计时
+	DrawEqualTest.java			1.4.8		模拟两数相等时间增长规模计时
+	FibonacciSearch.java		1.4.22		递归非波拿起数列搜索目标
+	FindInMatrix.java			1.4.15		矩阵查找符合的key数量，NlogN
+	FindMinBinary.java			1.4.10		二叉搜索找最小下标匹配项，对数增长级
+	FindNumBinary.java			1.4.11		二叉查找符合的key数量，对数增长级
+	FractionBinary.java			1.4.23		搜索符合要求有理数
+	SumControler.java			1.4.15		测试生成、计时控制器
+	ThreeCollinearity.java		1.4.26		三X立方同线,相加为0
+	ThreeSumFaster.java			1.4.15		三数相加，最后一维三叉搜索
+	ThreeSumMatrix.java			1.4.15		三数相加，最后一维矩阵搜索
+	ThreeSumModel.java			1.4.40		三随机数相加模型
+	TildeJudge.java				1.4.5		模拟规模增长
+	TripleSearch.java			1.4.15		设计三叉搜索，查找符合key数量，对数增长级
+	TwoSumFaster.java			1.4.15		两数相加，最后一维三叉搜索
+	TwoSumMatrix.java			1.4.15		两数相加，最后一维矩阵搜索
+class0105
+	Animation.java				1.5.19		所有可能性的随机连线
+	Connectivity.java			1.5.0		联通图问题
+	ConnectRandom.java			1.5.0		更大规模联通图
+	DynamicGrowth.java			1.5.20		动态加入连接点
+	ErdosRenyi.java				1.5.17		随机连接对，计数知道形成联通图所需对数
+	ErdosRenyiPerf.java			1.5.22		模型性能测试
+	ErdosRenyiSerial.java		1.5.21		模型假设验证
+	QUCompression.java			1.5.12		快速联合深度压缩算法
+	QuickFindUF.java			1.5.7		实现快速查找
+	QuickUnionUF.java			1.5.7		实现快速联合
+	QWByHeight.java				1.5.14		树深度作权联合算法
+	QWCompression.java			1.5.13		权重树的深度压缩算法
+	RandomGrid.java				1.5.18		随机网格，显示所有连接，连接顺序通过随机包随机
+	UnionFind.java				1.5.1/2		单纯的找出联通图的个数，蛮力/合并树
+	UnionFind.java				1.5.3/4		权重合并树和打印权重合并过程
+solution01
+	Date.java					1.2.19
+	ErdosRenyi.java				1.5.17
+	EvaluatePostfix.java		1.3.11
+	FixedCapStackOfStrings.java	1.3.1
+	FourSum.java				1.4.14
+	InfixToPostfix.java			1.3.10
+	Josephus.java				1.3.37
+	Parentheses.java			1.3.4
+	QuickFindUF.java			1.5.7
+	QuickUnionUF.java			1.5.7
+	Rational.java				1.2.16
+	ResizingArrayQueue.java		1.3.14
+	Stack.java					1.3.7
+	Transaction.java			1.2.13

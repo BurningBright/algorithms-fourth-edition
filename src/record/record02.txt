@@ -1,0 +1,49 @@
+class0201
+	AnimationShellSort.java		2.1.0			希尔排序可视化
+	AnimationSortOne.java		2.1.17/18		选择、插入排序的可视化
+	EqualKeys.java				2.1.28			仅有俩key的样本排序性能测试
+	InsertionInThree.java		2.1.8			插入排序随机三元素样本结果相同
+	InsertionSort.java			2.1.4/24		插入排序/哨兵性能区别不大
+	InstrumentShell.java		2.1.12			希尔排序性能测试
+	SelectionSort.java			2.1.1			选择排序
+	ShellSort.java				2.1.9			希尔排序
+	SortCompare.java			2.1.25			插排对比性能提升约
+	TimePlot.java				2.1.32			时间分布工具
+class0202
+	AnimationMergeSort.java		2.2.0			合并排序可视化
+	FastMerge.java				2.2.10			右半边的倒序拷贝减少合并的边界检测
+	FindSubArray.java			2.2.5			统计排序过程中的子数组数
+	IndirectMergeSort.java		2.2.20			间接合并排序，排的是下标
+	MergeBU.java				2.2.2			自底向上循环的合并排序
+	MergeBUinQueue.java			2.2.15			自底向上的队列排序，包括循环、递归方式
+	MergeImprov.java			2.2.11			优化合并，判断左右、加入插排、取消拷贝-_-
+	MergeQueue.java				2.2.14			队列的合并排序
+	MergeTD.java				2.2.1/3			自顶向下递归的合并排序
+	NaturalMergeInLinked.java	2.2.17			链表的自然合并：通过检查是否符合顺序，找出左右两有序部分，将他们合并，递归检查是否全局有序。
+	NaturalMergeSort.java		2.2.16			自然合并排序
+	ShufflingLinkedList.java	2.2.18			分合算法打乱链表
+	SublinearESP.java			2.2.12			将额外空间变得次线性
+
+class0203
+	
+
+solution02
+	Heap.java					2.5.
+	IndexMaxPQ.java				2.4.
+	IndexMinPQ.java				2.4.
+	Insertion.java				2.1.2
+	InsertionX.java				2.1.3
+	MaxPQ.java					2.4.
+	Merge.java					2.2.1
+	MergeBU.java				2.2.3
+	MergeX.java					2.2.2
+	MinPQ.java					2.4.
+	Multiway.java				2.4.
+	Quick.java					2.3.1
+	Quick3way.java				2.3.3
+	QuickX.java					2.3.2
+	Selection.java				2.1.1
+	Shell.java					2.1.4
+	TopM.java					2.3.4
+	
+	
