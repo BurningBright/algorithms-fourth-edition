@@ -2,15 +2,19 @@ package class0101;
 
 import stdlib.StdDraw;
 import stdlib.StdRandom;
+/**
+ * 
+ * @Description 
+ * @author leon
+ * @date 2016年5月17日 上午11:24:06
+ */
+public class StdDrawTest {
 
-public class Test {
-
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		int N = 50;
 		double[] a = new double[N];
 		for (int i = 0; i < N; i++) {
-			a[i] = StdRandom.random();
+			a[i] = StdRandom.uniform();
 		}
 		for (int i = 0; i < N; i++) {
 			double x = 1.0 * i / N;
