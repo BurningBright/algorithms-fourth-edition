@@ -4,8 +4,11 @@ import java.util.Arrays;
 
 import stdlib.StdDraw;
 import stdlib.StdRandom;
-
-//1.1.32
+/**
+ * @Description 1.1.32
+ * @author Leon
+ * @date 2016-05-23 15:30:57
+ */
 public class Histogram {
 	public static double width = 0;
 	

@@ -1,11 +1,13 @@
 class0101
 	BinaryBruteForce.java		1.1.38	 	蛮力对决二叉	相差大约730倍
 	CircleRanLine.java			1.1.31		均匀分布点事件连线
+	Euclid.java					1.1.24		欧几里德算法
 	HandMath.java				1.1.14		手动算开方整数部分
 	Histogram.java				1.1.32		直方图
 	NatureLogarithm.java		1.1.20		乘阶对数递归
-	PrepareVSData				1.1.38		准备对决数据
+	PrepareVSData.java			1.1.38		准备对决数据
 	ShowDice.java				1.1.35		模拟两个骰子的投掷结果概率
+	ShuffleCheck.java			1.1.36		打乱验证
 	StdDraw.java				1.1.0		起始测试
 class0102
 	FindClosestPair.java		1.2.1		随机点的距离最近两点
