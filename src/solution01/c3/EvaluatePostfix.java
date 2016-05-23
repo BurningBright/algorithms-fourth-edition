@@ -1,5 +1,6 @@
-package solution01;
+package solution01.c3;
 
+import solution01.c3.Stack;
 import stdlib.StdIn;
 import stdlib.StdOut;
 /*************************************************************************

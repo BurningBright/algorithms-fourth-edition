@@ -1,4 +1,4 @@
-package solution01;
+package solution01.c3;
 
 import rlgs4.Queue;
 import stdlib.*;

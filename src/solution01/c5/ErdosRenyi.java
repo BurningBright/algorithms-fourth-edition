@@ -1,4 +1,4 @@
-package solution01;
+package solution01.c5;
 
 import rlgs4.UF;
 import stdlib.StdOut;

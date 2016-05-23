@@ -1,4 +1,4 @@
-package solution01;
+package solution01.c2;
 
 import stdlib.*;
 /*************************************************************************
