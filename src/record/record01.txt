@@ -6,10 +6,12 @@ class0101
 	Histogram.java				1.1.32		直方图
 	NatureLogarithm.java		1.1.20		乘阶对数递归
 	PrepareVSData.java			1.1.38		准备对决数据
+	RandomMatches.java			1.1.39		随机匹配的匹配率
 	ShowDice.java				1.1.35		模拟两个骰子的投掷结果概率
 	ShuffleCheck.java			1.1.36		打乱验证
 	StdDraw.java				1.1.0		起始测试
 class0102
+	CircularRotation.java		1.1.6		回环测试
 	FindClosestPair.java		1.2.1		随机点的距离最近两点
 	Interval1DTest.java			1.2.2		找到随机分布一维点的最近一组，并找出相交段
 	Interval2DTest.java			1.2.3		按最大最小值生成矩形，找到相交图 包含图
