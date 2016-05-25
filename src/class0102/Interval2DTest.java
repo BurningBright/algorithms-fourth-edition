@@ -7,7 +7,11 @@ import rlgs4.Interval1D;
 import rlgs4.Interval2D;
 import stdlib.StdRandom;
 
-//1.2.3
+/**
+ * @Description 1.2.3
+ * @author Leon
+ * @date 2016-05-25 11:11:26
+ */
 public class Interval2DTest {
 	
 	@SuppressWarnings("deprecation")

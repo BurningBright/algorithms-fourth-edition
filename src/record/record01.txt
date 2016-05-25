@@ -11,13 +11,14 @@ class0101
 	ShuffleCheck.java			1.1.36		打乱验证
 	StdDraw.java				1.1.0		起始测试
 class0102
-	CircularRotation.java		1.1.6		回环测试
+	BiSCount.java				1.1.9		对二分搜索技术
+	CircularRotation.java		1.2.6		回环测试
 	FindClosestPair.java		1.2.1		随机点的距离最近两点
 	Interval1DTest.java			1.2.2		找到随机分布一维点的最近一组，并找出相交段
 	Interval2DTest.java			1.2.3		按最大最小值生成矩形，找到相交图 包含图
 	Rational.java				1.2.16		有理数加减乘除判断，无误差方法
 	SmartDate.java				1.2.12		智能日期，添加找星期\相差年月数功能
-	VisualCounter.java			1.2.9		累加器，设置最大操作数和最大累加值
+	VisualCounter.java			1.2.10		累加器，设置最大操作数和最大累加值
 class0103
 	AddLeftParentheses.java		1.3.9		字符串表达式运算
 	CircularQueue.java			1.3.29		循环队列仅保留队尾引用
@@ -81,18 +82,3 @@ class0105
 	RandomGrid.java				1.5.18		随机网格，显示所有连接，连接顺序通过随机包随机
 	UnionFind.java				1.5.1/2		单纯的找出联通图的个数，蛮力/合并树
 	UnionFind.java				1.5.3/4		权重合并树和打印权重合并过程
-solution01
-	Date.java					1.2.19
-	ErdosRenyi.java				1.5.17
-	EvaluatePostfix.java		1.3.11
-	FixedCapStackOfStrings.java	1.3.1
-	FourSum.java				1.4.14
-	InfixToPostfix.java			1.3.10
-	Josephus.java				1.3.37
-	Parentheses.java			1.3.4
-	QuickFindUF.java			1.5.7
-	QuickUnionUF.java			1.5.7
-	Rational.java				1.2.16
-	ResizingArrayQueue.java		1.3.14
-	Stack.java					1.3.7
-	Transaction.java			1.2.13

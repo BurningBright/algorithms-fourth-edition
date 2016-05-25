@@ -1,8 +1,9 @@
-package solution02;
+package solution02.c3;
 
 import java.util.Stack;
 
 import rlgs4.Transaction;
+import solution02.c4.MinPQ;
 import stdlib.StdIn;
 import stdlib.StdOut;
 

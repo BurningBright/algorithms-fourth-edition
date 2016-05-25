@@ -1,6 +1,12 @@
 package class0102;
 import rlgs4.Date;
-
+/**
+ * @Description 智能时间
+ *              计算当前是星期几需要计算今天距离19000101有几天
+ *              根据19000101是星期一来推算
+ * @author Leon
+ * @date 2016-05-25 11:16:54
+ */
 public class SmartDate extends Date{
 
 	public SmartDate(int month, int day, int year) {
@@ -98,6 +104,7 @@ public class SmartDate extends Date{
 		System.out.println(testYear1.intervalYear(testYear2));
 		System.out.println(testYear1.intervalMonth(testYear2));
 //		System.out.println(makeValid(2014, 2, 30).toString());
+		System.out.println(new SmartDate(5, 25, 2016).dayOfWeek());
 	}
 
 }

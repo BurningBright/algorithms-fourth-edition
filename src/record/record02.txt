@@ -26,24 +26,3 @@ class0202
 
 class0203
 	
-
-solution02
-	Heap.java					2.5.
-	IndexMaxPQ.java				2.4.
-	IndexMinPQ.java				2.4.
-	Insertion.java				2.1.2
-	InsertionX.java				2.1.3
-	MaxPQ.java					2.4.
-	Merge.java					2.2.1
-	MergeBU.java				2.2.3
-	MergeX.java					2.2.2
-	MinPQ.java					2.4.
-	Multiway.java				2.4.
-	Quick.java					2.3.1
-	Quick3way.java				2.3.3
-	QuickX.java					2.3.2
-	Selection.java				2.1.1
-	Shell.java					2.1.4
-	TopM.java					2.3.4
-	
-	

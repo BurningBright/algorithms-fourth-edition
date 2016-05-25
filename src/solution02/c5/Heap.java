@@ -1,4 +1,4 @@
-package solution02;
+package solution02.c5;
 
 import stdlib.StdIn;
 import stdlib.StdOut;
