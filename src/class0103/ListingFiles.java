@@ -50,7 +50,7 @@ public class ListingFiles {
 	}
 	
 	public static void main(String[] args) {
-		ListingFiles.listingFiles("../Guess");
+		ListingFiles.listingFiles("./");
 		ListingFiles.printQueue();
 	}
 

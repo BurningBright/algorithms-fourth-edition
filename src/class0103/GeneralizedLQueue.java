@@ -2,7 +2,12 @@ package class0103;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+/**
+ * @Description 1.3.38
+ *          常规队列列表实现
+ * @author Leon
+ * @date 2016-05-30 16:06:15
+ */
 public class GeneralizedLQueue<Item> implements Iterable<Item> {
 	private int N;
 	private Node first;

@@ -2,8 +2,13 @@ package class0103;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
+/**
+ * @Description 可变栈
+ * @author Leon
+ * @date 2016-05-30 10:07:20
+ */
 public class ResizeStack<Item> implements Iterable<Item> {
+
 	@SuppressWarnings("unchecked")
 	private Item[] a = (Item[]) new Object[1]; // stack items
 	private int N = 0; // number of items
@@ -22,6 +27,7 @@ public class ResizeStack<Item> implements Iterable<Item> {
 		for (int i = 0; i < N; i++)
 			temp[i] = a[i];
 		a = temp;
+//		System.arraycopy(a, 0, temp, 0, a.length);
 	}
 
 	public void push(Item item) { // Add item to top of stack.

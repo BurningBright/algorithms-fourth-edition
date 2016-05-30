@@ -5,6 +5,12 @@ import java.util.NoSuchElementException;
 
 import stdlib.StdRandom;
 
+/**
+ * @Description 1.3.35
+ *      随机队列
+ * @author Leon
+ * @date 2016-05-30 15:09:48
+ */
 public class RandomQueue<Item> implements Iterable<Item> {
 	private Item[] q; // queue elements
 	private int N = 0; // number of elements on queue

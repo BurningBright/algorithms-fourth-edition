@@ -2,7 +2,13 @@ package class0103;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
+import java.util.NoSuchElementException;
+/**
+ * @Description 1.3.12
+ * 				拷贝栈，其中的拷贝方法是迭代器价值的体现
+ * @author Leon
+ * @date 2016-05-30 10:40:03
+ */
 public class CopyStack<Item> implements Iterable<Item>,Cloneable{
 	
 	private Item[] a;
@@ -58,15 +64,18 @@ public class CopyStack<Item> implements Iterable<Item>,Cloneable{
 		}
 
 		public Item next() {
+			if (!hasNext())
+				throw new NoSuchElementException();
 			return a[--i];
 		}
 
 		public void remove() {
-			
+			throw new UnsupportedOperationException();
 		}
 	}
 
 	public static CopyStack<Integer> copy(CopyStack<Integer> cs) {
+		// use iterator interface copy to a new object
 		int size = cs.size();
 		CopyStack<Integer> tmp = new CopyStack<Integer>(size);
 		Iterator<Integer> i = cs.iterator();
@@ -82,7 +91,8 @@ public class CopyStack<Item> implements Iterable<Item>,Cloneable{
 		cs.push(5);
 		cs.push(3);
 		cs.push(2);
-		System.out.println(copy(cs));
-		System.out.println(cs.clone());
+		System.out.println(cs.hashCode());
+		System.out.println(copy(cs).hashCode());
+		System.out.println(cs.clone().hashCode());
 	}
 }
