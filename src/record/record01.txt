@@ -30,12 +30,15 @@ class0103
 	DequeRArray.java			1.3.33		双端队列变长数组实现
 	DoubleNode.java				1.3.31		双向链表的实现头尾增删、任意位置增删
 	EnDeQueueSequence.java		1.3.13		队列的进出队列判断
+	Evaluate.java				1.3.0		基础计算【编译基础】
+	EvaluatePostfix.java		1.3.11		计算后序表达式
 	Josephus.java				1.3.37		约瑟夫杀人环循环队列实现
 	LinkReverse.java			1.3.30		链表反转
 	ListingFiles.java			1.3.43		队列展示文件夹目录结构
 	FixedCapacityStack.java		1.3.1		定长栈
 	GeneralizedAQueue.java		1.3.38		常规队列数组实现
 	GeneralizedLQueue.java		1.3.38		常规队列链表实现
+	InfixToPostfix.java			1.3.10		中序表达式->后序表达式
 	InstanceOfQueue.java		1.3.15		队列的实例，读取倒数第K个标准输入
 	MaximumKey.java				1.3.27/28	循环递归查找最大Key
 	MoveToFront.java			1.3.40		向前移动策略，多用于压缩、最近打开等等
@@ -43,7 +46,7 @@ class0103
 	PopPushSequence.java		1.3.3		栈的弹压顺序判断
 	RandomBag.java				1.3.34		随机包，继承自可变长数组包
 	RandomQueue.java			1.3.35/36	随机队列出队、取样、迭代时将队列随机化
-	ResizeStack.java			1.3.0		基础类
+	ResizeStack.java			1.3.0		基础可变大小栈
 	StackGenerability.java		1.3.45		一串数字的混合弹压栈可能性验证
 	Steque.java					1.3.32		可入列栈/A stack-ended queue
 	TextEditorBuffer.java		1.3.44		双栈模拟文本缓冲编辑
