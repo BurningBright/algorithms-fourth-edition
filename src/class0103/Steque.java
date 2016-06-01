@@ -21,6 +21,7 @@ public class Steque<Item> implements Iterable<Item> {
 	}
 	
 	private class Node {
+		public Node(Item item) { this.item = item; }
 		private Item item;
 		private Node next;
 	}
@@ -30,8 +31,8 @@ public class Steque<Item> implements Iterable<Item> {
 	 * @param item
 	 */
 	public void push(Item item) {
-		Node newOne = new Node();
-		newOne.item = item;
+		Node newOne = new Node(item);
+		
 		if(N == 0) {
 			first = newOne;
 			last = newOne;
@@ -68,8 +69,8 @@ public class Steque<Item> implements Iterable<Item> {
 	 * @param item
 	 */
 	public void enqueue(Item item) {
-		Node newOne = new Node();
-		newOne.item = item;
+		Node newOne = new Node(item);
+		
 		if(N == 0) {
 			first = newOne;
 			last = newOne;
