@@ -1,2 +1,2 @@
-# study algorithms fourth edition
-study algorithms for fun
+# learn algorithms fourth edition
+learn algorithms for fun
