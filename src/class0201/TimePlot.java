@@ -54,7 +54,7 @@ public class TimePlot {
 	}
 	
 	private static void initialDraw(int N) {
-		StdDraw.line(-.03, 0, 1, 0);
+		StdDraw.line(0, 0, 1, 0);
 		StdDraw.line(0, -.03, 0, 1);
 		
 		double point1X = 0 - arrowLen * Math.sin(arrowAngle/360.0 * 2 * Math.PI);

@@ -72,6 +72,7 @@ class0104
 	ThreeSumFaster.java			1.4.15		三数相加，最后一维三叉搜索
 	ThreeSumMatrix.java			1.4.15		三数相加，最后一维矩阵搜索
 	ThreeSumModel.java			1.4.40		三随机数相加模型
+	ThrowEggs.java				1.4.25		丢鸡蛋问题
 	TildeJudge.java				1.4.5		模拟规模增长
 	TripleSearch.java			1.4.15		设计三叉搜索，查找符合key数量，对数增长级
 	TwoSumFaster.java			1.4.15		两数相加，最后一维三叉搜索

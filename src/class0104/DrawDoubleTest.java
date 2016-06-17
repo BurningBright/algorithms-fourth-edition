@@ -59,7 +59,7 @@ public class DrawDoubleTest {
 		
 		new Thread(new Runnable() {
 			public void run() {
-				int N=12000;
+				int N=6000;
 				a[0] = DoublingTest.timeTrial(N);
 				StdOut.printf("%7d %5.1f\n", N, a[0]);
 			}

@@ -24,7 +24,7 @@ public class Birthday {
 	}
 	
 	public static void main(String[] args) {
-		int N = 300;
+		int N = 2000;
 		bag = new ResizingArrayBag<Integer>();
 		int current;
 		while(!contain((current=StdRandom.uniform(N)))){
