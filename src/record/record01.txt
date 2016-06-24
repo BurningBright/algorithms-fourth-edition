@@ -58,17 +58,19 @@ class0104
 	Adjustable2DChart.java		1.4.3		可调图表
 	Birthday.java				1.4.44		重复周期出现概率√pai*N/2 验证
 	BitonicSearch.java			1.4.20		双调搜索，3*LogN
-	ClosestPair.java			1.4.16		最接近俩数，线性增长级
+	ClosestPair.java			1.4.16/17	最接近俩数，线性增长级
 	Coupon.java					1.4.45		找到所有可能性所需长度N*HN验证
 	DoublingRatio.java			1.4.43		可变数组、链表性能对比
 	DrawDoubleTest.java			1.4.3		模拟三数相加时间增长规模计时
 	DrawEqualTest.java			1.4.8		模拟两数相等时间增长规模计时
-	FibonacciSearch.java		1.4.22		递归非波拿起数列搜索目标
+	FibonacciSearch.java		1.4.22		递归斐波那契数列搜索目标
 	FindInMatrix.java			1.4.15		矩阵查找符合的key数量，NlogN
 	FindMinBinary.java			1.4.10		二叉搜索找最小下标匹配项，对数增长级
 	FindNumBinary.java			1.4.11		二叉查找符合的key数量，对数增长级
 	FractionBinary.java			1.4.23		搜索符合要求有理数
+	LocalMin4Aray.java			1.4.18/19	查找最小[小中大]组，意义何在
 	SumControler.java			1.4.15		测试生成、计时控制器
+	TheSameInTwo.java			1.4.12		找出两数组中的相同元素
 	ThreeCollinearity.java		1.4.26		三X立方同线,相加为0
 	ThreeSumFaster.java			1.4.15		三数相加，最后一维三叉搜索
 	ThreeSumMatrix.java			1.4.15		三数相加，最后一维矩阵搜索

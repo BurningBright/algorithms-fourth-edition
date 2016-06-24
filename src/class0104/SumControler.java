@@ -1,6 +1,7 @@
 package class0104;
 
 import rlgs4.Stopwatch;
+import rlgs4.ThreeSum;
 import stdlib.StdOut;
 import stdlib.StdRandom;
 
@@ -21,6 +22,9 @@ public class SumControler {
 		/*much more slower*/
 //		int cnt = new TwoSumMatrix(a).count();
 //		int cnt = new ThreeSumMatrix(a).count();
+		
+		/*slowest*/
+//		int cnt = ThreeSum.count(a);
 		
 		/*FibonacciSearch*/
 //		new FibonacciSearch(a);
