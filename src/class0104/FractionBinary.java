@@ -6,7 +6,12 @@ import class0102.Rational;
 
 import stdlib.StdOut;
 import stdlib.StdRandom;
-
+/**
+ * @Description 1.4.23
+ *      in hint use +1/N2 to compare less than
+ * @author Leon
+ * @date 2016-06-27 10:40:05
+ */
 public class FractionBinary {
 	private Rational[] a;
 	

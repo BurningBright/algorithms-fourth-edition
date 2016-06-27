@@ -9,13 +9,13 @@ import stdlib.StdOut;
  * @author soft01
  * 
  */
-public class FixedCapacityStack {
+public class FixedCapacityStack<T extends Object> {
 
-	private String[] a; // stack entries
+	private Object[] a; // stack entries
 	private int N; // size
 
 	public FixedCapacityStack(int cap) {
-		a = new String[cap];
+		a = new Object[cap];
 	}
 
 	public boolean isEmpty() {
@@ -26,26 +26,28 @@ public class FixedCapacityStack {
 		return N;
 	}
 
-	public void push(String item) {
+	public void push(T item) {
 		a[N++] = item;
 	}
 
-	public String pop() {
-		return a[--N];
+	@SuppressWarnings("unchecked")
+    public T pop() {
+		return (T)a[--N];
 	}
 
 	public boolean isFull() {
 		return N==a.length;
 	}
 	public static void main(String[] args) {
-		FixedCapacityStack s;
-		s = new FixedCapacityStack(100);
+		FixedCapacityStack<String> s;
+		s = new FixedCapacityStack<String>(100);
 		while (!StdIn.isEmpty()) {
 			String item = StdIn.readString();
 			if (!item.equals("-")) {
 				s.push(item);
 			} else if (!s.isEmpty()) {
 				StdOut.print(s.pop() + " ");
+				break;
 			}
 		}
 		StdOut.println("(" + s.size() + " left on stack)");
