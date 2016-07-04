@@ -373,7 +373,7 @@ public class Adjustable2DChart {
 
     public static void main(String[] args) {
         // test1 标准分布
-        
+        /*
         Adjustable2DChart a2d = new Adjustable2DChart(0.3, 0.1, 0, 0);
         
         a2d.setChartDesc("standard plot");
@@ -401,7 +401,7 @@ public class Adjustable2DChart {
             a2d.addChartData(N, time);
             a2d.reDraw();
         }
-        
+        */
         
         // test2 测试超范围
         /*
@@ -428,7 +428,7 @@ public class Adjustable2DChart {
         */
         
         // test4 测试对数分布
-        /*
+        
         Adjustable2DChart a2d1 = new Adjustable2DChart(0.4, 0.1, -0.3, -0.1);
         
         a2d1.setChartDesc("log-log plot");
@@ -440,7 +440,10 @@ public class Adjustable2DChart {
         a2d1.addAxisDataX(Math.log10(4000.0), "4k");
         a2d1.addAxisDataX(Math.log10(8000.0), "8k");
         
-        for (int N = 1000; N<9000; N += 1000) {
+//        a2d1.addAxisDataY(1.28, "0.3");
+//        a2d1.addAxisDataY(1.56, "0.5");
+        
+        for (int N = 1000; N<9000; N += N) {
             double time = DoublingTest.timeTrial(N);
             System.out.println(time + "--------" + Math.log10(time) + "-------"+ Math.log10(N*1.0));
             
@@ -450,7 +453,7 @@ public class Adjustable2DChart {
             a2d1.addChartData(Double.parseDouble(String.format("%.2f", Math.log10(N*1.0))), fake);
             a2d1.reDraw();
         }
-        */
+        
     }
 
 }
