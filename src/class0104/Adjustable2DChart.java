@@ -439,7 +439,7 @@ public class Adjustable2DChart {
         a2d1.addAxisDataX(Math.log10(2000.0), "2k");
         a2d1.addAxisDataX(Math.log10(4000.0), "4k");
         a2d1.addAxisDataX(Math.log10(8000.0), "8k");
-        
+//        a2d1.addAxisDataX(Math.log10(16000.0), "16k");
 //        a2d1.addAxisDataY(1.28, "0.3");
 //        a2d1.addAxisDataY(1.56, "0.5");
         
