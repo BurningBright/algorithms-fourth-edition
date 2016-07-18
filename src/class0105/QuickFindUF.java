@@ -17,7 +17,13 @@ public class QuickFindUF {
 		}
 	}
 	
-	public void quickUnion(int p, int q) {
+	public boolean connected(int p, int q) {
+		int rootP = find(p);
+		int rootQ = find(q);
+		return rootP == rootQ ? true : false;
+	}
+
+	public void union(int p, int q) {
 		int pID = find(p);
 		int qID = find(q);
 		if (pID == qID) return;
@@ -34,7 +40,7 @@ public class QuickFindUF {
 		return id[p];
 	}
 	
-	public int getCount() {
+	public int count() {
 		return count;
 	}
 	

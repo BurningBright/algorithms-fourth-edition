@@ -17,7 +17,14 @@ public class QuickUnionUF {
 		}
 		
 	}
-	public  void quickUnion(int p, int q) {
+	
+	public boolean connected(int p, int q) {
+		int rootP = find(p);
+		int rootQ = find(q);
+		return rootP == rootQ ? true: false;
+	}
+	
+	public  void union(int p, int q) {
 		// p's root element component number
 		int rootP = find(p);
 		// q's root element component number
@@ -40,13 +47,13 @@ public class QuickUnionUF {
 		return p;
 	}
 	
-	public int getCount() {
+	public int count() {
 		return count;
 	}
 	
 	public static void main(String[] args) {
 		QuickUnionUF qu = new QuickUnionUF(10);
-		qu.quickUnion(0, 1);
-		System.out.println(qu.getCount());
+		qu.union(0, 1);
+		System.out.println(qu.count());
 	}
 }

@@ -25,13 +25,13 @@ public class RandomGrid{
 		QuickUnionUF qu = new QuickUnionUF(N);
 		
 		int preCount = 0;
-		while(qu.getCount() != 1) {
+		while(qu.count() != 1) {
 			int p = (int) (StdRandom.uniform()*N);
 			int q = (int) (StdRandom.uniform()*N);
-			qu.quickUnion(p, q);
-			if(preCount != qu.getCount()) {
+			qu.union(p, q);
+			if(preCount != qu.count()) {
 				rb.add(new Connection(p, q));
-				preCount = qu.getCount();
+				preCount = qu.count();
 			}
 		}
 		

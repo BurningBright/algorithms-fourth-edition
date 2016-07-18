@@ -16,13 +16,13 @@ public class ErdosRenyiPerf {
 //		QuickFindUF qu = new QuickFindUF(N);
 //		QuickUnionUF qu = new QuickUnionUF(N);
 //		QWByHeight qu = new QWByHeight(N);
-		QWCompression qu = new QWCompression(N);
+		QickUnionWeightCompressionUF qu = new QickUnionWeightCompressionUF(N);
 
 		int times = 0;
 		while (qu.getCount() != 1) {
 			int p = (int) (Math.random() * N);
 			int q = (int) (Math.random() * N);
-			qu.quickUnion(p, q);
+			qu.union(p, q);
 			times++;
 		}
 		System.out.print(times);

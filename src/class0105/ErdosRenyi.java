@@ -7,18 +7,27 @@ package class0105;
  *
  */
 public class ErdosRenyi {
-
-	public static void main(String[] args) {
-		QuickUnionUF qu = new QuickUnionUF(10);
+	
+	public static int count(int N) {
+		
+		QuickUnionUF qu = new QuickUnionUF(N);
 		int times = 0;
-		while(qu.getCount() != 1) {
-			int p = (int) (Math.random()*10);
-			int q = (int) (Math.random()*10);
-			System.out.println(p+" "+q+" "+qu.getCount());
-			qu.quickUnion(p, q);
+		while(qu.count() != 1) {
+			int p = (int) (Math.random()*N);
+			int q = (int) (Math.random()*N);
+			System.out.println(p+" "+q+" "+qu.count());
+			
+			if(qu.connected(p, q))
+				qu.union(p, q);
 			times++;
 		}
-		System.out.println(times);
+		
+		return times;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(count(10));
 	} 
 
 }

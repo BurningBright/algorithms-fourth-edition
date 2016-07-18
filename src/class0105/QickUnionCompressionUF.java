@@ -10,7 +10,7 @@ import class0103.CircularQueue;
  * links every site on the paths from 
  * p and q to the roots of their trees to the
  * root of the new tree
- * 
+ * 有点像"快找"算法
  * @author soft01
  *
  */
@@ -30,20 +30,21 @@ public class QickUnionCompressionUF {
         CircularQueue<Integer> circP = find(p);
         CircularQueue<Integer> circQ = find(q);
         
-        StdOut.println(p + "  " + q + "  ");
+        StdOut.print(p + "  " + q + "  t:" +circQ.tail() + " ");
         
         if (circP.tail().equals(circQ.tail())) {
+            StdOut.println();
             return;
         }
         // id[circP.tail()] = circQ.tail();
         count--;
         
         // put path's node to it's root
-//        for (int i = 0; i < circP.size(); i++) {
-//            id[circP.dequeue()] = circQ.tail();
-//        }
-        for (Integer i : circP)
-            id[i] = circQ.tail();
+        int size = circP.size();
+        for (int i = 0; i < size; i++) {
+            Integer j = circP.dequeue();
+            id[j] = circQ.tail();
+        }
         StdOut.println(Arrays.toString(id));
     }
 
@@ -67,9 +68,12 @@ public class QickUnionCompressionUF {
     public static void main(String[] args) {
         int[] a = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
         QickUnionCompressionUF quc = new QickUnionCompressionUF(10);
-        for (int i = 0; i < a.length; i += 2) {
-            quc.union(a[i], a[i + 1]);
-        }
+//        for (int i = 0; i < a.length; i += 2) {
+//            quc.union(a[i], a[i + 1]);
+//        }
+        quc.union(0, 1);
+        quc.union(2, 3);
+        quc.union(0, 2);
         StdOut.println(quc.getCount());
     }
 
