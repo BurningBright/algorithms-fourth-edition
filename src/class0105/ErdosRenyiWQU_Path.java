@@ -6,47 +6,46 @@ import java.util.List;
 
 import class0104.Adjustable2DChart;
 import rlgs4.Stopwatch;
-
 /**
- * @Description 1.5.23
- *      Compare quick-find with 
- *      quick-union for Erdös-Renyi model.
- *      对比快联、快找性能
+ * @Description 1.5.24
+ *      对比 WeightedQuickUnionUF 和 WeightedQickUnionPathUF
+ *      在 ErdosRenyi 模型下的性能表现
+ *      貌似队列的使用影响了效率
  * @author Leon
- * @date 2016-07-18 17:21:28
+ * @date 2016-07-19 17:13:03
  */
-public class ErdosRenyiQF_QU {
-    
+public class ErdosRenyiWQU_Path {
+
     private static List<Conn> date;
     
     private static List<Conn> datePrepare(int N) {
         date = new LinkedList<Conn>();
-        QuickFindUF qf = new QuickFindUF(N);
+        WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(N);
         
-        while(qf.count() != 1) {
+        while(wqu.count() != 1) {
             int p = (int) (Math.random()*N);
             int q = (int) (Math.random()*N);
             date.add(new Conn(p, q));
-            qf.union(p, q);
+            wqu.union(p, q);
         }
         
         return date;
     }
     
-    private static void QU(int N) {
-        QuickUnionUF qu = new QuickUnionUF(N);
+    private static void WQU(int N) {
+        WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(N);
         for(Conn c: date)
-            qu.union(c.p, c.q);
+            wqu.union(c.p, c.q);
     }
     
-    private static void QF(int N) {
-        QuickFindUF qf = new QuickFindUF(N);
+    private static void WQUP(int N) {
+        WeightedQickUnionPathQUF wqup = new WeightedQickUnionPathQUF(N);
         for(Conn c: date)
-        	qf.union(c.p, c.q);
+            wqup.union(c.p, c.q);
     }
     
     public static void main(String[] args) {
-        int T = 5;
+        int T = 12;
         Adjustable2DChart a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
         
         a2d.setChartDesc("Erdös-Renyi model");
@@ -57,14 +56,14 @@ public class ErdosRenyiQF_QU {
         for (int i = 10000, j = 0; j < T; i *= 2, j++) {
             datePrepare(i);
             Stopwatch swatch = new Stopwatch();
-            QF(i);
-            System.out.print(i+" quick find:" + swatch.elapsedTime());
+            WQU(i);
+            System.out.print(i+" weighted quick union:" + swatch.elapsedTime());
             a2d.addChartData(i, swatch.elapsedTime());
             a2d.reDraw();
             
             swatch = new Stopwatch();
-            QU(i);
-            System.out.println("  quick union:" + swatch.elapsedTime());
+            WQUP(i);
+            System.out.println("  weighted quick union path:" + swatch.elapsedTime());
             a2d.addChartData(i, swatch.elapsedTime());
             a2d.reDraw();
         }

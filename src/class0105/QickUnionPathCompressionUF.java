@@ -14,11 +14,11 @@ import class0103.CircularQueue;
  * @author soft01
  *
  */
-public class QickUnionCompressionUF {
+public class QickUnionPathCompressionUF {
     private int[] id;
     private int count;
 
-    public QickUnionCompressionUF(int N) {
+    public QickUnionPathCompressionUF(int N) {
         this.id = new int[N];
         this.count = N;
         for (int i = 0; i < N; i++) {
@@ -67,7 +67,7 @@ public class QickUnionCompressionUF {
 
     public static void main(String[] args) {
         int[] a = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
-        QickUnionCompressionUF quc = new QickUnionCompressionUF(10);
+        QickUnionPathCompressionUF quc = new QickUnionPathCompressionUF(10);
 //        for (int i = 0; i < a.length; i += 2) {
 //            quc.union(a[i], a[i + 1]);
 //        }

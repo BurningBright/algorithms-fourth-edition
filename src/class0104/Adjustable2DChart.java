@@ -55,6 +55,8 @@ public class Adjustable2DChart {
     private double axisMaxInX = -10000;
     private double axisMaxInY = -10000;
     
+    private boolean isLinked = false;
+    
     // 坐标数据
     private List<Circle> coordinate = new LinkedList<Circle>();
     private double radius = .007;
@@ -161,7 +163,7 @@ public class Adjustable2DChart {
     // 非均匀基准间隔[通过手动输入形式解决]
     // 加入新点数据，根据映射表最大值做相应放大并重绘,同上
     // 基准数据画图、解释
-    private void reDraw() {
+    public void reDraw() {
         
         StdDraw.clear();
         
@@ -186,21 +188,29 @@ public class Adjustable2DChart {
         (new Line(0, 0, 0, baseY, 'y')).draw();
         
         // 数据重绘
-        Circle previous = null;
-        for(Circle current: coordinate) {
-            current.draw();
-            if(previous != null) {
-                StdDraw.setPenColor(Color.RED);
-                (new Line(previous.p, current.p)).draw();
-                StdDraw.setPenColor(Color.BLACK);
+        if(isLinked) {
+            Circle previous = null;
+            for(Circle current: coordinate) {
+                current.draw();
+                if(previous != null) {
+                    (new Line(previous.p, current.p)).draw();
+                }
+                previous = current;
             }
-            previous = current;
+        } else {
+            for(Circle current: coordinate) 
+                current.draw();
         }
+        
         
         // 重绘描述
         (new InnerStr(0.5, -axisDescDistanceX, axisXDesc, 'x')).draw();
         (new InnerStr(-axisDescDistanceY, 0.5, axisYDesc, 'y')).draw(90);
         (new InnerStr(-axisDescDistanceChart, 0.77, chartDesc, 'T')).draw();
+    }
+    
+    public void setColorForChar(Color c) {
+        StdDraw.setPenColor(c);
     }
     
     class Point {
@@ -231,9 +241,7 @@ public class Adjustable2DChart {
             this.radius = radius;
         }
         public void draw() {
-            StdDraw.setPenColor(Color.RED);
             StdDraw.filledCircle(p.x, p.y, radius);
-            StdDraw.setPenColor(Color.BLACK);
         }
     }
     
@@ -272,14 +280,10 @@ public class Adjustable2DChart {
             this.src = src;
         }
         public void draw() {
-            StdDraw.setPenColor(Color.RED);
             StdDraw.text(x, y, src);
-            StdDraw.setPenColor(Color.BLACK);
         }
         public void draw(double degree) {
-            StdDraw.setPenColor(Color.RED);
             StdDraw.text(x, y, src, degree);
-            StdDraw.setPenColor(Color.BLACK);
         }
     }
     
@@ -371,6 +375,14 @@ public class Adjustable2DChart {
         this.radius = radius;
     }
 
+    public boolean isLinked() {
+        return isLinked;
+    }
+
+    public void setLinked(boolean isLinked) {
+        this.isLinked = isLinked;
+    }
+
     public static void main(String[] args) {
         // test1 标准分布
         /*
@@ -443,6 +455,7 @@ public class Adjustable2DChart {
 //        a2d1.addAxisDataY(1.28, "0.3");
 //        a2d1.addAxisDataY(1.56, "0.5");
         
+        a2d1.setColorForChar(Color.RED);
         for (int N = 1000; N<9000; N += N) {
             double time = DoublingTest.timeTrial(N);
             System.out.println(time + "--------" + Math.log10(time) + "-------"+ Math.log10(N*1.0));

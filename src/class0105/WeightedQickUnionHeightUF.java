@@ -10,12 +10,12 @@ import class0103.CircularQueue;
  * @author soft01
  *
  */
-public class QickUnionWeightByHeight {
+public class WeightedQickUnionHeightUF {
 	private int[] id;
 	private int [] dept;
 	private int count;
 	
-	public QickUnionWeightByHeight(int N) {
+	public WeightedQickUnionHeightUF(int N) {
 		this.id = new int[N];
 		this.dept = new int[N];
 		this.count = N;

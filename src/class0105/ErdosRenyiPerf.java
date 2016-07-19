@@ -16,7 +16,7 @@ public class ErdosRenyiPerf {
 //		QuickFindUF qu = new QuickFindUF(N);
 //		QuickUnionUF qu = new QuickUnionUF(N);
 //		QWByHeight qu = new QWByHeight(N);
-		QickUnionWeightCompressionUF qu = new QickUnionWeightCompressionUF(N);
+		WeightedQickUnionPathQUF qu = new WeightedQickUnionPathQUF(N);
 
 		int times = 0;
 		while (qu.getCount() != 1) {

@@ -17,7 +17,7 @@ public class ErdosRenyi {
 			int q = (int) (Math.random()*N);
 			System.out.println(p+" "+q+" "+qu.count());
 			
-			if(qu.connected(p, q))
+			if(!qu.connected(p, q))
 				qu.union(p, q);
 			times++;
 		}
