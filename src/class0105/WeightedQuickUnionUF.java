@@ -1,4 +1,7 @@
 package class0105;
+
+import stdlib.StdOut;
+
 /**
  * 
  * @Description 权重快联，将小树并上大树
@@ -48,5 +51,21 @@ public class WeightedQuickUnionUF {
             sz[i] += sz[j];
         }
         count--;
+//        StdOut.print(p + "  " + q + "  " + i + "  " + j);
+//        StdOut.print(Arrays.toString(sz));
+//        StdOut.println(Arrays.toString(id));
     }
+    
+    public static void main(String[] args) {
+        int[] a = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
+        WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(10);
+        for(int i=0; i<a.length; i+=2) {
+            wqu.union(a[i], a[i+1]);
+        }
+//      qwc.union(0, 1);
+//      qwc.union(2, 3);
+//      qwc.union(0, 2);
+        StdOut.println(wqu.count());
+    }
+    
 }

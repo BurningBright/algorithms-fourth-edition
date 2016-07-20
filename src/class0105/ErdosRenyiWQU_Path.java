@@ -39,16 +39,17 @@ public class ErdosRenyiWQU_Path {
     }
     
     private static void WQUP(int N) {
-        WeightedQickUnionPathQUF wqup = new WeightedQickUnionPathQUF(N);
+        WeightedQuickUnionPathQUF wqup = new WeightedQuickUnionPathQUF(N);
         for(Conn c: date)
             wqup.union(c.p, c.q);
     }
     
     public static void main(String[] args) {
-        int T = 12;
+        int T = 6;
         Adjustable2DChart a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
         
-        a2d.setChartDesc("Erdös-Renyi model");
+        a2d.setChartDesc("Erdös-Renyi model WQUP path vs nopath, nopath better");
+        a2d.setAxisDescDistanceChart(-.4);
         a2d.setAxisXDesc("N");
         a2d.setAxisYDesc("T");
         a2d.setColorForChar(Color.RED);

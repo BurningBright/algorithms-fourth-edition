@@ -8,11 +8,11 @@ import stdlib.StdOut;
  * @author soft01
  *
  */
-public class WeightedQickUnionPathQUF {
+public class WeightedQuickUnionPathQUF {
 	private int[] id;
 	private int count;
 	
-	public WeightedQickUnionPathQUF(int N) {
+	public WeightedQuickUnionPathQUF(int N) {
 		this.id = new int[N];
 		this.count = N;
 		for(int i=0; i<N; i++) {
@@ -53,8 +53,9 @@ public class WeightedQickUnionPathQUF {
 //			StdOut.print("+");
 		}
 		count--;
-//		StdOut.print(Arrays.toString(id));
-//		StdOut.println(Arrays.toString(sz));
+		
+//		StdOut.print(p + "  " + q);
+//		StdOut.println(Arrays.toString(id));
 	}
 	
 	public CircularQueue<Integer> find(int p) {
@@ -69,19 +70,19 @@ public class WeightedQickUnionPathQUF {
 		return cq;
 	}
 	
-	public int getCount() {
+	public int count() {
 		return count;
 	}
 	
 	public static void main(String[] args) {
 		int[] a = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
-		WeightedQickUnionPathQUF qwc = new WeightedQickUnionPathQUF(10);
+		WeightedQuickUnionPathQUF qwc = new WeightedQuickUnionPathQUF(10);
 		for(int i=0; i<a.length; i+=2) {
 			qwc.union(a[i], a[i+1]);
 		}
 //		qwc.union(0, 1);
 //		qwc.union(2, 3);
 //		qwc.union(0, 2);
-		StdOut.println(qwc.getCount());
+		StdOut.println(qwc.count());
 	}
 }

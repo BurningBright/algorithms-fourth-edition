@@ -92,13 +92,15 @@ class0105
 	ErdosRenyiPerf.java					1.5.22		模型性能测试
 	ErdosRenyiQF_QU.java				1.5.23		"快找"、"快联"性能对比
 	ErdosRenyiSerial.java				1.5.21		模型假设验证
+	ErdosRenyiWQU_Path.java				1.5.24		没有路径压缩反而更快？可能是压缩有重度的内存操作
 	QickUnionPathCompressionUF.java		1.5.12		"快联"深度压缩算法
 	QuickFindUF.java					1.5.7		实现快速查找
 	QuickUnionUF.java					1.5.7		实现快速联合
 	RandomGrid.java						1.5.18		随机网格，显示所有连接，连接顺序通过随机包随机
 	UnionFind.java						1.5.1/2		单纯的找出联通图的个数，蛮力/合并树
 	UnionFind.java						1.5.3/4		权重合并树和打印权重合并过程
-	WeightedQickUnionHeightUF.java		1.5.14		"快联"树高度作权联合算法
-	WeightedQickUnionPathQUF.java		1.5.13		"快联"权重树的深度压缩算法
 	WeightedQuickFindUF.java			1.5.11		树高作权"快找"算法
+	WeightedQuickUnionHeightUF.java		1.5.14		"快联"树高度作权联合算法
+	WeightedQuickUnionPathQUF.java		1.5.13		"快联"权重树的深度压缩算法
+	WeightedQuickUnionPathUF.java		1.5.13		"快联"权重树的深度压缩算法,性能并不如队列？可能是维护子树的操作影响了性能
 	WeightedQuickUnionUF.java			1.5.14		树高作权"快联"算法
