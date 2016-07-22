@@ -1,6 +1,5 @@
 package class0201;
 
-import stdlib.In;
 import stdlib.StdOut;
 
 /**
@@ -21,7 +20,6 @@ public class SelectionSort {
 				}
 			}
 			exch(a, i, min);
-//			show(a);
 		}
 	}
 
@@ -38,7 +36,6 @@ public class SelectionSort {
 	/*
 	 * Print the array, on a single line.
 	 */
-	@SuppressWarnings("unused")
 	private static void show(Comparable<Object>[] a) {
 		for (int i = 0; i < a.length; i++)
 			StdOut.print(a[i] + " ");
@@ -56,11 +53,13 @@ public class SelectionSort {
 	}
 
 	public static void main(String[] args) {
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		Comparable<Object>[] a = (Comparable[])In.readStrings("2.0/2.1/tiny1.txt");
+//		Comparable<Object>[] a = (Comparable[])In.readStrings("2.0/2.1/tiny1.txt");
+		
+		@SuppressWarnings("unchecked")
+		Comparable<Object>[] a = (Comparable[]) "E A S Y Q U E S T I O N".split(" ");
 		sort(a);
 		assert isSorted(a);
-//		show(a);
+		show(a);
 	}
 
 }

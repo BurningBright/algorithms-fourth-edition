@@ -1,6 +1,5 @@
 package class0201;
 
-import stdlib.In;
 import stdlib.StdOut;
 
 /**
@@ -117,11 +116,13 @@ public class InsertionSort {
 	}
 
 	public static void main(String[] args) {
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		Comparable<Object>[] a = (Comparable[]) In
-				.readStrings("2.0/2.1/tiny1.txt");
+//		Comparable<Object>[] a = (Comparable[]) In.readStrings("2.0/2.1/tiny1.txt");
+		
+		@SuppressWarnings("unchecked")
+		Comparable<Object>[] a = (Comparable[]) "E A S Y Q U E S T I O N".split(" ");
 		// sort(a);
-		optimizedThreeSort(a);
+		sort(a);
+//		optimizedThreeSort(a);
 		assert isSorted(a);
 		show(a);
 	}
