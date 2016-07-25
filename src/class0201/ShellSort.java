@@ -1,6 +1,5 @@
 package class0201;
 
-import stdlib.In;
 import stdlib.StdOut;
 /**
  * shell sort in insertion sort
@@ -61,9 +60,8 @@ public class ShellSort {
 	}
 
 	public static void main(String[] args) {
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		Comparable<Object>[] a = (Comparable[]) In
-				.readStrings("2.0/2.1/tiny2.txt");
+		@SuppressWarnings("unchecked")
+		Comparable<Object>[] a = (Comparable[]) "E A S Y S H E L L S O R T Q U E S T I O N".split(" ");
 		sort(a);
 		assert isSorted(a);
 		show(a);

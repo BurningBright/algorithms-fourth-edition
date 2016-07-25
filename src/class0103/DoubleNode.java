@@ -255,6 +255,14 @@ public class DoubleNode<Item> implements Iterable<Item>{
 		N--;
 	}
 	
+	public Item peek() {
+		return begin.item;
+	}
+	
+	public Item tail() {
+		return point.item;
+	}
+	
 	/**
 	 * used to show data
 	 */
