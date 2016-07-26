@@ -40,13 +40,13 @@ public class AnimationShellSort {
 			h = 3 * h + 1;
 		}
 		while (h >= 1) {
-			for(int i=0;i<10;) {
-				i = StdIn.readInt();
-			}
+//			for(int i=0;i<10;) {
+//				i = StdIn.readInt();
+//			}
 			
 			int counter = 1;
 			StdDraw.clear();
-			AnimationSortOne.draw(privous, 0, 0);
+			AnimationSortCompare.draw(privous, 0, 0);
 			
 			for (int i = h; i < N; i++) {
 				/*
@@ -62,7 +62,7 @@ public class AnimationShellSort {
 						ShellSort.exch(a, j, j - h);
 					} 
 				}
-				AnimationSortOne.draw(a, 0, -insertY*(counter++), touched, target);
+				AnimationSortCompare.draw(a, 0, -insertY*(counter++), touched, target);
 			}
 			h /= 3;
 			
@@ -70,8 +70,8 @@ public class AnimationShellSort {
 	}
 	
 	public static void main(String[] args) {
-		AnimationSortOne.internalX = .45;
-		AnimationSortOne.halfWidth = .30;
+		AnimationSortCompare.internalX = .45;
+		AnimationSortCompare.halfWidth = .30;
 		StdDraw.setXscale(0, 23.0);
 		StdDraw.setYscale(-200.0, 0);
 		sortProcess(30);

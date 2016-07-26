@@ -16,7 +16,7 @@ import stdlib.StdRandom;
  * @author Chen
  *
  */
-public class AnimationSortOne {
+public class AnimationSortCompare {
 	
 	//x coordinate's internal distance 
 	public static double internalX = .25;

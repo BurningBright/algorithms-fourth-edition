@@ -1,6 +1,6 @@
 class0201
 	AnimationShellSort.java				2.1.0			希尔排序可视化
-	AnimationSortOne.java				2.1.17/18		选择、插入排序的可视化
+	AnimationSortCompare.java			2.1.17			选择、插入排序的可视化
 	DequeueSort.java					2.1.14			出队排序，感觉效率好低
 	EqualKeys.java						2.1.28			仅有俩key的样本排序性能测试
 	InsertionInThree.java				2.1.8			插入排序随机三元素样本结果相同
@@ -10,6 +10,8 @@ class0201
 	ShellSort.java						2.1.9			希尔排序
 	SortCompare.java					2.1.25			插排对比性能提升约40%
 	TimePlot.java						2.1.32			时间分布工具
+	VisualTracesShellSort.java			2.1.18			选择、插入排序的可视化追踪
+	VisualTracesSortCompare.java		2.1.0			希尔排序可视化追踪
 class0202
 	AnimationMergeSort.java				2.2.0			合并排序可视化
 	FastMerge.java						2.2.10			右半边的倒序拷贝减少合并的边界检测

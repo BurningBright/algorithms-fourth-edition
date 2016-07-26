@@ -2,7 +2,7 @@ package class0202;
 
 import stdlib.StdDraw;
 import stdlib.StdRandom;
-import class0201.AnimationSortOne;
+import class0201.AnimationSortCompare;
 
 /**
  * describe: 
@@ -42,7 +42,7 @@ public class AnimationMergeSort {
 			for(int i=0; i<size-sz; i+=2*sz) {
 				MergeTD.mergeFirst(i, i+sz-1, Math.min(i+2*sz-1, size-1), a);
 			}
-			AnimationSortOne.draw(a, 0, -insertY*++flag);
+			AnimationSortCompare.draw(a, 0, -insertY*++flag);
 		}
 	}
 	
@@ -53,12 +53,12 @@ public class AnimationMergeSort {
 		mergeTd(mid+1, hi, a);		// can't miss +1 because the part is different
 		MergeTD.mergeFirst(lo, mid, hi, a);
 		if(hi-lo>15)
-			AnimationSortOne.draw(a, insertX, -insertY*++flag);
+			AnimationSortCompare.draw(a, insertX, -insertY*++flag);
 	}
 	
 	public static void main(String[] args) {
-		AnimationSortOne.internalX = .15;
-		AnimationSortOne.halfWidth = .13;
+		AnimationSortCompare.internalX = .15;
+		AnimationSortCompare.halfWidth = .13;
 		StdDraw.setXscale(0, 40.0);
 		StdDraw.setYscale(-13.0, 0);
 		sortProcess(70);
