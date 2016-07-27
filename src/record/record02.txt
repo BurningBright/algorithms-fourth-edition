@@ -5,7 +5,7 @@ class0201
 	EqualKeys.java						2.1.28			仅有俩key的样本排序性能测试
 	InsertionInThree.java				2.1.8			插入排序随机三元素样本结果相同
 	InsertionSort.java					2.1.4/24		插入排序/哨兵性能区别不大
-	InstrumentShell.java				2.1.12			希尔排序性能测试
+	InstrumentShell.java				2.1.12/27		希尔排序性能测试
 	SelectionSort.java					2.1.1			选择排序
 	ShellSort.java						2.1.9			希尔排序
 	SortCompare.java					2.1.25			插排对比性能提升约40%

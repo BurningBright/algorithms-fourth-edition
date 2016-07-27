@@ -61,6 +61,12 @@ public class Adjustable2DChart {
     private List<Circle> coordinate = new LinkedList<Circle>();
     private double radius = .007;
     
+    /**
+     * @param relativeX 画面整体X偏移
+     * @param relativeY 画面整体Y偏移
+     * @param offsetX	X方向数据、轴、描述偏移
+     * @param offsetY	Y方向数据、轴、描述偏移
+     */
     public Adjustable2DChart(double relativeX, double relativeY, double offsetX, double offsetY) {
         this.relativeX = relativeX;
         this.relativeY = relativeY;
@@ -154,6 +160,17 @@ public class Adjustable2DChart {
             addAxisDataX(x, String.format("%.2f", x));
         }
         if(y > axisMaxInY) {
+            addAxisDataY(y, String.format("%.2f", y));
+        }
+        coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));
+//        reDraw();
+    }
+    
+    public void addChartData(boolean showX, boolean showY,double x, double y) {
+        if(x > axisMaxInX && showX) {
+            addAxisDataX(x, String.format("%.2f", x));
+        }
+        if(y > axisMaxInY && showY) {
             addAxisDataY(y, String.format("%.2f", y));
         }
         coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));
