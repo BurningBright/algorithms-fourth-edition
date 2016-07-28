@@ -43,7 +43,7 @@ public class ShellSort {
 	/*
 	 * Print the array, on a single line.
 	 */
-	private static void show(Comparable<Object>[] a) {
+	public static void show(Comparable<Object>[] a) {
 		for (int i = 0; i < a.length; i++)
 			StdOut.print(a[i] + " ");
 		StdOut.println();
