@@ -7,6 +7,8 @@ class0201
 	InsertionInThree.java				2.1.8			插入排序随机三元素样本结果相同
 	InsertionSort.java					2.1.4/24		插入排序/哨兵性能区别不大
 	InstrumentShell.java				2.1.12/27		希尔排序性能测试
+	NonuniformData.java					2.1.36			不规则分布数据
+	PartiallySorted						2.1.37			部分有序数据
 	SelectionSort.java					2.1.1			选择排序
 	ShellSort.java						2.1.9			希尔排序
 	ShellSortIncrements.java			2.1.29			希尔增量序列，提升28%左右

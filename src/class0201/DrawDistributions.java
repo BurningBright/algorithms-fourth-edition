@@ -40,10 +40,22 @@ public class DrawDistributions {
         StdDraw.line(5, 5, 5, -5);
     }
     
+    public static void discrete(int N, int M) {
+        StdDraw.setYscale(-5, 5);
+        StdDraw.setXscale(-1, 9);
+        StdDraw.line(-1, 0, 9, 0);
+        StdDraw.line(0, 5, 0, -5);
+        for(int i=0; i<N; i++) {
+            StdDraw.circle(StdRandom.uniform(1, M), StdRandom.uniform(-4.0, 4.0), 0.1);
+        }
+        
+    }
+    
     public static void main(String[] args) {
 //        gaussian(3000);
-        poisson(300);
+//        poisson(300);
 //        geometric(300);
+        discrete(300, 7);
     }
 
 }
