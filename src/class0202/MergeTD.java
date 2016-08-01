@@ -1,5 +1,7 @@
 package class0202;
 
+import java.util.Arrays;
+
 /**
  * describe: 
  * 		this is top to down merge method
@@ -68,12 +70,21 @@ public class MergeTD {
 		return v.compareTo(w) < 0;
 	}
 	
+	public static boolean isSorted(Comparable<Object>[] a) {
+		for (int i = 1; i < a.length; i++)
+			if (less(a[i], a[i - 1]))
+				return false;
+		return true;
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
 		//Comparable[] a = new Comparable[]{"E","E","G","M","R","A","C","E","R","T"};
 		Comparable[] a = new Comparable[]{"E","A","S","Y","Q","U","E","S","T","I","O","N"};
 		MergeTD.sort(a);
 		//MergeBU.sort(a);
+		System.out.println(Arrays.toString(a));
+		assert isSorted(a);
 	}
 
 }

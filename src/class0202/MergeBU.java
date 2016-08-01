@@ -47,8 +47,6 @@ public class MergeBU {
 		Comparable[] a = new Comparable[]{"E","E","G","M","R","A","C","E","R","T"};
 		MergeBU.sort(a);
 		System.out.println(Arrays.toString(a));
-		for (Comparable c:a) {
-			System.out.println(c);
-		}
+		assert MergeTD.isSorted(a);
 	}
 }
