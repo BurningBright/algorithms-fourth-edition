@@ -3,6 +3,7 @@ package class0202;
 import java.util.Arrays;
 
 import stdlib.StdOut;
+import stdlib.StdRandom;
 /**
  * @Description 2.2.12
  *      合并排序空间次线性
@@ -32,13 +33,19 @@ public class SublinearESP {
             return;
         }
         
-        int mid = lo + ((hi - lo + 1) / CUTOFF < 2 ? CUTOFF : (int)(((hi - lo + 1) / CUTOFF) / 2.0) * CUTOFF);
+        int tar = ((hi - lo + 1) / CUTOFF) / 2;
+        int mid = lo + (((tar == 0 ? 1 : tar) * CUTOFF - 1));
         StdOut.println("--"+mid);
         
         sort(lo, mid, src, aux);
         sort(mid+1, hi, src, aux);
         
-        FastMerge.mergeThird(lo, mid, hi, src, aux);
+        mergeFifth(lo, mid, hi, src, aux);
+        
+    }
+    
+    public static void mergeFifth(int lo, int mid, int hi,
+            Comparable<Object>[] a, Comparable<Object>[] aux) {
         
     }
     
@@ -65,9 +72,13 @@ public class SublinearESP {
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static void main(String[] args) {
-        Comparable[] a = new Comparable[] { "E", "E", "G", "M", "R", "A", "C", "E", "R", "T" };
-        sort(a);
-        System.out.println(Arrays.toString(a));
+//        Comparable[] a = new Comparable[] { "E", "E", "G", "M", "R", "A", "C", "E", "R", "T" };
+        Comparable[] b = new Comparable[100];
+        for(int i=0; i<100; i++) {
+            b[i] = StdRandom.uniform(100);
+        }
+        sort(b);
+        System.out.println(Arrays.toString(b));
     }
 
 }
