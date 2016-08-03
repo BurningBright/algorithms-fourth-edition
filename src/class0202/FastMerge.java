@@ -36,7 +36,8 @@ public class FastMerge {
 			aux[j++] = a[k];
 		System.out.print(Arrays.toString(aux)+ lo +" "+ mid +" "+ hi);
 		j--; // set to end
-
+		
+		// 第二部分倒排后，越界即是目标对象
 		for (int k = lo; k <= hi; k++) {
 			if (less(aux[i], aux[j])) {
 				a[k] = aux[i++];

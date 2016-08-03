@@ -21,6 +21,7 @@ public class MergeTD {
 		/* initial the template array */
 		aux = new Comparable[a.length];
 		sort(0, a.length-1, a);
+//		sortJudgeFirst(0, a.length-1, a);
 	}
 	
 	/*
@@ -28,7 +29,7 @@ public class MergeTD {
 	 * big part to little part sort problem.
 	 * (Top to down solve)
 	 */
-	public static void sort(int lo, int hi, Comparable<Object>[] b) {
+	public static void sort(int lo, int hi, Comparable<Object>[] a) {
 		/*
 		 * if only one element in current array,
 		 * we thought it's was sorted .
@@ -38,10 +39,27 @@ public class MergeTD {
 		}
 		
 		int mid = lo + (hi - lo) / 2;		/* got the middle one */
-		sort(lo, mid, b);					/* sort the left part */
-		sort(mid + 1, hi, b);				/* sort the right part */
-		mergeFirst(lo, mid, hi, b);			/* merge two part */
+		sort(lo, mid, a);					/* sort the left part */
+		sort(mid + 1, hi, a);				/* sort the right part */
+		mergeFirst(lo, mid, hi, a);			/* merge two part */
 	}
+	
+	public static void sortJudgeFirst(int lo, int hi, Comparable<Object>[] b) {
+        /*
+         * if only one element in current array,
+         * we thought it's was sorted .
+         */
+        if (lo >= hi) {
+            return;
+        }
+        
+        int mid = lo + (hi - lo) / 2;       /* got the middle one */
+        sort(lo, mid, b);                   /* sort the left part */
+        sort(mid + 1, hi, b);               /* sort the right part */
+        if(!less(b[mid], b[mid+1]))
+            mergeFirst(lo, mid, hi, b);         /* merge two part */
+        
+    }
 	
 	public static void mergeFirst(int lo, int mid, int hi, Comparable<Object>[] c) {
 

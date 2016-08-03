@@ -76,12 +76,18 @@ public class MergeImprov {
 	/* optimized insertion sort */
 	public static Comparable<Object>[] insertForMerge(int lo, int hi,
 			Comparable<Object>[] src) {
+		
 		// find the minimal one first, as a sentinel
+		/* 放置哨兵，一个个换太慢 干脆遍历一边再换 */
+		int min = 0;
 		for (int i = hi-1; i > lo; i--) {
-			if (less(src[i], src[i - 1])) {
-				exch(src, i, i - 1);
-			}
+//			if (less(src[i], src[i - 1])) {
+//				exch(src, i, i - 1);
+//			}
+			if (less(src[i], src[i - 1]))
+				min = i;
 		}
+		exch(src, 0, min);
 		
 		for (int i = lo+1; i <= hi; i++) {
 			
