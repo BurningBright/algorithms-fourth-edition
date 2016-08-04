@@ -8,6 +8,7 @@ import java.util.List;
  * 		divide-and-conquer algorithm that 
  * 		randomly shuffles a linked list in 
  * 		linearithmic time and logarithmic extra space
+ * 		自底向上打乱
  * date:	 2015年10月10日 上午09:11:29
  * @author:	 Chen
  *
@@ -19,12 +20,12 @@ public class ShufflingLinkedList {
 	 * @param src data source
 	 */
 	public static void shufflingLL(LinkedList<Comparable<Object>> src) {
-		int size = src.size();
-		for (int sz = 1; sz < size; sz += sz) {
-			for (int lo = 0; lo < size - sz; lo += 2 * sz) {
-				int itl = Math.min(size-1, lo+2*sz-1)-lo;
+		int N = src.size();
+		for (int sz = 1; sz < N; sz += sz) {
+			for (int lo = 0; lo < N - sz; lo += 2 * sz) {
+				int itl = Math.min(N-1, lo+2*sz-1)-lo;
 				if(itl <= 1) { continue; }
-				shuffling(src.subList(lo, Math.min(size-1, lo+2*sz-1)), itl);
+				shuffling(src.subList(lo, Math.min(N-1, lo+2*sz-1)), itl);
 			}
 		}
 	}

@@ -27,11 +27,15 @@ public class MergeBUinQueue {
 			 * every loop jump to the next start point
 			 */
 			for(int lo = 0; lo < size-sz; lo += sz*2) {
-				for(int i=lo; i<lo+sz; i++) {left.add(src[i]);}
+				for(int i=lo; i<lo+sz; i++) 
+					left.add(src[i]);
 				//(size>lo+2*sz?lo+2*sz:size)
-				for(int i=lo+sz; i<Math.min(lo+2*sz, size); i++) {right.add(src[i]);}
+				for(int i=lo+sz; i<Math.min(lo+2*sz, size); i++) 
+					right.add(src[i]);
 				dest = MergeQueue.mergeQueue(left, right);
-				for(int i=lo; i<Math.min(lo+2*sz, size); i++) {src[i] = dest.poll();}
+				
+				for(int i=lo; i<Math.min(lo+2*sz, size); i++) 
+					src[i] = dest.poll();
 			}
 			
 			System.out.println(Arrays.toString(src));

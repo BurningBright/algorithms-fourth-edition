@@ -13,17 +13,17 @@ import java.util.Arrays;
 public class IndirectMergeSort {
 	
 	public static void sort(Comparable<Object>[] src, int[] perm) {
-		int size = src.length;
+		int N = src.length;
 		
 		// step interval
-		for (int sz = 1; sz < size; sz += sz) {
+		for (int sz = 1; sz < N; sz += sz) {
 			// low index flag
-			for (int lo = 0; lo< size - sz; lo += sz * 2) {
+			for (int lo = 0; lo< N - sz; lo += sz * 2) {
 				// make sure would't miss the end sort
 				//System.out.println(lo+" "+(lo+sz-1)+" "+Math.min(lo+sz*2-1, size-1));
 				//for (int i :perm){System.out.print(src[i]+"|"+i+"	");}
 				//System.out.println();
-				mergeSecond(lo, lo+sz-1, Math.min(lo+sz*2-1, size-1), src, perm);
+				mergeSecond(lo, lo+sz-1, Math.min(lo+sz*2-1, N-1), src, perm);
 				//for (int i :perm){System.out.print(src[i]+"|"+i+"	");}
 				//System.out.println();
 			}
