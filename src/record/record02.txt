@@ -29,6 +29,7 @@ class0202
 	NaturalMergeSort.java				2.2.16			自然合并排序
 	ShufflingLinkedList.java			2.2.18			分合算法打乱链表
 	SublinearESP.java					2.2.12			将额外空间变得次线性
-
+	ThreeWayMergeSort.java				2.2.22			三道合并[BT]
+	Triplicates.java					2.2.21			寻找相同元素
 class0203
 	
