@@ -27,6 +27,25 @@ public class NonuniformData {
         return data;
     }
     
+    // 0-1 离散型
+    public static int[] dataPrepareOneX(int N) throws Exception {
+        if(N<1)
+            throw new Exception("zzz");
+        int[] data = new int[N];
+        double proportion = StdRandom.uniform(.3, .7);
+        int point = (int) Math.ceil(N * proportion);
+        
+        for(int i=0; i<point; i++) 
+            data[i] = 0;
+        
+        for(int i=point; i<N; i++) 
+            data[i] = 1;
+        
+        StdRandom.shuffle(data);
+        
+        return data;
+    }
+    
     // 一半递归递增
     public static int[] dataPrepareTwo(int N) throws Exception {
         if(N<1)
@@ -66,7 +85,7 @@ public class NonuniformData {
     
     public static void main(String[] args) {
         try {
-            System.out.println(Arrays.toString(dataPrepareOne(50)));
+            System.out.println(Arrays.toString(dataPrepareOneX(50)));
             System.out.println(Arrays.toString(dataPrepareTwo(50)));
             System.out.println(Arrays.toString(dataPrepareThree(50)));
         } catch (Exception e) {
