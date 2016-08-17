@@ -11,11 +11,16 @@ import stdlib.StdRandom;
  */
 public class CountExactCn {
     
-    private static int COUNTER = 0;
+    private static int COUNTER;
+    private static int ZERO, ONE, TWO;
     
     @SuppressWarnings("rawtypes")
     private static void sort(Comparable[] a, int lo, int hi) { 
-        if (hi <= lo) return;
+//        if (hi <= lo) return;
+        if(hi < lo) {ZERO++; return;}
+        if(hi == lo) {ONE++; return;}
+        if(hi - lo == 1) TWO++;
+        
         int j = partition(a, lo, hi);
         sort(a, lo, j-1);
         sort(a, j+1, hi);
@@ -96,24 +101,54 @@ public class CountExactCn {
     
     @SuppressWarnings("rawtypes")
     public static void main(String[] args) {
-        /*
-        for(int i=100; i<10001; i *= 10) {
+        
+        for(int i=10; i<10001; i *= 10) {
+            COUNTER = 0;
+            ZERO = ONE = TWO = 0;
+            
             Comparable[] a = new Comparable[i];
             for(int j=0; j<i; j++)
                 a[j] = j;
             StdRandom.shuffle(a);
             sort(a, 0, a.length-1);
             
-            StdOut.printf("%d\t %7.3f\t %d\n", i, 2 * i * Math.log(i), COUNTER);
+            StdOut.printf("%d\t %7.3f\t %d\t %d\t %d\t %d\n", i, 2 * i * Math.log(i), COUNTER, ZERO, ONE, TWO);
             
-            COUNTER = 0;
         }
-        */
+        
+        /*
         Comparable[] a = new Comparable[10];
         for(int i=0; i<a.length; i++)
             a[i] = 1;
         sort(a, 0, a.length-1);
         StdOut.println(COUNTER);
+        */
+        /*
+        // 计算 比对次数标准差
+        int N = 10000;
+        long[] calc = new long[N];
+        for(int i=0; i<10; i++) {
+            Comparable[] a = new Comparable[N];
+            for(int j=0; j<N; j++)
+                a[j] = j;
+            StdRandom.shuffle(a);
+            COUNTER = 0;
+            sort(a, 0, a.length - 1);
+            calc[i] = COUNTER;
+        }
+        
+        long mean = 0;
+        double stdDev = 0;
+        for(int i=0; i<100; i++)
+            mean += calc[i];
+        mean /= N;
+        
+        for(int i=0; i<100; i++)
+            stdDev += Math.pow(mean - calc[i], 2);
+        stdDev /= mean;
+        
+        StdOut.printf("%d\t %10.3f\n", mean, Math.sqrt(stdDev));
+        */
     }
 
 }
