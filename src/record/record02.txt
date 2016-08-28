@@ -32,6 +32,8 @@ class0202
 	ThreeWayMergeSort.java				2.2.22			三道合并[BT]
 	Triplicates.java					2.2.21			寻找相同元素
 class0203
+	BestCase.java						2.3.16			生成最佳案例，任不是最佳
 	CountExactCn.java					2.3.6/7/8		接近理论值，不到理论值
 	ScanOverEqual.java					2.3.11			跳过相等key，后序整合，感觉效率不高
+	Sentinels.java						2.3.17			哨兵使得partition里跳过越界检查
 	TwoKeyAlgorithm.java				2.3.5			排两个key的样本
