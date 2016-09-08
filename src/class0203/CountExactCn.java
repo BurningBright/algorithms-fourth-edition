@@ -15,11 +15,11 @@ public class CountExactCn {
     private static int ZERO, ONE, TWO;
     
     @SuppressWarnings("rawtypes")
-    private static void sort(Comparable[] a, int lo, int hi) { 
-//        if (hi <= lo) return;
-        if(hi < lo) {ZERO++; return;}
-        if(hi == lo) {ONE++; return;}
-        if(hi - lo == 1) TWO++;
+    public static void sort(Comparable[] a, int lo, int hi) { 
+        if (hi <= lo) return;
+//        if(hi < lo) {ZERO++; return;}
+//        if(hi == lo) {ONE++; return;}
+//        if(hi - lo == 1) TWO++;
         
         int j = partition(a, lo, hi);
         sort(a, lo, j-1);

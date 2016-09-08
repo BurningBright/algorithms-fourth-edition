@@ -15,7 +15,7 @@ import stdlib.StdRandom;
 public class MedianOfFive {
 
     @SuppressWarnings("rawtypes")
-    private static void sort(Comparable[] a, int lo, int hi) { 
+    public static void sort(Comparable[] a, int lo, int hi) { 
         if (hi <= lo) return;
         
         int N = hi - lo + 1;

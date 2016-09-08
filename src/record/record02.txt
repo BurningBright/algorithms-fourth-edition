@@ -34,6 +34,9 @@ class0202
 class0203
 	BestCase.java						2.3.16			生成最佳案例，任不是最佳
 	CountExactCn.java					2.3.6/7/8		接近理论值，不到理论值
+	MedianCompare.java					2.3.19			对比Quick&M3&M5的性能，M3最好
+	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交互，再做快排
+	MedianOfThree.java					2.3.18			使用三元素中间元素做标杆与lo交互，再做快排
 	ScanOverEqual.java					2.3.11			跳过相等key，后序整合，感觉效率不高
 	Sentinels.java						2.3.17			哨兵使得partition里跳过越界检查
 	TwoKeyAlgorithm.java				2.3.5			排两个key的样本
