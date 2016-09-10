@@ -26,19 +26,25 @@ public class MedianCompare {
         Comparable<Object>[] srcA = src.clone();
         Comparable<Object>[] srcB = src.clone();
         
-        double[] marks = new double[3];
+        double[] marks = new double[2];
         
         Stopwatch sw = new Stopwatch();
-//        CountExactCn.sort(srcA, 0, N-1);
-//        marks[0] = sw.elapsedTime();
         
         sw = new Stopwatch();
-        MedianOfThree.sort(srcB, 0, N-1);
+        MedianOfThree.sort(srcA, 0, N-1);
+        marks[0] = sw.elapsedTime();
+        
+//        sw = new Stopwatch();
+//        MedianOfFive.sort(srcB, 0, N-1);
+//        marks[1] = sw.elapsedTime();
+        
+//        sw = new Stopwatch();
+//        CountExactCn.sort(srcB, 0, N-1);
+//        marks[1] = sw.elapsedTime();
+        
+        sw = new Stopwatch();
+        NonrecursiveQuickSort.sort(srcB, 0, N-1);
         marks[1] = sw.elapsedTime();
-        
-        sw = new Stopwatch();
-        MedianOfFive.sort(src, 0, N-1);
-        marks[2] = sw.elapsedTime();
         
         return marks;
     }
@@ -49,7 +55,9 @@ public class MedianCompare {
         
         a2d.setAxisDescDistanceChart(-.3);
         a2d.setAxisDescDistanceY(.07);
-        a2d.setChartDesc("M3 VS M5");
+//        a2d.setChartDesc("M3 VS M5");
+//        a2d.setChartDesc("M3 VS Quick");
+        a2d.setChartDesc("M3 VS NonrecursiveQuic");
         a2d.setAxisXDesc("problem size N");
         a2d.setAxisYDesc("running time T(N)");
         a2d.setColorForChar(Color.RED);
@@ -58,18 +66,18 @@ public class MedianCompare {
         // 2097152;4194305
         for (int i = N; i < 8000001; i *= 2) {
             double[] marks = quickDoubling(i);
-            StdOut.println(i+" \t "+marks[0]+" \t "+marks[1]+" \t "+marks[2]);
+            StdOut.println(i+" \t "+marks[0]+" \t "+marks[1]);
             
             if(i<10000) {
-                a2d.addChartData((double)i, marks[1]);
+                a2d.addChartData((double)i, marks[0]);
                 a2d.addAxisDataX((double)i, i/1000+"K");
-                a2d.addChartData(false, true, (double)i, marks[2]);
+                a2d.addChartData(false, true, (double)i, marks[1]);
                 
                 
             } else if(i<100000000) {
                 a2d.addChartData((double)i, marks[1]);
                 a2d.addAxisDataX((double)i, i/10000+"W");
-                a2d.addChartData(false, true, (double)i, marks[2]);
+                a2d.addChartData(false, true, (double)i, marks[1]);
                 
             }
             a2d.reDraw();

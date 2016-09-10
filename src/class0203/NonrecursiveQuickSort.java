@@ -15,9 +15,9 @@ import stdlib.StdRandom;
 public class NonrecursiveQuickSort {
     
     @SuppressWarnings("rawtypes")
-    public static void sort(Comparable[] a) {
+    public static void sort(Comparable[] a, int lo, int hi) {
         Stack<Partition> stack = new Stack<Partition>();
-        stack.push(new Partition(0, a.length -1));
+        stack.push(new Partition(lo, hi));
         /**
          *  
          *  如何判断域被排好 ？
@@ -54,7 +54,7 @@ public class NonrecursiveQuickSort {
         for(int i=0; i<a.length; i++)
             a[i] = i;
         StdRandom.shuffle(a);
-        sort(a);
+        sort(a, 0, a.length-1);
         StdOut.println(Arrays.toString(a));
     }
 
