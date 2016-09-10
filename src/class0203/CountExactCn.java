@@ -27,7 +27,7 @@ public class CountExactCn {
     }
     
     @SuppressWarnings("rawtypes")
-    private static int partition(Comparable[] a, int lo, int hi) {
+    public static int partition(Comparable[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
         Comparable v = a[lo];

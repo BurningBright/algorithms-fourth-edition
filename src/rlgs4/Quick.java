@@ -49,12 +49,14 @@ public class Quick {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
+    @SuppressWarnings("rawtypes")
     public static void sort(Comparable[] a) {
         StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
     }
 
     // quicksort the subarray from a[lo] to a[hi]
+    @SuppressWarnings("rawtypes")
     private static void sort(Comparable[] a, int lo, int hi) { 
         if (hi <= lo) return;
         int j = partition(a, lo, hi);
@@ -65,6 +67,7 @@ public class Quick {
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
+    @SuppressWarnings("rawtypes")
     private static int partition(Comparable[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
@@ -99,6 +102,7 @@ public class Quick {
      * @param a the array
      * @param k find the kth smallest
      */
+    @SuppressWarnings("rawtypes")
     public static Comparable select(Comparable[] a, int k) {
         if (k < 0 || k >= a.length) {
             throw new IndexOutOfBoundsException("Selected element out of bounds");
@@ -121,6 +125,7 @@ public class Quick {
     ***********************************************************************/
     
     // is v < w ?
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private static boolean less(Comparable v, Comparable w) {
         return (v.compareTo(w) < 0);
     }
@@ -136,10 +141,12 @@ public class Quick {
    /***********************************************************************
     *  Check if array is sorted - useful for debugging
     ***********************************************************************/
+    @SuppressWarnings({ "rawtypes", "unused" })
     private static boolean isSorted(Comparable[] a) {
         return isSorted(a, 0, a.length - 1);
     }
 
+    @SuppressWarnings("rawtypes")
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
         for (int i = lo + 1; i <= hi; i++)
             if (less(a[i], a[i-1])) return false;
@@ -148,6 +155,7 @@ public class Quick {
 
 
     // print array to standard output
+    @SuppressWarnings("rawtypes")
     private static void show(Comparable[] a) {
         for (int i = 0; i < a.length; i++) {
             StdOut.println(a[i]);
