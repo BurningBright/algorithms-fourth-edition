@@ -31,7 +31,7 @@ public class MedianOfThree {
     }
     
     @SuppressWarnings("rawtypes")
-    private static int median3(Comparable[] a, int i, int j, int k) {
+    public static int median3(Comparable[] a, int i, int j, int k) {
         return (less(a[i], a[j]) ?
                (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
                (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));

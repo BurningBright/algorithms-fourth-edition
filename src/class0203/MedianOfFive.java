@@ -30,7 +30,7 @@ public class MedianOfFive {
     }
     
     @SuppressWarnings("rawtypes")
-    private static int median5(Comparable[] a, int i, int j, int k, int m, int n) {
+    public static int median5(Comparable[] a, int i, int j, int k, int m, int n) {
         int t = (less(a[i], a[j]) ?
                     (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
                     (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));

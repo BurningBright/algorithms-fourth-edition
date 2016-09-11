@@ -34,6 +34,7 @@ class0202
 class0203
 	BestCase.java						2.3.16			生成最佳案例，任不是最佳
 	CountExactCn.java					2.3.6/7/8		接近理论值，不到理论值
+	CutoffToInsertion.java				2.3.25/26		子数组在低于阀值时用插排
 	Fast3Way.java						2.3.22			三道快排的另一种思路
 	MedianCompare.java					2.3.19			对比Quick&M3&M5的性能，M3最好
 	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交互，再做快排
@@ -41,4 +42,5 @@ class0203
 	NonrecursiveQuickSort.java			2.3.20			用循环实现快速排序
 	ScanOverEqual.java					2.3.11			跳过相等key，后序整合，感觉效率不高
 	Sentinels.java						2.3.17			哨兵使得partition里跳过越界检查
+	TukeyNinther.java					2.3.23			使用九元素中间元素做标杆返回标杆下标
 	TwoKeyAlgorithm.java				2.3.5			排两个key的样本
