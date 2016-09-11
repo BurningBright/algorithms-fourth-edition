@@ -156,21 +156,25 @@ public class Adjustable2DChart {
     }
     
     public void addChartData(double x, double y) {
+        /*
         if(x > axisMaxInX) {
             addAxisDataX(x, String.format("%.2f", x));
         }
         if(y > axisMaxInY) {
             addAxisDataY(y, String.format("%.2f", y));
         }
+        */
+        addAxisDataX(x, String.format("%.2f", x));
+        addAxisDataY(y, String.format("%.2f", y));
         coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));
 //        reDraw();
     }
     
     public void addChartData(boolean showX, boolean showY,double x, double y) {
-        if(x > axisMaxInX && showX) {
+        if(showX) {
             addAxisDataX(x, String.format("%.2f", x));
         }
-        if(y > axisMaxInY && showY) {
+        if(showY) {
             addAxisDataY(y, String.format("%.2f", y));
         }
         coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));

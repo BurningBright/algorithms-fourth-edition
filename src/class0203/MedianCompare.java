@@ -3,6 +3,7 @@ package class0203;
 import java.awt.Color;
 
 import class0104.Adjustable2DChart;
+import rlgs4.QuickX;
 import rlgs4.Stopwatch;
 import stdlib.StdOut;
 import stdlib.StdRandom;
@@ -42,8 +43,16 @@ public class MedianCompare {
 //        CountExactCn.sort(srcB, 0, N-1);
 //        marks[1] = sw.elapsedTime();
         
+//        sw = new Stopwatch();
+//        NonrecursiveQuickSort.sort(srcB, 0, N-1);
+//        marks[1] = sw.elapsedTime();
+        
+//        sw = new Stopwatch();
+//        RandomizationSort.sort(srcB, 0, N-1);
+//        marks[1] = sw.elapsedTime();
+        
         sw = new Stopwatch();
-        NonrecursiveQuickSort.sort(srcB, 0, N-1);
+        QuickX.sort(srcB);
         marks[1] = sw.elapsedTime();
         
         return marks;
@@ -57,13 +66,16 @@ public class MedianCompare {
         a2d.setAxisDescDistanceY(.07);
 //        a2d.setChartDesc("M3 VS M5");
 //        a2d.setChartDesc("M3 VS Quick");
-        a2d.setChartDesc("M3 VS NonrecursiveQuic");
+//        a2d.setChartDesc("M3 VS Nonrecursive");
+//        a2d.setChartDesc("Randomization VS M3");
+        a2d.setChartDesc("QuickX VS M3");
         a2d.setAxisXDesc("problem size N");
         a2d.setAxisYDesc("running time T(N)");
         a2d.setColorForChar(Color.RED);
         
         int N = 1000000;
         // 2097152;4194305
+        
         for (int i = N; i < 8000001; i *= 2) {
             double[] marks = quickDoubling(i);
             StdOut.println(i+" \t "+marks[0]+" \t "+marks[1]);
@@ -75,13 +87,14 @@ public class MedianCompare {
                 
                 
             } else if(i<100000000) {
-                a2d.addChartData((double)i, marks[1]);
+                a2d.addChartData((double)i, marks[0]);
                 a2d.addAxisDataX((double)i, i/10000+"W");
                 a2d.addChartData(false, true, (double)i, marks[1]);
                 
             }
             a2d.reDraw();
         }
+        
     }
 
 }

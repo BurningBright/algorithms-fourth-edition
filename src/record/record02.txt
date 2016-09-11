@@ -36,10 +36,13 @@ class0203
 	CountExactCn.java					2.3.6/7/8		接近理论值，不到理论值
 	CutoffToInsertion.java				2.3.25/26		子数组在低于阀值时用插排
 	Fast3Way.java						2.3.22			三道快排的另一种思路
+	IgnoreSmallSubarrays.java			2.3.27			使用子数组于阀的另一种思路
 	MedianCompare.java					2.3.19			对比Quick&M3&M5的性能，M3最好
-	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交互，再做快排
-	MedianOfThree.java					2.3.18			使用三元素中间元素做标杆与lo交互，再做快排
+	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交换，再做快排
+	MedianOfThree.java					2.3.18			使用三元素中间元素做标杆与lo交换，再做快排
 	NonrecursiveQuickSort.java			2.3.20			用循环实现快速排序
+	RandomizationSort.java				2.3.29			使用随机下标元素做标杆与lo交换，再做快排
+	RecursionDepth.java					2.3.28			使用了阀值后的快排深度
 	ScanOverEqual.java					2.3.11			跳过相等key，后序整合，感觉效率不高
 	Sentinels.java						2.3.17			哨兵使得partition里跳过越界检查
 	TukeyNinther.java					2.3.23			使用九元素中间元素做标杆返回标杆下标

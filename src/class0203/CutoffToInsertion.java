@@ -11,11 +11,13 @@ import stdlib.StdRandom;
  */
 public class CutoffToInsertion {
     
-    private static int CUTOFF = 8;  // cutoff to insertion sort, must be >= 1
-    private static int COUNT = 0;
+    protected static int CUTOFF = 8;  // cutoff to insertion sort, must be >= 1
+    protected static int COUNT = 0;
+    protected static int DEPTH = 0;
     
     @SuppressWarnings("rawtypes")
     public static void sort(Comparable[] a, int lo, int hi) {
+        DEPTH++;
         int N = hi - lo + 1;
         
         // cutoff to insertion sort
@@ -32,7 +34,7 @@ public class CutoffToInsertion {
     
     // sort from a[lo] to a[hi] using insertion sort
     @SuppressWarnings("rawtypes")
-    private static void insertionSort(Comparable[] a, int lo, int hi) {
+    protected static void insertionSort(Comparable[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++)
             for (int j = i; j > lo && less(a[j], a[j-1]); j--)
                 exch(a, j, j-1);
@@ -40,12 +42,12 @@ public class CutoffToInsertion {
     
     // is v < w ?
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    private static boolean less(Comparable v, Comparable w) {
+    protected static boolean less(Comparable v, Comparable w) {
         return (v.compareTo(w) < 0);
     }
     
     // exchange a[i] and a[j]
-    private static void exch(Object[] a, int i, int j) {
+    protected static void exch(Object[] a, int i, int j) {
         Object swap = a[i];
         a[i] = a[j];
         a[j] = swap;
