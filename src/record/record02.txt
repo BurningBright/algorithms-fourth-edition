@@ -33,10 +33,12 @@ class0202
 	Triplicates.java					2.2.21			寻找相同元素
 class0203
 	BestCase.java						2.3.16			生成最佳案例，任不是最佳
+	CornerCases.java					2.3.30			快排的边际案例被打乱所受影响
 	CountExactCn.java					2.3.6/7/8		接近理论值，不到理论值
 	CutoffToInsertion.java				2.3.25/26		子数组在低于阀值时用插排
 	Fast3Way.java						2.3.22			三道快排的另一种思路
 	IgnoreSmallSubarrays.java			2.3.27			使用子数组于阀的另一种思路
+	HistogramOfRunningTimes.java		2.3.31			快速排序的幂次时间分布
 	MedianCompare.java					2.3.19			对比Quick&M3&M5的性能，M3最好
 	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交换，再做快排
 	MedianOfThree.java					2.3.18			使用三元素中间元素做标杆与lo交换，再做快排

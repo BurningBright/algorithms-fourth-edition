@@ -56,6 +56,7 @@ public class Adjustable2DChart {
     private double axisMaxInY = -10000;
     
     private boolean isLinked = false;
+    private boolean isCurves = false;
     
     // 坐标数据
     private List<Circle> coordinate = new LinkedList<Circle>();
@@ -218,7 +219,18 @@ public class Adjustable2DChart {
                 }
                 previous = current;
             }
-        } else {
+        } 
+        else if(isCurves && coordinate.size()>1) {
+            double[] x = new double[coordinate.size()];
+            double[] y = new double[coordinate.size()];
+            for(int i=0; i<coordinate.size(); i++) {
+                coordinate.get(i).draw();
+                x[i] = coordinate.get(i).p.x;
+                y[i] = coordinate.get(i).p.y;
+            }
+            StdDraw.curves(x, y);
+        }
+        else {
             for(Circle current: coordinate) 
                 current.draw();
         }
@@ -404,6 +416,14 @@ public class Adjustable2DChart {
         this.isLinked = isLinked;
     }
 
+    public boolean isCurves() {
+        return isCurves;
+    }
+
+    public void setCurves(boolean isCurves) {
+        this.isCurves = isCurves;
+    }
+
     public static void main(String[] args) {
         // test1 标准分布
         /*
@@ -475,7 +495,7 @@ public class Adjustable2DChart {
 //        a2d1.addAxisDataX(Math.log10(16000.0), "16k");
 //        a2d1.addAxisDataY(1.28, "0.3");
 //        a2d1.addAxisDataY(1.56, "0.5");
-        
+        a2d1.setCurves(true);
         a2d1.setColorForChar(Color.RED);
         for (int N = 1000; N<9000; N += N) {
             double time = DoublingTest.timeTrial(N);
