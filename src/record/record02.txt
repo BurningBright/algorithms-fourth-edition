@@ -49,3 +49,6 @@ class0203
 	Sentinels.java						2.3.17			哨兵使得partition里跳过越界检查
 	TukeyNinther.java					2.3.23			使用九元素中间元素做标杆返回标杆下标
 	TwoKeyAlgorithm.java				2.3.5			排两个key的样本
+class0204
+	MaxArrayPQ.java						2.4.3			用数组+插排方式/暴力方式实现的有序/无序优先队列
+	MaxListPQ.java						2.4.3			用链表+插排方式/暴力方式实现的有序/无序优先队列
