@@ -51,5 +51,6 @@ class0203
 	TwoKeyAlgorithm.java				2.3.5			排两个key的样本
 class0204
 	AuthenticateHeap.java				2.4.15			对堆架构的验证，参考是用递归分叉检验
+	LinkPQ.java							2.4.24			使用3链接组成优先堆队列
 	MaxArrayPQ.java						2.4.3			用数组+插排方式/暴力方式实现的有序/无序优先队列
 	MaxListPQ.java						2.4.3			用链表+插排方式/暴力方式实现的有序/无序优先队列

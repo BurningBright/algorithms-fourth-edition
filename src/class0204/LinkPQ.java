@@ -65,11 +65,27 @@ public class LinkPQ<Key extends Comparable<Key>> {
         if(isEmpty()) {
             throw new UnsupportedOperationException();
         }
-        N--;
         
+        if(N == 1) {
+            Key tmp = top.key;
+            top = null;
+            N--;
+            return tmp;
+        }
+        
+        N--;
         // 交换首尾节点
         Node<Key> node = ddl.popRight();
         exch(node, top);
+        
+        // 删除节点
+        if(node.parent.chL == node)
+            node.parent.chL = null;
+        else {
+            node.parent.chR = null;
+            ddl.pushLeft(node.parent);
+        }
+        node.parent = null;
         
         // 下沉
         sink(top);
@@ -86,12 +102,15 @@ public class LinkPQ<Key extends Comparable<Key>> {
     }
     
     public void print() {
+        if(isEmpty()) {
+            StdOut.println("Empty heap");
+            return ;
+        }
         LinkedQueue<Node<Key>> lq = new LinkedQueue<Node<Key>>();
         lq.enqueue(top);
         int n = 1;
         while(lq.size() > 0) {
             String level = "";
-            int counter = 0;
             for(int i=0; i<n; i++) {
                 Node<Key> tmp = lq.dequeue();
                 level += tmp.key;
@@ -110,13 +129,22 @@ public class LinkPQ<Key extends Comparable<Key>> {
     
     private void swim(Node<Key> node) {
         Node<Key> p = node.parent;
+        int n = 0;
         while(p != null && less(p, node)) {
-            exch(node, p);
+            n++;
             if(p.parent == null)
                 break;
             else
                 p = p.parent;
         }
+        
+        Key tmpK = node.key;
+        Node<Key> tmpN = node;
+        for(int i=0; i<n; i++, tmpN = tmpN.parent) {
+            tmpN.key = tmpN.parent.key;
+        }
+        tmpN.key = tmpK;
+        
     }
     
     private void sink(Node<Key> node) {
@@ -130,8 +158,10 @@ public class LinkPQ<Key extends Comparable<Key>> {
                         (c.chR == null ? c.chL : less(c.chL, c.chR) ? c.chR : c.chL);
             if(tmp == null)
                 break;
-            else
+            else {
+                node = c;
                 c = tmp;
+            }
         }
     }
     
@@ -168,10 +198,25 @@ public class LinkPQ<Key extends Comparable<Key>> {
     
     public static void main(String[] args) {
         LinkPQ<Integer> lpq = new LinkPQ<Integer>();
+        lpq.insert(1);
+        lpq.insert(2);
         lpq.insert(3);
         lpq.insert(4);
         lpq.insert(5);
         lpq.insert(6);
+        lpq.insert(7);
+        lpq.insert(8);
+        lpq.insert(0);
+        lpq.print();
+        StdOut.println("------------------");
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
+        lpq.delMax();
         lpq.print();
     }
 
