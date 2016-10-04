@@ -55,6 +55,8 @@ class0204
 	CubeSum.java						2.4.25			找到立方相等的组，可以联想到所有组合问题
 	DiscreteDistribution.java			2.4.35			离散随机分布
 	DynamicMedianFinding.java			2.4.30			动态构建查找中位数的结构
+	ExerciseDriver.java					2.4.38			边际案例 时间：乱序>顺序>双键>=同键>倒序
+	FloydMaxPQ.java						2.4.40			弗洛伊德方法加速沉降，转而为更快的上浮
 	LinkPQ.java							2.4.24			使用3链接组成优先堆队列
 	MaxArrayPQ.java						2.4.3			用数组+插排方式/暴力方式实现的有序/无序优先队列
 	MaxListPQ.java						2.4.3			用链表+插排方式/暴力方式实现的有序/无序优先队列
