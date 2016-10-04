@@ -59,4 +59,6 @@ class0204
 	MaxArrayPQ.java						2.4.3			用数组+插排方式/暴力方式实现的有序/无序优先队列
 	MaxListPQ.java						2.4.3			用链表+插排方式/暴力方式实现的有序/无序优先队列
 	MinMaxPQ.java						2.4.29			组合数据结构，牺牲生产性能，加速消费性能
+	PerformanceDriverI.java				2.4.36			测试随机弹压优先队列的耗时
+	PerformanceDriverII.java			2.4.37			测试每秒随机弹压优先队列的次数
 	SelectionFilter.java				2.4.28			使用堆结构对数据流筛选数据

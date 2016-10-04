@@ -40,7 +40,7 @@ public class PerformanceDriverI {
     public static void main(String[] args) {
         int N = 7;
         int M = 3;
-        int O = 100000;
+        int T = 100000;
         
         Adjustable2DChart a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
         
@@ -55,7 +55,7 @@ public class PerformanceDriverI {
         for(int i=0; i<N; i++) {
             double sum = .0;
             for(int j=0; j<M; j++) 
-                sum += PerformanceDriverI.time(StdRandom.uniform(O*(j+1)));
+                sum += PerformanceDriverI.time(StdRandom.uniform(T*(j+1)));
             
             StdOut.printf("%.3f\n", sum);
             

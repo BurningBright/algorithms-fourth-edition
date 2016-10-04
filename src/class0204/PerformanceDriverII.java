@@ -1,8 +1,13 @@
+
 package class0204;
 
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.Color;
+
+import class0104.Adjustable2DChart;
+import rlgs4.MaxPQ;
+import rlgs4.Stopwatch;
+import stdlib.StdOut;
+import stdlib.StdRandom;
 
 /**
  * @Description 2.4.37
@@ -13,24 +18,70 @@ import java.util.TimerTask;
  */
 public class PerformanceDriverII {
     
-    static public class CountTask extends TimerTask {
-        @Override
-        public void run() {
-            System.out.println("运行了！时间为：" + new Date());
-        }
+    private static MaxPQ<Double> pq = new MaxPQ<Double>();
+    private final static int ALL = 500000;
+    
+    public static void init() {
+        int n = ALL - pq.size();
+        for(int i=0; i<n; i++)
+            pq.insert(StdRandom.uniform());
     }
     
     public static void main(String[] args) {
-        CountTask task = new CountTask();
-        Timer timer = new Timer();
-        System.out.println("当前时间："+new Date());
-        timer.schedule(task, 3000,1000);
-        try {
-            Thread.sleep(60*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        int N = 5;
+        int M = 3;
+        int T = 100000;
+        
+        Adjustable2DChart a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
+        
+        a2d.setAxisDescDistanceChart(-.3);
+        a2d.setAxisDescDistanceY(.07);
+        a2d.setChartDesc("Performance Driver II");
+        a2d.setAxisXDesc("driver order N");
+        a2d.setAxisYDesc("running times T(N)");
+        a2d.setColorForChar(Color.RED);
+        a2d.setLinked(false);
+        
+        // 次数
+        for(int i=0; i<N; i++) {
+            long count = 0l;
+            
+            // 重复
+            for(int j=0; j<M; j++) {
+                init();
+                boolean signal = false;
+                int range = StdRandom.uniform(i*T, (i+1)*T);
+                
+                Stopwatch sw = new Stopwatch();
+                
+                // 计数
+                while(sw.elapsedTime() < 1.0) {
+                    
+                    for(int k=0; k<range && signal && sw.elapsedTime() < 1.0; k++) {
+                        pq.insert(StdRandom.uniform());
+                        count++;
+                        if(k+1 == range)
+                            signal = !signal;
+                    }
+                    
+                    for(int k=0; k<range && !signal && sw.elapsedTime() < 1.0; k++) {
+                        pq.delMax();
+                        count++;
+                        if(k+1 == range)
+                            signal = !signal;
+                    }
+                    
+                }
+                
+            }
+            count = (int)(count/M);
+            a2d.addChartData(true, false, i+1, count);
+            a2d.addAxisDataY((double)count, count/10000+"W");
+            a2d.reDraw();
+            StdOut.println(i+" "+count);
+            count = 0;
         }
-        timer.cancel();
+        
     }
 
 }
