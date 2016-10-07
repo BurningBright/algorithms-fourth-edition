@@ -14,10 +14,10 @@ import stdlib.StdOut;
  */
 public class PreorderHeap<Key> implements Iterable<Key> {
     
-    public Key[] pq;                    // store items at indices 1 to N
-    public int N;                       // number of items on priority queue
+    private Key[] pq;                    // store items at indices 1 to N
+    private int N;                       // number of items on priority queue
     private Comparator<Key> comparator;  // optional Comparator
-
+    
     @SuppressWarnings("unchecked")
     public PreorderHeap(int initCapacity) {
         pq = (Key[]) new Object[initCapacity + 1];
@@ -41,16 +41,11 @@ public class PreorderHeap<Key> implements Iterable<Key> {
 
     @SuppressWarnings("unchecked")
     public PreorderHeap(Key[] keys) {
-        N = keys.length;
         pq = (Key[]) new Object[keys.length + 1];
-        /*
-        for (int i = 0; i < N; i++)
-            pq[i+1] = keys[i];
-        for (int k = N/2; k >= 1; k--)
-            sink(k);
-        */
-        for (int i = 0; i < N; i++)
+        
+        for (int i = 0; i < keys.length; i++)
             insert(keys[i]);
+        
         assert isMaxHeap();
     }
 
@@ -82,7 +77,9 @@ public class PreorderHeap<Key> implements Iterable<Key> {
         
         // add x, and percolate it up to maintain heap invariant
         pq[++N] = x;
-        eat(1);
+        
+        if(N != 1)
+            eat(N);
         
         assert isMaxHeap();
     }
@@ -103,13 +100,89 @@ public class PreorderHeap<Key> implements Iterable<Key> {
    /***********************************************************************
     * Helper functions to restore the heap invariant.
     **********************************************************************/
-
+    
     private void eat(int k) {
         /**
          * 用一方法自上而下路径查找k所应在位置
-         * 全局变量保存？维护位置数组问题会变简单
-         * 构建后序结构的递归来将其置位？
+         * 全局变量保存？维护位置数组问题会变简单？No
+         * 构建后序结构的递归来将其置位？Yes
+         * 将元素推向正确位置
+         *  
+         *          7
+         *       /    \
+         *      6      3
+         *    /  \    /  \
+         *   5    4  2    1
          */
+        
+        if(k==1)
+            return;
+        
+        // 作为右子叶时 探索左节点、父右节点
+        if(k*2 > N && k%2 != 0) {
+            if(less(k-1, k)) {
+                exch(k-1, k);
+                eat(k-1);
+            } else {
+                int p = k;
+                while((p/2)%2 != 0)
+                    p /= 2;
+                p += 1;
+                if(less(k, p)) {
+                    exch(k, p);
+                    eat(p);
+                }
+            }
+        }
+        
+        
+        // 作为左子叶时 探索父节点、父右节点
+        else if(k*2 > N && k%2 == 0) {
+            if(less(k/2, k)) {
+                exch(k/2, k);
+                eat(k/2);
+            } else {
+                int p = k;
+                while((p/2)%2 != 0)
+                    p /= 2;
+                p += 1;
+                if(less(k, p)) {
+                    exch(k, p);
+                    eat(p);
+                }
+            }
+        }
+        
+        // 作为右根节点 探索左节点、左子节点
+        else if(k*2 <= N && k%2 != 0) {
+            if(less(k, k*2)) {
+                exch(k, k*2);
+                eat(k*2);
+            } else {
+                int p = k-1;
+                while(p*2 <= N) 
+                    p *= 2;
+                if (p + 1 <= N)
+                    p = p + 1;
+                
+                if(less(p, k)) {
+                    exch(p, k);
+                    eat(p);
+                }
+                
+            }
+        }
+        
+        // 作为左根节点 探索父节点、左子节点
+        else if(k*2 <= N && k%2 == 0) {
+            if(less(k, k*2)) {
+                exch(k, k*2);
+                eat(k*2);
+            } else if(less(k/2, k)) {
+                exch(k/2, k);
+                eat(k/2);
+            }
+        }
         
     }
 
@@ -119,8 +192,6 @@ public class PreorderHeap<Key> implements Iterable<Key> {
          * 它有固定模式 像【贪吃蛇】
          * 递归不构结构不行？
          */
-        /*
-        // 越界返回
         if(k*2 > N)
             return;
         // 左节点向上到父节点
@@ -132,10 +203,19 @@ public class PreorderHeap<Key> implements Iterable<Key> {
         if(k*2+1 > N)
             return;
         // 右节点到左节点
-        pq[k*2] = pq[k*2+1];
+        if(k*2*2 > N)
+            pq[k*2] = pq[k*2+1];
+        
+        // 到底的折返查右根节点
+        int p = k;
+        while(p%2 != 0)
+            p /= 2;
+        if(p != 0)
+            pq[k*2+1] = pq[p+1];
+        
         // 继续右子节点
         spit(k*2+1);
-        */
+        
     }
 
     /***********************************************************************
@@ -144,8 +224,10 @@ public class PreorderHeap<Key> implements Iterable<Key> {
     public void print() {
         int k=0;
         for(int i=1; i > 0; i=Math.min(i*2, N - k)) {
-            for(int j=i; j>0; j--)
+            for(int j=i; j>0; j--) {
                 StdOut.print(pq[++k]+"   ");
+            }
+                
             StdOut.println();
         }
 //        StdOut.println(Arrays.toString(pq));
@@ -163,8 +245,9 @@ public class PreorderHeap<Key> implements Iterable<Key> {
             return comparator.compare(pq[i], pq[j]) < 0;
         }
     }
-
+    
     private void exch(int i, int j) {
+//        StdOut.println(i+"   "+j);
         Key swap = pq[i];
         pq[i] = pq[j];
         pq[j] = swap;
@@ -221,11 +304,21 @@ public class PreorderHeap<Key> implements Iterable<Key> {
     }
     
     public static void main(String[] args) {
+        /*
         PreorderHeap<Integer> ph = new PreorderHeap<Integer>();
-        ph.pq = new Integer[]{null, 7, 6, 3, 5, 4, 2, 1};
-        ph.N = 7;
+        ph.pq = new Integer[]{null, 15, 14, 7, 13, 10, 6, 3, 12, 11, 9, 8, 5, 4, 2, 1};
+        ph.N = 15;
         ph.print();
+        
+        StdOut.println("-----------");
         ph.delMax();
+        ph.print();
+        
+        StdOut.println("-----------");
+        ph.insert(15);
+        ph.print();
+        */
+        PreorderHeap<Integer> ph = new PreorderHeap<Integer>(new Integer[]{1, 2, 3, 4, 5, 6, 7});
         ph.print();
     }
 
