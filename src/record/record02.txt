@@ -66,4 +66,6 @@ class0204
 	PerformanceDriverII.java			2.4.37			测试每秒随机弹压优先队列的次数
 	PreorderHeap.java					2.4.42			前序结构堆，用数组实现还是太勉强了
 	SelectionFilter.java				2.4.28			使用堆结构对数据流筛选数据
-	
+class0205
+	DedupArraySort.java					2.5.4			剔除重复排序
+	FindCompoundWord.java				2.5.2			找词组单词
