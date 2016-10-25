@@ -69,3 +69,5 @@ class0204
 class0205
 	DedupArraySort.java					2.5.4			剔除重复排序
 	FindCompoundWord.java				2.5.2			找词组单词
+	Frequency.java						2.5.8			词频倒序
+	RecursiveSelect.java				2.5.6			递归查找排序
