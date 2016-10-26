@@ -24,9 +24,18 @@ import stdlib.StdIn;
 import stdlib.StdOut;
 
 public class Frequency {
-
+    
+    static class Record{
+        String a;
+        int b;
+        public Record(String a, int b) {
+            this.a = a;
+            this.b = b;
+        }
+    }
+    
     public static void main(String[] args) {
-        /*
+        
         // read in and sort the input strings
         String[] a = StdIn.readAllStrings();
         int n = a.length;
@@ -51,6 +60,6 @@ public class Frequency {
         Arrays.sort(records, 0, m);
         for (int i = m-1; i >= 0; i--) 
             StdOut.println(records[i]);
-        */
+        
     }
 }

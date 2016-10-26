@@ -23,6 +23,7 @@ import stdlib.StdStats;
 public class Distinct {
 
     // return number of distinct entries in array a[]
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static int distinct(Comparable[] a) {
         if (a.length == 0) return 0;
         Arrays.sort(a);

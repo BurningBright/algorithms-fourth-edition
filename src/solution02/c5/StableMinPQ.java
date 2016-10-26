@@ -29,6 +29,7 @@ public class StableMinPQ<Key extends Comparable<Key>> {
     private long timestamp = 1;          // timestamp for when item was inserted
 
     // create an empty priority queue with given initial capacity
+    @SuppressWarnings("unchecked")
     public StableMinPQ(int initCapacity) {
         pq = (Key[]) new Comparable[initCapacity + 1];
         time = new long[initCapacity + 1];
@@ -58,6 +59,7 @@ public class StableMinPQ<Key extends Comparable<Key>> {
     }
 
     // helper function to double the size of the heap array
+    @SuppressWarnings("unchecked")
     private void resize(int capacity) {
         assert capacity > n;
         Key[]  tempPQ   = (Key[]) new Comparable[capacity];
