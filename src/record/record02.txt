@@ -67,11 +67,13 @@ class0204
 	PreorderHeap.java					2.4.42			前序结构堆，用数组实现还是太勉强了
 	SelectionFilter.java				2.4.28			使用堆结构对数据流筛选数据
 class0205
+	California.java						2.5.16			自实现比较器，使用库排序
+	CheckStability.java					2.5.17			排序稳定性检查
 	DedupArraySort.java					2.5.4			剔除重复排序
 	FindCompoundWord.java				2.5.2			找词组单词
 	Frequency.java						2.5.8			词频倒序
 	LPT.java							2.5.13			负载均衡
 	RecursiveSelect.java				2.5.6			递归查找排序
 	ReverseDomain.java					2.5.14			逆域名排序
-	SPT.java							2.5.12			调度
+	SPT.java							2.5.12			调度，最低平均时间
 	Version.java						2.5.10			对比版本号
