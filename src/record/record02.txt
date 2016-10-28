@@ -44,6 +44,7 @@ class0203
 	MedianOfFive.java					2.3.19			使用五元素中间元素做标杆与lo交换，再做快排
 	MedianOfThree.java					2.3.18			使用三元素中间元素做标杆与lo交换，再做快排
 	NonrecursiveQuickSort.java			2.3.20			用循环实现快速排序
+	Quick.java							2.3.0			额外实现对比器构造的快排
 	RandomizationSort.java				2.3.29			使用随机下标元素做标杆与lo交换，再做快排
 	RecursionDepth.java					2.3.28			使用了阀值后的快排深度
 	ScanOverEqual.java					2.3.11			跳过相等key，后序整合，感觉效率不高
@@ -71,6 +72,7 @@ class0205
 	CheckStability.java					2.5.17			排序稳定性检查
 	DedupArraySort.java					2.5.4			剔除重复排序
 	FindCompoundWord.java				2.5.2			找词组单词
+	ForceStability.java					2.5.18			强稳排序-_-
 	Frequency.java						2.5.8			词频倒序
 	LPT.java							2.5.13			负载均衡
 	RecursiveSelect.java				2.5.6			递归查找排序
