@@ -74,6 +74,7 @@ class0205
 	FindCompoundWord.java				2.5.2			找词组单词
 	ForceStability.java					2.5.18			强稳排序-_-
 	Frequency.java						2.5.8			词频倒序
+	KendallTauDistance.java				2.5.19			计算样本排序熵
 	LPT.java							2.5.13			负载均衡
 	RecursiveSelect.java				2.5.6			递归查找排序
 	ReverseDomain.java					2.5.14			逆域名排序
