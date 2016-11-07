@@ -78,6 +78,7 @@ class0205
 	LPT.java							2.5.13			负载均衡
 	RecursiveSelect.java				2.5.6			递归查找排序
 	ReverseDomain.java					2.5.14			逆域名排序
+	SimplePolygon.java					2.5.26			用排序组成简单多边形
 	SPT.java							2.5.12			调度，最低平均时间
 	Vector.java							2.5.21			多维排序
 	Version.java						2.5.10			对比版本号

@@ -116,7 +116,7 @@ public class Adjustable2DChart {
             // 重排数据
             List<Circle> tmpList = new LinkedList<Circle>();
             for(Circle c: coordinate) {
-                // 按原最大/现最大  比例放大坐标
+                // 按原最大/现最大  比例缩小坐标
                 tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius));
             }
             coordinate = tmpList;
@@ -156,6 +156,67 @@ public class Adjustable2DChart {
 //        reDraw();
     }
     
+    // 基准划线
+    public void addAxisDataX(Double position, String desc, boolean show) {
+        if (show)
+            axisInX.put(position, desc);
+        
+        if(position > axisMaxInX) {
+            double tmpAxisMaxInX = axisMaxInX;
+            axisMaxInX = position;
+            
+            // 重排X轴
+            Set<Double> inKey = axisInX.keySet();
+            Map<Double, String> tmpMap = new HashMap<Double, String>();
+            for (Double key : inKey) {
+                tmpMap.put(baseX * key / axisMaxInX, axisInX.get(key));
+            }
+            axisX = tmpMap;
+            
+            // 重排数据
+            List<Circle> tmpList = new LinkedList<Circle>();
+            for(Circle c: coordinate) {
+                // 按原最大/现最大  比例缩小坐标
+                tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius));
+            }
+            coordinate = tmpList;
+        } else if(show) {
+            axisX.put(baseX * position / axisMaxInX, desc);
+        }
+        
+//        reDraw();
+    }
+    
+    public void addAxisDataY(Double position, String desc, boolean show) {
+        if (show)
+            axisInY.put(position, desc);
+        
+        if(position > axisMaxInY) {
+            double tmpAxisInY = axisMaxInY;
+            axisMaxInY = position;
+            
+            // 重排Y轴
+            Set<Double> inKey = axisInY.keySet();
+            Map<Double, String> tmpMap = new HashMap<Double, String>();
+            for (Double key : inKey) {
+                tmpMap.put(baseY * key / axisMaxInY, axisInY.get(key));
+            }
+            axisY = tmpMap;
+            
+            // 重排数据
+            List<Circle> tmpList = new LinkedList<Circle>();
+            for(Circle c: coordinate) {
+                // 按原最大/现最大  比例放大坐标
+                tmpList.add(new Circle(c.x , tmpAxisInY * c.y / axisMaxInY, radius));
+            }
+            coordinate = tmpList;
+        } else if (show) {
+            axisY.put(baseY * position / axisMaxInY, desc);
+        }
+        
+//        reDraw();
+    }
+    
     public void addChartData(double x, double y) {
         /*
         if(x > axisMaxInX) {
@@ -172,12 +233,8 @@ public class Adjustable2DChart {
     }
     
     public void addChartData(boolean showX, boolean showY,double x, double y) {
-        if(showX) {
-            addAxisDataX(x, String.format("%.2f", x));
-        }
-        if(showY) {
-            addAxisDataY(y, String.format("%.2f", y));
-        }
+        addAxisDataX(x, String.format("%.2f", x), showX);
+        addAxisDataY(y, String.format("%.2f", y), showY);
         coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));
 //        reDraw();
     }
@@ -219,6 +276,15 @@ public class Adjustable2DChart {
                 }
                 previous = current;
             }
+            /*
+            for(int i=0; i<coordinate.size(); i++) {
+                coordinate.get(i).draw();
+                if(i!=0)
+                    (new Line(coordinate.get(i).p, coordinate.get(i-1).p)).draw();
+                if(i==coordinate.size()-1)
+                    (new Line(coordinate.get(i).p, coordinate.get(0).p)).draw();
+            }
+            */
         } 
         else if(isCurves && coordinate.size()>1) {
             double[] x = new double[coordinate.size()];
