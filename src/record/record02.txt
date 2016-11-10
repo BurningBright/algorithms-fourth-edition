@@ -71,6 +71,7 @@ class0205
 	California.java						2.5.16			自实现比较器，使用库排序
 	CheckStability.java					2.5.17			排序稳定性检查
 	DedupArraySort.java					2.5.4			剔除重复排序
+	Duplicates.java						2.5.31			重复概率验证(1-e^(-N/M))
 	FindCompoundWord.java				2.5.2			找词组单词
 	ForceStability.java					2.5.18			强稳排序-_-
 	Frequency.java						2.5.8			词频倒序
