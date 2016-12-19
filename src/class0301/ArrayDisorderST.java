@@ -11,14 +11,14 @@ import stdlib.StdOut;
  * @author Leon
  * @date 2016-11-29 14:21:09
  */
-public class ArraySTUnorder<Key extends Comparable<Key>, Value> {
+public class ArrayDisorderST<Key extends Comparable<Key>, Value> {
     
     private int N;
     private Key[] keys;
     private Value[] values;
     
     @SuppressWarnings("unchecked")
-    public ArraySTUnorder() {
+    public ArrayDisorderST() {
         N = 0;
         keys = (Key[]) new Comparable[1];
         values = (Value[]) new Comparable[1];
@@ -103,7 +103,7 @@ public class ArraySTUnorder<Key extends Comparable<Key>, Value> {
     }
     
     public static void main(String[] args) {
-        ArraySTUnorder<String, Integer> a = new ArraySTUnorder<String, Integer>();
+        ArrayDisorderST<String, Integer> a = new ArrayDisorderST<String, Integer>();
         a.put("a", 1);
         a.put("b", 2);
         a.put("c", 3);
