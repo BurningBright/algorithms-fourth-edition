@@ -69,11 +69,7 @@ public class OrderedSequentialSearchST <Key extends Comparable<Key>, Value> {
     }
     
     public boolean contains(Key key) {
-        for (Node cur = first; cur!=null; cur=cur.next) 
-            if (key.compareTo(cur.k) == 0) 
-                return true;
-            
-        return false;
+        return get(key) != null;
     }
     
     public boolean isEmpty() {

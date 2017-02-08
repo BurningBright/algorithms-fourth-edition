@@ -5,7 +5,7 @@ import java.util.Arrays;
 import stdlib.StdOut;
 
 /**
- * @Description 3.1.12/16/17/18
+ * @Description 3.1.12/16/17/18/25[cache]
  *          二叉搜索符号表
  * @author Leon
  * @date 2016-12-15 16:28:00
@@ -14,6 +14,10 @@ public class BinarySearchST<K extends Comparable<K>, V>{
 
     private int N = 0;
     private NameValuePair<K, V>[] nvps;
+    
+    // software cache
+    private K cacheK = null;
+    private V cacheV = null;
     
     @SuppressWarnings("unchecked")
     public BinarySearchST() {
@@ -32,6 +36,10 @@ public class BinarySearchST<K extends Comparable<K>, V>{
         Arrays.sort(nvps);
     }
     
+    public boolean contains(K key) {
+        return get(key) != null;
+    }
+    
     public int size() {
         return N;
     }
@@ -43,14 +51,23 @@ public class BinarySearchST<K extends Comparable<K>, V>{
     public V get(K key) {
         if (isEmpty())
             return null;
+        
+        if (key == cacheK)
+            return cacheV;
+        
         int i = rank(key);
-        if (i < N && nvps[i].getKey().compareTo(key) == 0)
+        if (i < N && nvps[i].getKey().compareTo(key) == 0) {
+            cacheK = key;
+            cacheV = nvps[i].getValue();
             return nvps[i].getValue();
-        else
+        } else
             return null;
     }
 
     public void put(K key, V val) {
+        // if val is null that mean delete operation
+        if (val == null) { remove(key); return; }
+        
         if (N == nvps.length)
             resize(2 * nvps.length);
         int i = rank(key);
