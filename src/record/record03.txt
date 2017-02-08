@@ -2,6 +2,8 @@ class0301
 	ArraySTUnorder.java					3.1.2			数组型无序符号表
 	BinarySearchST.java					3.1.12			二叉搜索符号表
 	FrequencyCounter.java				3.1.19			顶部统计数据
+	InterpolationSearch.java			3.1.24			"预判"搜索
 	OrderedSequentialSearchST.java		3.1.3			链表型有序符号表
 	TaleOfTwoCities.java				3.1.8			双城记
 	SelfOrganizingST.java				3.1.22			常用符号向前，自组织符号表
+	
