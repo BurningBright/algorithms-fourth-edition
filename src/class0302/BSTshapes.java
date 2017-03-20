@@ -21,8 +21,8 @@ public class BSTshapes {
 
     public static void arrange(String[] str, int st, int len) {
         if (st == len - 1) {
-            if ((less(str[str.length - 3], str[str.length - 2]) && more(str[str.length - 3], str[str.length - 1]))
-                    || (more(str[str.length - 3], str[str.length - 2]) && less(str[str.length - 3], str[str.length - 1]))) {
+            if ((less(str[str.length - 3], str[str.length - 2]) && more(str[str.length - 3], str[str.length - 1]))) {
+//                    || (more(str[str.length - 3], str[str.length - 2]) && less(str[str.length - 3], str[str.length - 1]))) {
                 return;
             }
             for (int i = 0; i < len; i++) {
@@ -51,7 +51,7 @@ public class BSTshapes {
     }
     
     public static void main(String[] args) {
-        String[] src = new String[] {"a", "b", "c"};
+        String[] src = new String[] {"a", "b", "c", "d"};
         
         arrange(src, 0, src.length);
         System.out.println(total);
