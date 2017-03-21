@@ -7,7 +7,7 @@ import rlgs4.Queue;
  * @author Leon
  * @date 2017-03-16 17:07:14
  */
-public class BaseBST<Key extends Comparable<Key>, Value> {
+public class BSTbase<Key extends Comparable<Key>, Value> {
     
     protected Node root; // root of BST
 
@@ -81,7 +81,7 @@ public class BaseBST<Key extends Comparable<Key>, Value> {
         return min(root).key;
     }
 
-    private Node min(Node x) {
+    protected Node min(Node x) {
         if (x.left == null)
             return x;
         return min(x.left);
@@ -94,7 +94,7 @@ public class BaseBST<Key extends Comparable<Key>, Value> {
     private Node max(Node x) {
         if (x.right == null)
             return x;
-        return min(x.right);
+        return max(x.right);
     }
     
     public Key floor(Key key) {
