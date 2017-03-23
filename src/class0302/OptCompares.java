@@ -29,11 +29,12 @@ public class OptCompares {
         
         System.out.println(hyp +"   "+ sum +"   "+ --exp);
         
-        return .0;
+        return sum/(double)N;
     }
     
     public static void main(String[] args) {
-        optCompares(9);
+        System.out.println(optCompares(6000000));
+        System.out.println(optCompares(7));
     }
 
 }
