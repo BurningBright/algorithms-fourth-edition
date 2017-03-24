@@ -8,6 +8,13 @@ class0301
 	OrderedSequentialSearchST.java		3.1.3			链表型有序符号表
 	PerformanceDriverI.java				3.1.35			顺序符号表性能测试
 	Reflect.java						3.1.0			反射调用实体类方法
-	TaleOfTwoCities.java				3.1.8			双城记
 	SmallTables.java					3.1.27			探索建表的消耗， 小表时建表线性增长
 	SelfOrganizingST.java				3.1.22			常用符号向前，自组织符号表
+	TaleOfTwoCities.java				3.1.8			双城记
+class0302
+	Adjustable2DTree.java				3.2.0			可视树？
+	BSTbase.java						3.2.0			树基类
+	BSTcompares.java					3.2.7			数比较次数
+	BSTheight.java						3.2.6			树高
+	BSTshapes.java						3.2.9			数形
+	OptCompares.java					3.2.8			完美平衡树的比较次数

@@ -10,7 +10,7 @@ public class BSTheight<Key extends Comparable<Key>, Value> extends BSTbase<Key, 
     
     private int height;
     
-    private class HNode extends BSTheight.Node{
+    private class HNode extends Node{
 //        private Key key;            // key
 //        private Value val;          // associated value
 //        private HNode left, right;  // links to subtrees
@@ -100,6 +100,12 @@ public class BSTheight<Key extends Comparable<Key>, Value> extends BSTbase<Key, 
         optHeight((HNode)root.right);
     }
     
+    public int heightSize() {
+        return height;
+    }
+    
+    /*****************************************************************/
+    
     public int height() {
         return height(root);
     }
@@ -113,10 +119,6 @@ public class BSTheight<Key extends Comparable<Key>, Value> extends BSTbase<Key, 
             return left;
         else
             return right;
-    }
-    
-    public int heightSize() {
-        return height;
     }
     
     public static void main(String[] args) {
