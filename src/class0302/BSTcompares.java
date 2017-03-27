@@ -117,8 +117,8 @@ public class BSTcompares<Key extends Comparable<Key>, Value> extends BSTbase<Key
         bst.put("6", "v2");
         bst.put("8", "v2");
         bst.put("1", "v3");
-        bst.put("10", "v3");
-        bst.put("9", "v4");
+        bst.put("10", "v4");
+        bst.put("9", "v3");
         
         System.out.println(bst.compares());
         System.out.println(bst.comparesSize());
