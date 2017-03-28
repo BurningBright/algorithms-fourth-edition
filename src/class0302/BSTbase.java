@@ -135,8 +135,8 @@ public class BSTbase<Key extends Comparable<Key>, Value> {
             return x;
         // not touch ceil yet
         if (cmp > 0)
-            return floor(x.right, key);
-        Node t = floor(x.left, key);
+            return ceil(x.right, key);
+        Node t = ceil(x.left, key);
         if (t != null)
             return t;
         else
