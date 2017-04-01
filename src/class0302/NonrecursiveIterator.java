@@ -25,34 +25,46 @@ public class NonrecursiveIterator<Key extends Comparable<Key>, Value> extends No
         
         Stack<Node> stack = new Stack<Node>();
         
-//        boolean flag = false;
+        // prepare min item
+        Node min = x;
+        while(min.left != null) {
+            stack.push(min);
+            min = min.left;
+        }
+//        stack.push(min);
         
-//        Node x = node;
-        stack.push(x);
+        // first node
+//        queue.enqueue(min.key);
+//        stack.pop();
         
-        while (stack.size() > 0) {
-//            int cmplo = lo.compareTo(x.key);
-//            int cmphi = hi.compareTo(x.key);
+        while (min != null) {
+            int cmplo = lo.compareTo(min.key);
+            int cmphi = hi.compareTo(min.key);
             
-            // botton nodes
-            if(stack.peek().left == null && stack.peek().right == null) {
-                queue.enqueue(stack.peek().key);
-                stack.pop();
-                continue;
-            }
-            
-            if(stack.peek().left != null) {
-                stack.push(stack.peek().left);
-                continue;
-            } else {
-                // left is null so right is not null
-                queue.enqueue(stack.peek().key);
-                stack.pop();
-                stack.push(stack.peek().right);
+            if(cmplo <= 0 && cmphi >= 0)
+            queue.enqueue(min.key);
+//            System.out.println(stack.toString());
+            if(min.right != null) {
                 
+                Node p = min.right;
+                while(p.left != null) {
+                    stack.push(p);
+                    p = p.left;
+                }
+//                stack.push(min);
+                min = p;
+            } else {
+                // stack top is min's parent
+                Node p = stack.size() > 0 ? stack.pop(): null;
+                Node ch = min;
+                
+                while(p != null && ch == p.right) {
+                    ch = p;
+                    p = stack.size() > 0 ? stack.pop(): null;
+                }
+//                stack.push(min);
+                min = p;
             }
-            
-            
             
         }
         
@@ -68,19 +80,41 @@ public class NonrecursiveIterator<Key extends Comparable<Key>, Value> extends No
         bst.put("5", "v0");
         bst.put("3", "v1");
         bst.put("7", "v1");
-//        bst.put("2", "v2");
-//        bst.put("4", "v2");
-//        bst.put("6", "v2");
-//        bst.put("8", "v2");
-//        bst.put("1", "v3");
-//        bst.put("10", "v4");
-//        bst.put("9", "v3");
+        bst.put("2", "v2");
+        bst.put("4", "v2");
+        bst.put("6", "v2");
+        bst.put("8", "v2");
+        bst.put("1", "v3");
+        bst.put("10", "v4");
+        bst.put("9", "v3");
         
         System.out.println("----------");
         for(Object k: bst.keys()) {
-            System.out.println(k.toString());
+            System.out.print(k.toString() + " ");
         }
-        System.out.println("----------");
+        System.out.println("\r\n----------");
+        
+        for(Object k: bst.keys("2", "8")) {
+            System.out.print(k.toString() + " ");
+        }
+        
+        /*
+        TreeMap<String, String> tree = new TreeMap<String, String>();
+        tree.put("5", "v0");
+        tree.put("3", "v1");
+        tree.put("7", "v1");
+        tree.put("2", "v2");
+        tree.put("4", "v2");
+        tree.put("6", "v2");
+        tree.put("8", "v2");
+        tree.put("1", "v3");
+        tree.put("10", "v4");
+        tree.put("9", "v3");
+        
+        Iterator<Map.Entry<String, String>> it = tree.entrySet().iterator();
+        while(it.hasNext())
+            System.out.println(it.next().getKey());
+        */
     }
 
 }

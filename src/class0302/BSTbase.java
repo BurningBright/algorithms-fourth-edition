@@ -22,6 +22,11 @@ public class BSTbase<Key extends Comparable<Key>, Value> {
             this.val = val;
             this.N = N;
         }
+        
+        public String toString() {
+            return key + ":" + val;
+        }
+        
     }
 
     public int size() {
