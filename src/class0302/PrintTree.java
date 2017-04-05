@@ -1,10 +1,7 @@
 package class0302;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import stdlib.StdDraw;
 
 /**
  * @Description 3.2.0
@@ -12,17 +9,7 @@ import stdlib.StdDraw;
  * @author leon
  * @date 2017-03-20 23:06:13
  */
-public class Adjustable2DTree<Key extends Comparable<Key>, Value> extends BSTbase<Key, Value>{
-    
-    /*
-    // 起始参考点
-    private double refX = 0.5;
-    private double refY = 0.5;
-    
-    // 节点参数
-    private double radius = .03;
-    private double circle = .003;
-    */
+public class PrintTree<Key extends Comparable<Key>, Value> extends BSTbase<Key, Value>{
     
     private Queue<Node> que = new LinkedList<Node>();
     
@@ -75,14 +62,8 @@ public class Adjustable2DTree<Key extends Comparable<Key>, Value> extends BSTbas
     }
     
     public static void main(String[] args) {
-        /*
-        Adjustable2DTree<String, String> a2t = new Adjustable2DTree<String, String>();
-        StdDraw.setPenColor(Color.RED);
-        StdDraw.setPenRadius(a2t.circle);
-        StdDraw.circle(a2t.refX, a2t.refY, a2t.radius);
-        */
         
-        Adjustable2DTree<String, String> a2t = new Adjustable2DTree<String, String>();
+        PrintTree<String, String> a2t = new PrintTree<String, String>();
         a2t.put("5", "v0");
         a2t.put("3", "v1");
         a2t.put("7", "v1");

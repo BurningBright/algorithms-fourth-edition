@@ -14,13 +14,13 @@ import stdlib.StdRandom;
  */
 public class PerfectBalance {
     
-    public static void pb(Adjustable2DTree<String, String> st, String[] args) {
+    public static void pb(PrintTree<String, String> st, String[] args) {
         
         pb(st, args, 0, args.length-1, 1);
         
     }
     
-    private static void pb(Adjustable2DTree<String, String> st, String[] args, int lo, int hi, int level) {
+    private static void pb(PrintTree<String, String> st, String[] args, int lo, int hi, int level) {
         
         if(lo == hi) 
             st.put(args[lo], "lv"+level);
@@ -77,7 +77,7 @@ public class PerfectBalance {
             srcX[i] = String.valueOf(10 + StdRandom.uniform(90));
         */
         Arrays.sort(srcX);
-        Adjustable2DTree<String, String> a2t = new Adjustable2DTree<String, String>();
+        PrintTree<String, String> a2t = new PrintTree<String, String>();
         pb(a2t, srcX);
         
         a2t.calcTree();
