@@ -74,6 +74,7 @@ public class PrintTree<Key extends Comparable<Key>, Value> extends BSTbase<Key, 
         a2t.put("1", "v3");
         a2t.put("10", "v4");
         a2t.put("9", "v3");
+        a2t.put("11", "v3");
         
         a2t.calcTree();
     }
