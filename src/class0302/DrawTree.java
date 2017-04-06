@@ -18,10 +18,12 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
     // 节点默认参数
     private double circle = .03;
     private double radius = .003;
+    
+    private double ROOTY = .75;
+    private double YSTEP = .1;
+    
     private Color color = Color.RED;
     private Font font = new Font("Consolas", Font.BOLD, 20);
-    
-    private double DISTANCE = .1;
     
     {
 //        StdDraw.setCanvasSize(700, 700);
@@ -61,7 +63,7 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
     public void put(Key key, Value val) {
         
         if(root == null) {
-            root = new DNode(key, val, null, 1, .5, .9);
+            root = new DNode(key, val, null, 1, .5, ROOTY);
             return;
         }
         Node x = root;
@@ -71,6 +73,7 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
             int cmp = key.compareTo(x.key);
             if (cmp == 0) {
                 x.val = val;
+                return;
             } else if (cmp < 0) {
                 sk.push(x);
                 if(x.left == null) {
@@ -105,7 +108,7 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
         Key min = min();
         Key max = max();
         
-        calcCooridate();
+        calcNodeCooridate();
         
         draw(root, min, max);
     }
@@ -124,17 +127,42 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
         StdDraw.circle(t.x, t.y, circle);
         StdDraw.text(t.x, t.y, x.key.toString());
         if(t.parent != null)
-            StdDraw.line(t.x, t.y, t.parent.x, t.parent.y);
+                drawLine(t.parent.x, t.parent.y, t.x, t.y);
         
         if (cmphi > 0)
             draw(x.right, lo, hi);
         
     }
     
-    @SuppressWarnings("unchecked")
-    private void calcCooridate() {
+    /** 
+     * parent node & child node
+     */
+    private void drawLine(double xp, double yp, double xc, double yc) {
         
-        double offsetY = .9;
+        double xChild, yChild, xParent, yParent;
+        if(xp-xc > 0) {
+            double angle = Math.atan((yp-yc)/(xp-xc));
+            xChild = xc + Math.cos(angle) * circle;
+            yChild = yc + Math.sin(angle) * circle;
+            xParent = xp - Math.cos(angle) * circle;
+            yParent = yp - Math.sin(angle) * circle;
+        } else {
+            double angle = Math.atan((yp-yc)/(xc-xp));
+            xChild = xc - Math.cos(angle) * circle;
+            yChild = yc + Math.sin(angle) * circle;
+            xParent = xp + Math.cos(angle) * circle;
+            yParent = yp - Math.sin(angle) * circle;
+        }
+        
+        
+        
+        StdDraw.line(xParent, yParent, xChild, yChild);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void calcNodeCooridate() {
+        
+        double offsetY = ROOTY;
         
         Queue<? super Node> que = new Queue<Node>();
         que.enqueue(root);
@@ -147,15 +175,14 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
             for(int i=size; i > 0; i--) {
                 
                 Object o = que.dequeue();
-//                System.out.println(((Node)o).toString()+" "+size+" "+i);
                 
                 if(o instanceof DrawTree.NullObj) {
                     que.enqueue(new BlankObj());
                     que.enqueue(new BlankObj());
                 } else if(o instanceof DrawTree.BlankObj && blankFlag) {
+//                    que.enqueue(new BlankObj());
                     que.enqueue(new BlankObj());
-                    que.enqueue(new BlankObj());
-                } else if(o instanceof DrawTree.DNode && !(o instanceof DrawTree.BlankObj)){
+                } else if(o.getClass().getSimpleName().equals(DNode.class.getSimpleName())){
                     
                     blankFlag = true;
                     DNode node = (DNode)o;
@@ -192,7 +219,7 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
                 
             }
             
-            offsetY -= .1;
+            offsetY -= YSTEP;
         }
     }
     
@@ -208,6 +235,8 @@ public class DrawTree <Key extends Comparable<Key>, Value> extends BSTbase<Key, 
         dt.put("1", "v3");
         dt.put("10", "v4");
         dt.put("9", "v3");
+        dt.put("0", "v4");
+        
         dt.draw();
         
     }

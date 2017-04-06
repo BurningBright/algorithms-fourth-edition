@@ -38,6 +38,7 @@ public class NonrecursiveGetPut <Key extends Comparable<Key>, Value> extends BST
             int cmp = key.compareTo(x.key);
             if (cmp == 0) {
                 x.val = val;
+                return;
             } else if (cmp < 0) {
                 sk.push(x);
                 if(x.left == null) {
