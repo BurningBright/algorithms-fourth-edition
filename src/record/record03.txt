@@ -12,9 +12,16 @@ class0301
 	SelfOrganizingST.java				3.1.22			常用符号向前，自组织符号表
 	TaleOfTwoCities.java				3.1.8			双城记
 class0302
-	Adjustable2DTree.java				3.2.0			可视树？
+	ActualTimings.java					3.2.45			性能对比
+	BruteSelectRank.java				3.2.12			蛮力选择目标顺序节点
 	BSTbase.java						3.2.0			树基类
 	BSTcompares.java					3.2.7			数比较次数
 	BSTheight.java						3.2.6			树高
 	BSTshapes.java						3.2.9			数形
+	DrawTree.java						3.2.38			画树
+	NonrecursiveGetPut.java				3.2.13			非递归的读写二叉符号表
+	NonrecursiveIterator.java			3.2.36			非递归的迭代二叉符号表
+	NonrecursiveOthers.java				3.2.14			非递归的其它二叉符号表API
 	OptCompares.java					3.2.8			完美平衡树的比较次数
+	PerfectBalance						3.2.25			完美平衡树的插入顺序
+	PrintTree.java						3.2.0			可视树？

@@ -80,13 +80,11 @@ public class ActualTimings {
         
         for(int i=10000; i< 330000; i*=2) 
             st1.draw2D(a2d, i, .0);
-        
-//        a2d.reDraw();
+        a2d.reDraw();
         
         for(int i=10000; i< 330000; i*=2) 
             st2.draw2D(a2d, i, .0);
-        
-//        a2d.reDraw();
+        a2d.reDraw();
     }
     
     
@@ -100,16 +98,17 @@ public class ActualTimings {
     class ExBST<K, V> extends BST<String, Integer> implements ST<String, Integer> {
         @Override
         public void draw2D(Adjustable2DChart a2d, int GP, double time) {
+            a2d.addChartData(false, false, GP/1.0, time);
             a2d.addAxisDataX(GP/1.0, (GP/10000)+"W");
-            a2d.addAxisDataY(time, String .format("%.1f", time));
+            a2d.addAxisDataY(time, String .format("%.3f", time));
         }
     }
     class ExBinarySearchST<K, V> extends BinarySearchST<String, Integer> implements ST<String, Integer> {
         @Override
         public void draw2D(Adjustable2DChart a2d, int GP, double time) {
+            a2d.addChartData(false, false, GP/1.0, time);
             a2d.addAxisDataX(GP/1.0, (GP/10000)+"W");
-            a2d.addAxisDataY(time, String .format("%.1f", time));
-            a2d.reDraw();
+            a2d.addAxisDataY(time, String .format("%.3f", time));
         }
     }
     
@@ -158,7 +157,6 @@ public class ActualTimings {
     
     public static void main(String[] args) {
         new ActualTimings().process();
-        
     }
 
 }
