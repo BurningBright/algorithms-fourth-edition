@@ -12,10 +12,10 @@ public class BSTbase<Key extends Comparable<Key>, Value> {
     protected Node root; // root of BST
 
     protected class Node {
-        protected Key key;                // key
-        protected Value val;              // associated value
-        protected Node left, right;       // links to subtrees
-        protected int N;                  // # nodes in subtree rooted here
+        public Key key;                // key
+        public Value val;              // associated value
+        public Node left, right;       // links to subtrees
+        public int N;                  // # nodes in subtree rooted here
 
         public Node(Key key, Value val, int N) {
             this.key = key;
@@ -26,7 +26,7 @@ public class BSTbase<Key extends Comparable<Key>, Value> {
         public String toString() {
             return key + ":" + val;
         }
-        
+
     }
 
     public int size() {
