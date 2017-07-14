@@ -111,10 +111,11 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         
         int cmp = key.compareTo(h.key);
         // 递归找位，压栈是寻找路、径亦是更新路径
-        if(cmp < 0)         h.left = put((RBNode)h.left, key, val);
-        else if(cmp > 0)    h.right = put((RBNode)h.right, key, val);
+        if(cmp < 0)         {h.left = put((RBNode)h.left, key, val); ((RBNode)h.left).parent = h;}
+        else if(cmp > 0)    {h.right = put((RBNode)h.right, key, val); ((RBNode)h.right).parent = h;}
         else h.val = val;
         
+        // 寻路路上现不平，红黑平乱保社稷
         if(!isRed((RBNode)h.left) && isRed((RBNode)h.right))    h = rotateLeft(h);
         if(isRed((RBNode)h.left) && isRed((RBNode)h.left.left)) h = rotateRight(h);
         if(isRed((RBNode)h.left) && isRed((RBNode)h.right))     flipColor(h);

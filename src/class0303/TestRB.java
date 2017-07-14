@@ -1,6 +1,6 @@
 package class0303;
 
-import class0302.DrawTree;
+//import class0302.DrawTree;
 
 /**
  * @Description 3.3.21
@@ -11,6 +11,7 @@ import class0302.DrawTree;
 public class TestRB {
 
     public static void main(String[] args) {
+        /*
         DrawTree<String, String> dt = new DrawTree<String, String>();
         dt.put("E", "1");
         dt.put("A", "2");
@@ -24,6 +25,21 @@ public class TestRB {
         dt.put("N", "0");
         
         dt.draw();
+        */
+        
+        DrawRedBlack<String, String> drb = new DrawRedBlack<String, String>();
+        drb.put("E", "1");
+        drb.put("A", "2");
+        drb.put("S", "3");
+        drb.put("Y", "4");
+        drb.put("Q", "5");
+        drb.put("U", "6");
+        drb.put("T", "7");
+        drb.put("I", "8");
+        drb.put("O", "9");
+        drb.put("N", "0");
+        drb.draw();
+        
     }
 
 }
