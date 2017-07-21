@@ -1,14 +1,16 @@
 package class0303;
 
-import java.util.UUID;
-
 import class0302.BSTbase;
-import class0303.BSTRedBlack.RBNode;
-import class0303.BSTRedBlack.Type;
 
 /**
  * @Description 3.3.25
  *     红黑结构，自上而下2-3平衡树
+ *     S E A R C H X M P L
+ *              M
+ *          /       \
+ *         E         R
+ *        /  \      /  \
+ *    C = A  H = L P    S = X
  * @author Leon
  * @date 2017-07-13 10:29:13
  */
@@ -26,7 +28,7 @@ public class TD234Tree<Key extends Comparable<Key>, Value>
             this.color = color;
         }
         public String toString() {
-            return (color == Type.TWO? "2 ": "3 ") + key + ":" + val;
+            return (color == Type.TWO? "2 ": "3 ") + key + ":" + val +" | "+ N;
         }
     }
     
@@ -38,47 +40,93 @@ public class TD234Tree<Key extends Comparable<Key>, Value>
     
     @SuppressWarnings("unchecked")
     public void put(Key key, Value val) {
-        root = put((BNode)root, null, key, val);
+        root = put((BNode)root, key, val);
+        ((BNode)root).color = Type.TWO;
     }
     
-    @SuppressWarnings("unchecked")
-    private BNode put(BNode h, BNode p, Key key, Value val) {
+    private BNode put(BNode h, Key key, Value val) {
         // 默认生成3节点
         if(h == null)
             return new BNode(key, val, 1, Type.THREE);
         
         int cmp = key.compareTo(h.key);
-        
-        if(cmp > 0)         h.right = put(h.right, h, key, val);
-        else if(cmp < 0)    h.left = put(h.left, h, key, val);
+        if(cmp > 0)         h.right = put(h.right, key, val);
+        else if(cmp < 0)    h.left = put(h.left, key, val);
         else                h.val = val;
         
-        if(h.left.color == Type.THREE && h.right.color == Type.THREE) {
-            h.color = Type.THREE;
-            h.left.color = Type.TWO;
-            h.right.color = Type.TWO;
+        if (isThree(h.left) && isThree(h.left.right)) {
+            // rotateLeft[h.left]
+            h.left = rotateLeft(h.left);
         }
-        if(h.left.color == Type.THREE && h.left.left.color == Type.THREE) {
-            BNode middle = h.left;
-            
-            if (p.left == h) 
-                p.left = middle;
-            else
-                p.right = middle;
-            
-            middle.right = h;
-        };
-        if(h.left.color == Type.THREE && h.left.right.color == Type.THREE);
-        if(h.right.color == Type.THREE && h.right.left.color == Type.THREE);
-        if(h.right.color == Type.THREE && h.right.right.color == Type.THREE);
+        if (isThree(h.left) && isThree(h.left.left)) {
+            // rotateRight
+            h = rotateRight(h);
+        }
+        if (isThree(h.right) && isThree(h.right.left)) {
+            // rotateRight[h.right]
+            h.right = rotateRight(h.right);
+        }
+        if (isThree(h.right) && isThree(h.right.right)) {
+            // rotateLeft
+            h = rotateLeft(h);
+        }
+        if (isThree(h.right) && isThree(h.left)) {
+            // flip color
+            flipColor(h);
+        }
         
         h.N = size(h.left) + size(h.right) + 1;
         return h;
     }
     
+    BNode rotateLeft(BNode h) {
+        BNode x = h.right;
+        
+        h.right = x.left;
+        x.left = h;
+        
+        x.color = h.color;
+        h.color = Type.THREE;
+        
+        x.N = h.N;
+        h.N = size(h.left) + size(h.right) + 1;
+        
+        return x;
+    }
+    
+    BNode rotateRight(BNode h) {
+        BNode x = h.left;
+        
+        h.left = x.right;
+        x.right = h;
+        
+        x.color = h.color;
+        h.color = Type.THREE;
+        
+        x.N = h.N;
+        h.N = size(h.left) + size(h.right) + 1;
+        
+        return x;
+    }
+    
+    void flipColor(BNode h) {
+        h.left.color = h.right.color = Type.TWO;
+        h.color = Type.THREE;
+    }
     
     public static void main(String[] args) {
-
+        TD234Tree<String, Object> tdt = new TD234Tree<String, Object>();
+        tdt.put("S", "1");
+        tdt.put("E", "2");
+        tdt.put("A", "3");
+        tdt.put("R", "4");
+        tdt.put("C", "5");
+        tdt.put("H", "6");
+        tdt.put("X", "7");
+        tdt.put("M", "8");
+        tdt.put("P", "9");
+        tdt.put("L", "0");
+        System.out.println(tdt);
     }
 
 }

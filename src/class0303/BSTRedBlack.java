@@ -5,6 +5,11 @@ import class0302.BSTbase;
 /**
  * @Description 3.3.0
  *      红黑符号表
+ *               S
+ *             /   \
+ *        E = O      U
+ *       /     \    / \
+ *      A   I = N  T   Y
  * @author Leon
  * @date 2017-07-13 10:29:13
  */
