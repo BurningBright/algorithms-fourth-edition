@@ -59,27 +59,6 @@ public class TwoThreeST<Key extends Comparable<Key>, Value> {
             this.valB = valB;
             this.N = N;
         }
-        /*
-        public NodeThree(Key key, Value val, NodeTwo x, int N) {
-            int cmp = key.compareTo(x.key);
-            if(cmp > 0) {
-                this.keyA = x.key;
-                this.valA = x.val;
-                this.keyB = key;
-                this.valB = val;
-                this.left = x.left;
-                this.middle = x.right;
-            } else if(cmp < 0) {
-                this.keyA = key;
-                this.valA = val;
-                this.keyB = x.key;
-                this.valB = x.val;
-                this.middle = x.left;
-                this.right = x.right;
-            }
-            this.N = N;
-        }
-        */
         public String toString() {
             return N +"   " +keyA + ":" + valA + "|" + keyB + ":" + valB;
         }
@@ -116,13 +95,13 @@ public class TwoThreeST<Key extends Comparable<Key>, Value> {
             if (cmp > 0) {
                 Node tmp = put(xt.right, key, val);
                 if (tmp.isMerge()){
-                    // TODO merge
+                    x = mergeTwo(xt, (NodeTwo)tmp, false);
                 } else
                     x = tmp;
             } else if (cmp < 0) {
                 Node tmp = put(xt.left, key, val);
                 if (tmp.isMerge()){
-                    // TODO merge
+                    x = mergeTwo(xt, (NodeTwo)tmp, true);
                 } else
                     x = tmp;
             } else {
@@ -133,21 +112,21 @@ public class TwoThreeST<Key extends Comparable<Key>, Value> {
             int cmpA = key.compareTo(xt.keyA);
             int cmpB = key.compareTo(xt.keyB);
             if (cmpA < 0) {
-                Node tmp = put(xt.right, key, val);
+                Node tmp = put(xt.left, key, val);
                 if (tmp.isMerge()){
-                    // TODO merge
+                    x = mergeThree(xt, (NodeTwo)tmp, 1);
                 } else
                     x = tmp;
             } else if(cmpA > 0 && cmpB < 0) {
                 Node tmp = put(xt.middle, key, val);
                 if (tmp.isMerge()){
-                    // TODO merge
+                    x = mergeThree(xt, (NodeTwo)tmp, 2);
                 } else
                     x = tmp;
             } else if(cmpB > 0) {
                 Node tmp = put(xt.right, key, val);
                 if (tmp.isMerge()){
-                    // TODO merge
+                    x = mergeThree(xt, (NodeTwo)tmp, 3);
                 } else
                     x = tmp;
             } else if(cmpA == 0) {
@@ -160,6 +139,47 @@ public class TwoThreeST<Key extends Comparable<Key>, Value> {
         return x;
     }
     
+    private Node mergeTwo(NodeTwo main, NodeTwo attach, boolean isLeft) {
+        NodeThree n = null;
+        if(isLeft) {
+            n = new NodeThree(attach.key, attach.val, main.key, main.val, size(main));
+            n.left = attach;
+            n.middle = main.left;
+            n.right = main.right;
+        } else {
+            n = new NodeThree(main.key, main.val, attach.key, attach.val, size(main));
+            n.left = main.left;
+            n.middle = main.right;
+            n.right = attach;
+        }
+        return n;
+    }
+    
+    private Node mergeThree(NodeThree main, NodeTwo attach, int direct) {
+        switch(direct) {
+        case 1: {NodeTwo m = new NodeTwo(main.keyA, main.valA, main.N, true);
+            attach.setMerge(false);
+            NodeTwo r = new NodeTwo(main.keyB, main.valB, main.N, false);
+            m.left = attach;
+            m.right = r;
+            return m;
+        }
+        case 2: {NodeTwo l = new NodeTwo(main.keyA, main.valA, main.N, false);
+            NodeTwo r = new NodeTwo(main.keyA, main.valA, main.N, false);
+            attach.left = l;
+            attach.right = r;
+            return attach;
+        }
+        case 3: {NodeTwo m = new NodeTwo(main.keyB, main.valB, main.N, true);
+            attach.setMerge(false);
+            NodeTwo l = new NodeTwo(main.keyA, main.valA, main.N, false);
+            m.left = l;
+            m.right = attach;
+            return m;
+        }
+        }
+        return null;
+    }
     public static void main(String[] args) {
 
     }
