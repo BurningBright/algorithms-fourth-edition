@@ -34,6 +34,7 @@ public class DrawRedBlack  <Key extends Comparable<Key>, Value>
     private class DNode extends RBNode {
         private double x;
         private double y;
+        private DNode parent;
         public DNode(Key key, Value val, int N, Type C, double x, double y) {
             super(key, val, N, C);
             this.x = x;
