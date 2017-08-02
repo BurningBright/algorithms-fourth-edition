@@ -1,7 +1,6 @@
 package class0303;
 
 import class0302.BSTbase;
-import class0303.TD234Tree.BNode;
 
 /**
  * @Description 3.3.0
@@ -9,8 +8,23 @@ import class0303.TD234Tree.BNode;
  *               S
  *             /   \
  *      E  =  O      U
- *    /   \    \     / \
+ *    /   \    \    / \
  *   A I = N    Q   T   Y
+ *   
+ *   deleteMin()
+ *               S
+ *             /   \
+ *      I  =  O      U
+ *    /   \    \    / \
+ *   E     N    Q   T   Y
+ *   
+ *   deleteMax()
+ *             O
+ *           /   \
+ *         E       S
+ *       /  \     /  \
+ *     A   I=N   Q  T=U
+ *   
  * @author Leon
  * @date 2017-07-13 10:29:13
  */
@@ -126,6 +140,7 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
     
     @SuppressWarnings("unchecked")
     private RBNode deleteMin(RBNode h) {
+        // base case used to remove most left red node
         if (h.left == null)
             return null;
         if (!isRed((RBNode)h.left) && !isRed((RBNode)h.left.left))
@@ -153,6 +168,36 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         return h;
     }
     
+    @SuppressWarnings("unchecked")
+    public void deleteMax() {
+        if (!isRed((RBNode)root.left) && !isRed((RBNode)root.right))
+            ((RBNode)root).color = Type.RED;
+        root = deleteMax((RBNode)root);
+        if(root != null && root.N > 0) 
+            ((RBNode)root).color = Type.BLACK;
+    }
+    
+    @SuppressWarnings("unchecked")
+    private RBNode deleteMax(RBNode h) {
+        // base case used to remove most right red node
+        if (h.right == null)
+            return null;
+        if (!isRed((RBNode)h.right) && !isRed((RBNode)h.right.right))
+            h = moveRedRight(h);
+        h.right = deleteMax((RBNode)h.right);
+        return balance(h);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private RBNode moveRedRight(RBNode h) {
+        flipColor(h);
+        if(isRed((RBNode)h.left.right)) {
+            h.left = rotateLeft((RBNode)h.left);
+            h = rotateRight(h);
+        }
+        return h;
+    }
+    
     public static void main(String[] args) {
         BSTRedBlack<String, Object> rb = new BSTRedBlack<String, Object>();
         rb.put("E", "1");
@@ -165,6 +210,9 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         rb.put("I", "8");
         rb.put("O", "9");
         rb.put("N", "0");
+        
+//        rb.deleteMin();
+        rb.deleteMax();
         
         System.out.println("Finish");
         
