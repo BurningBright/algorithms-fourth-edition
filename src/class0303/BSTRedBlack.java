@@ -129,12 +129,29 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         return h;
     }
     
+
+    public Value get(Key key) {
+        return get(root, key);
+    }
+
+    private Value get(Node x, Key key) {
+        if (x == null)
+            return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0)
+            return get(x.left, key);
+        else if (cmp > 0)
+            return get(x.right, key);
+        else
+            return x.val;
+    }
+    
     @SuppressWarnings("unchecked")
     public void deleteMin() {
         if (!isRed((RBNode)root.left) && !isRed((RBNode)root.right))
             ((RBNode)root).color = Type.RED;
         root = deleteMin((RBNode)root);
-        if(root != null && root.N > 0) 
+        if(!isEmpty()) 
             ((RBNode)root).color = Type.BLACK;
     }
     
@@ -173,12 +190,15 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         if (!isRed((RBNode)root.left) && !isRed((RBNode)root.right))
             ((RBNode)root).color = Type.RED;
         root = deleteMax((RBNode)root);
-        if(root != null && root.N > 0) 
+        if(!isEmpty()) 
             ((RBNode)root).color = Type.BLACK;
     }
     
     @SuppressWarnings("unchecked")
     private RBNode deleteMax(RBNode h) {
+        // left is red turn to right
+        if (isRed((RBNode)h.left))
+            h = rotateRight(h);
         // base case used to remove most right red node
         if (h.right == null)
             return null;
@@ -192,12 +212,44 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
     private RBNode moveRedRight(RBNode h) {
         flipColor(h);
         if(isRed((RBNode)h.left.right)) {
-            h.left = rotateLeft((RBNode)h.left);
+//            h.left = rotateLeft((RBNode)h.left);
             h = rotateRight(h);
         }
         return h;
     }
     
+    @SuppressWarnings("unchecked")
+    public void delete(Key key) {
+        if (!isRed((RBNode)root.left) && !isRed((RBNode)root.right))
+                ((RBNode)root).color = Type.RED;
+            root = delete((RBNode)root, key);
+            if (!isEmpty()) 
+                ((RBNode)root).color = Type.BLACK;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Node delete(RBNode h, Key key) {
+        if (key.compareTo(h.key) < 0) {
+            if (!isRed((RBNode)h.left) && !isRed((RBNode)h.left.left))
+                h = moveRedLeft(h);
+            h.left = delete((RBNode)h.left, key);
+        } else {
+            if (isRed((RBNode)h.left))
+                h = rotateRight(h);
+            if (key.compareTo(h.key) == 0 && (h.right == null))
+                return null;
+            if (!isRed((RBNode)h.right) && !isRed((RBNode)h.right.left))
+                h = moveRedRight(h);
+            if (key.compareTo(h.key) == 0) {
+                h.val = get(h.right, ((RBNode)min(h.right)).key);
+                h.key = min((RBNode)h.right).key;
+                h.right = deleteMin((RBNode)h.right);
+            } else
+                h.right = delete((RBNode)h.right, key);
+        }
+        return balance(h);
+    }
+
     public static void main(String[] args) {
         BSTRedBlack<String, Object> rb = new BSTRedBlack<String, Object>();
         rb.put("E", "1");
@@ -212,7 +264,8 @@ public class BSTRedBlack<Key extends Comparable<Key>, Value>
         rb.put("N", "0");
         
 //        rb.deleteMin();
-        rb.deleteMax();
+//        rb.deleteMax();
+        rb.delete("Q");
         
         System.out.println("Finish");
         

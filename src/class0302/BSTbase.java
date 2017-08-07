@@ -222,6 +222,10 @@ public class BSTbase<Key extends Comparable<Key>, Value> {
         return x;
     }
 
+    public boolean isEmpty() {
+        return root == null || root.N <= 0;
+    }
+    
     public Iterable<Key> keys() {
         return keys(min(), max());
     }
