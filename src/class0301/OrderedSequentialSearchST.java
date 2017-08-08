@@ -51,6 +51,27 @@ public class OrderedSequentialSearchST <Key extends Comparable<Key>, Value> {
         N++;
     }
     
+    public int put(Key key) {
+        int i = 0;
+        for (Node prv=null, cur = first; cur!=null; prv=cur, cur=cur.next) {
+            if (key.compareTo(cur.k) == 0) {
+                return ++i;
+            }
+            
+            if (key.compareTo(cur.k) < 0) {
+                if (prv == null)
+                    break;
+                prv.next = new Node(key, null, cur);
+                N++;
+                return ++i;
+            }
+            i+=2;
+        }
+        first = new Node(key, null, first);
+        N++;
+        return i;
+    }
+    
     public Value get(Key key) {
         for (Node cur = first; cur!=null; cur=cur.next) 
             if (key.compareTo(cur.k) == 0) 

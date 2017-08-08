@@ -62,6 +62,12 @@ public class Adjustable2DChart {
     private List<Circle> coordinate = new LinkedList<Circle>();
     private double radius = .007;
     
+    // 颜色
+    private Color dataColor = Color.RED;
+//    private Color charColor = Color.RED;
+//    private Color lineColor = Color.RED;
+//    private Color baseColor = Color.RED;
+    
     /**
      * @param relativeX 画面整体X偏移
      * @param relativeY 画面整体Y偏移
@@ -269,13 +275,21 @@ public class Adjustable2DChart {
         // 数据重绘
         if(isLinked) {
             Circle previous = null;
-            for(Circle current: coordinate) {
+            Color c = StdDraw.getPenColor();
+            StdDraw.setPenColor(dataColor);
+            for(Circle current: coordinate) 
                 current.draw();
+            StdDraw.setPenColor(c);
+            
+            // draw line
+            for(Circle current: coordinate) {
+//                current.draw();
                 if(previous != null) {
                     (new Line(previous.p, current.p)).draw();
                 }
                 previous = current;
             }
+            
             /*
             for(int i=0; i<coordinate.size(); i++) {
                 coordinate.get(i).draw();
@@ -285,20 +299,28 @@ public class Adjustable2DChart {
                     (new Line(coordinate.get(i).p, coordinate.get(0).p)).draw();
             }
             */
-        } 
-        else if(isCurves && coordinate.size()>1) {
+        } else if(isCurves && coordinate.size()>1) {
             double[] x = new double[coordinate.size()];
             double[] y = new double[coordinate.size()];
+            
+            Color c = StdDraw.getPenColor();
+            StdDraw.setPenColor(dataColor);
             for(int i=0; i<coordinate.size(); i++) {
                 coordinate.get(i).draw();
                 x[i] = coordinate.get(i).p.x;
                 y[i] = coordinate.get(i).p.y;
             }
+            StdDraw.setPenColor(c);
+            
+            // curves
             StdDraw.curves(x, y);
-        }
-        else {
+        } else {
+            Color c = StdDraw.getPenColor();
+            StdDraw.setPenColor(dataColor);
+            
             for(Circle current: coordinate) 
                 current.draw();
+            StdDraw.setPenColor(c);
         }
         
         
@@ -310,6 +332,10 @@ public class Adjustable2DChart {
     
     public void setColorForChar(Color c) {
         StdDraw.setPenColor(c);
+    }
+    
+    public void setColorForData(Color c) {
+        dataColor = c;
     }
     
     class Point {
