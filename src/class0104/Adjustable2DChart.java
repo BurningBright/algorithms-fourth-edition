@@ -123,7 +123,7 @@ public class Adjustable2DChart {
             List<Circle> tmpList = new LinkedList<Circle>();
             for(Circle c: coordinate) {
                 // 按原最大/现最大  比例缩小坐标
-                tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius));
+                tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius, c.c));
             }
             coordinate = tmpList;
         } else {
@@ -152,7 +152,7 @@ public class Adjustable2DChart {
             List<Circle> tmpList = new LinkedList<Circle>();
             for(Circle c: coordinate) {
                 // 按原最大/现最大  比例放大坐标
-                tmpList.add(new Circle(c.x , tmpAxisInY * c.y / axisMaxInY, radius));
+                tmpList.add(new Circle(c.x , tmpAxisInY * c.y / axisMaxInY, radius, c.c));
             }
             coordinate = tmpList;
         } else {
@@ -183,7 +183,7 @@ public class Adjustable2DChart {
             List<Circle> tmpList = new LinkedList<Circle>();
             for(Circle c: coordinate) {
                 // 按原最大/现最大  比例缩小坐标
-                tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius));
+                tmpList.add(new Circle(tmpAxisMaxInX * c.x / axisMaxInX, c.y, radius, c.c));
             }
             coordinate = tmpList;
         } else if(show) {
@@ -213,7 +213,7 @@ public class Adjustable2DChart {
             List<Circle> tmpList = new LinkedList<Circle>();
             for(Circle c: coordinate) {
                 // 按原最大/现最大  比例放大坐标
-                tmpList.add(new Circle(c.x , tmpAxisInY * c.y / axisMaxInY, radius));
+                tmpList.add(new Circle(c.x , tmpAxisInY * c.y / axisMaxInY, radius, c.c));
             }
             coordinate = tmpList;
         } else if (show) {
@@ -242,7 +242,14 @@ public class Adjustable2DChart {
         addAxisDataX(x, String.format("%.2f", x), showX);
         addAxisDataY(y, String.format("%.2f", y), showY);
         coordinate.add(new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius));
-//        reDraw();
+    }
+    
+    public void addChartData(boolean showX, boolean showY,double x, double y, Color c) {
+        addAxisDataX(x, String.format("%.2f", x), showX);
+        addAxisDataY(y, String.format("%.2f", y), showY);
+        Circle cir = new Circle(baseX * x / axisMaxInX, baseY * y / axisMaxInY, radius);
+        cir.c = c;
+        coordinate.add(cir);
     }
     
     // 非均匀基准间隔[通过手动输入形式解决]
@@ -341,6 +348,7 @@ public class Adjustable2DChart {
     class Point {
         double x;
         double y;
+        Color c;
         public Point(double x, double y) {
             this.x = x + relativeX + offsetX;
             this.y = y + relativeY + offsetY;
@@ -352,6 +360,9 @@ public class Adjustable2DChart {
         public void draw() {
             StdDraw.point(x, y);
         }
+        public String toString() {
+            return x + " | " + y;
+        }
     }
     
     class Circle {
@@ -359,20 +370,40 @@ public class Adjustable2DChart {
         double y;
         Point p;
         double radius;
+        Color c;
         public Circle(double x, double y, double radius) {
             this.x = x;
             this.y = y;
             this.p = new Point(x, y);
             this.radius = radius;
         }
+        public Circle(double x, double y, double radius, Color c) {
+            this.x = x;
+            this.y = y;
+            this.p = new Point(x, y);
+            this.radius = radius;
+            this.c = c;
+        }
         public void draw() {
+            /*
+            if(c != null) {
+                Color tmp = StdDraw.getPenColor();
+                StdDraw.setPenColor(c);
+                StdDraw.filledCircle(p.x, p.y, radius*10);
+                StdDraw.setPenColor(tmp);
+            } else
+            */
             StdDraw.filledCircle(p.x, p.y, radius);
+        }
+        public String toString() {
+            return x + " | " + y;
         }
     }
     
     class Line {
         Point p1;
         Point p2;
+        Color c;
         public Line(Point p1, Point p2) {
             this.p1 = p1;
             this.p2 = p2;
@@ -388,12 +419,16 @@ public class Adjustable2DChart {
         public void draw() {
             StdDraw.line(p1.x, p1.y, p2.x, p2.y);
         }
+        public String toString() {
+            return p1 + " - " + p2;
+        }
     }
     
     class InnerStr {
         double x;
         double y;
         String src;
+        Color c;
         public InnerStr(double x, double y, String src) {
             this.x = x + relativeX;
             this.y = y + relativeY;

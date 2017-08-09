@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 import class0104.Adjustable2DChart;
 import stdlib.StdDraw;
-import stdlib.StdRandom;
 
 /**
  * @Description 3.1.38/39
@@ -25,8 +24,7 @@ public class AmortizedCostPlots {
     int N = 1;
     
     String[] txt;
-    
-    int[] sumCp;
+    int[] calcAvg; 
     
     private static File f = new File(FrequencyCounter.class.getResource("/").getPath().replace("bin", "lib")
             + "A Tale of Two Cities - Charles Dickens.txt");
@@ -53,7 +51,7 @@ public class AmortizedCostPlots {
         }
         
         txt = tmp.toArray(new String[0]);
-        sumCp = new int[txt.length];
+        calcAvg = new int[txt.length];
 //        StdRandom.shuffle(txt);
     }
     
@@ -66,26 +64,50 @@ public class AmortizedCostPlots {
         a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
         a2d.setAxisDescDistanceChart(-.3);
         a2d.setAxisDescDistanceY(.12);
-        a2d.setRadius(.0003);
-        a2d.setChartDesc("sequential plot");
+        a2d.setRadius(.0005);
+        a2d.setChartDesc("sequential plot avg-3014");
         a2d.setAxisXDesc("operations");
         a2d.setAxisYDesc("compares");
         a2d.setColorForChar(Color.RED);
         a2d.setColorForData(Color.GRAY);
-        a2d.reDraw();
+//        a2d.reDraw();
         
-        StdRandom.shuffle(txt);
-        for (int j=0; j<txt.length; j++) {
-            int cpTime = sst.put(txt[j]);
-            sumCp[j] += cpTime;
-            a2d.addChartData(false, false, j, cpTime);
-//                if(j%100 == 0)
-//                    a2d.reDraw();
+//        StdRandom.shuffle(txt);
+        for (int i=0; i<txt.length; i++) {
+            
+            int cpTime = sst.put(txt[i]);
+            calcAvg[i] = cpTime;
+            a2d.addChartData(false, false, i, cpTime);
+            
+            if(i>0 && i%100 == 0) {
+                int sum = 0;
+                for (int j=i-100; j<i; j++) {
+                    sum += calcAvg[j];
+                }
+                a2d.addChartData(false, false, i, sum/100, Color.RED);
+            }
+            
+            if(i == txt.length - 1) {
+                int sum = 0;
+                for (int j=i-100; j<i; j++) {
+                    sum += calcAvg[j];
+                }
+                a2d.addChartData(false, false, i, sum/100, Color.RED);
+            }
+            
+            /*
+            if(!sst.contains(txt[j])) {
+                int cpTime = sst.put(txt[j]);
+                a2d.addChartData(false, false, j, cpTime);
+            }
+            */
         }
+        a2d.addAxisDataX((double)txt.length, txt.length+"");
+        a2d.addAxisDataY((double)sst.size(), sst.size()+"");
+        
         a2d.reDraw();
         
         
-        System.out.println("");
     }
     
     public static void main(String[] args) {
