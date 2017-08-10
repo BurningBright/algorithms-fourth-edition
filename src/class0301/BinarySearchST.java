@@ -112,6 +112,43 @@ public class BinarySearchST<K extends Comparable<K>, V>{
         return lo;
     }
     
+    @SuppressWarnings("unchecked")
+    public int put4Cmp(K key) {
+        if (N == nvps.length)
+            resize(2 * nvps.length);
+        int[] i = rank4Cmp(key);
+        if (i[1] < N && nvps[i[1]].getKey().compareTo(key) == 0) {
+            return i[0];
+        }
+        for (int j = N; j > i[1]; j--) {
+            nvps[j] = nvps[j - 1];
+        }
+        nvps[i[1]] = new NameValuePair<K, V>(key, (V)(new Object()));
+        N++;
+        
+        return i[0] + (N-i[1])*2;
+    }
+    
+    public int[] rank4Cmp(K key) {
+        int lo = 0, hi = N - 1;
+        int[] i = {0, 0};
+        while (lo <= hi) {
+            i[0]++;
+            int mid = lo + (hi - lo) / 2;
+            int cmp = key.compareTo(nvps[mid].getKey());
+            if (cmp < 0)
+                hi = mid - 1;
+            else if (cmp > 0)
+                lo = mid + 1;
+            else {
+                i[1] = mid;
+                return i;
+            }
+        }
+        i[1] = lo;
+        return i;
+    }
+    
     public V ceiling(K key) {
         int i = rank(key);
         return i >= N? null: nvps[i].getValue();

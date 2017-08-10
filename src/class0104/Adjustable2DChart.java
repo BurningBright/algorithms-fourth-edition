@@ -385,14 +385,13 @@ public class Adjustable2DChart {
             this.c = c;
         }
         public void draw() {
-            /*
+            
             if(c != null) {
                 Color tmp = StdDraw.getPenColor();
                 StdDraw.setPenColor(c);
                 StdDraw.filledCircle(p.x, p.y, radius*10);
                 StdDraw.setPenColor(tmp);
             } else
-            */
             StdDraw.filledCircle(p.x, p.y, radius);
         }
         public String toString() {

@@ -28,6 +28,8 @@ class0302
 class0303
 	All23Shape.java						3.3.34			23平衡树形状
 	BSTRedBlack.java					3.3.0			基础红黑
+	BSTRedBlackPlot.java				3.3.43			红黑分布
+	CostPlots.java						3.3.43			红黑分布
 	DrawRedBlack.java					3.3.31			画红黑
 	HelloClassmexer.java				3.3.0			内存度量？
 	TD234Tree.java						3.3.25			234平衡树

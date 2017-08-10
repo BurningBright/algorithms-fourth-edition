@@ -52,7 +52,7 @@ public class OrderedSequentialSearchST <Key extends Comparable<Key>, Value> {
     }
     
     @SuppressWarnings("unchecked")
-    public int put(Key key) {
+    public int put4Cmp(Key key) {
         int i = 0;
         
         for (Node x = first; x != null; x = x.next) {

@@ -21,15 +21,13 @@ import stdlib.StdDraw;
  */
 public class AmortizedCostPlots {
     
-    int N = 1;
-    
-    String[] txt;
-    int[] calcAvg; 
+    protected String[] txt;
+    protected int[] calcAvg; 
     
     private static File f = new File(FrequencyCounter.class.getResource("/").getPath().replace("bin", "lib")
             + "A Tale of Two Cities - Charles Dickens.txt");
     
-    AmortizedCostPlots() {
+    protected AmortizedCostPlots() {
         
         LinkedList<String> tmp = new LinkedList<String>();
         try {
@@ -55,6 +53,7 @@ public class AmortizedCostPlots {
 //        StdRandom.shuffle(txt);
     }
     
+    @SuppressWarnings("unused")
     private void sequentialPlot() {
         
         OrderedSequentialSearchST<String, Integer> sst = 
@@ -65,17 +64,15 @@ public class AmortizedCostPlots {
         a2d.setAxisDescDistanceChart(-.3);
         a2d.setAxisDescDistanceY(.12);
         a2d.setRadius(.0005);
-        a2d.setChartDesc("sequential plot avg-3014");
+        a2d.setChartDesc("sequential plot avg-3013");
         a2d.setAxisXDesc("operations");
         a2d.setAxisYDesc("compares");
         a2d.setColorForChar(Color.RED);
         a2d.setColorForData(Color.GRAY);
-//        a2d.reDraw();
         
-//        StdRandom.shuffle(txt);
         for (int i=0; i<txt.length; i++) {
             
-            int cpTime = sst.put(txt[i]);
+            int cpTime = sst.put4Cmp(txt[i]);
             calcAvg[i] = cpTime;
             a2d.addChartData(false, false, i, cpTime);
             
@@ -93,6 +90,7 @@ public class AmortizedCostPlots {
                     sum += calcAvg[j];
                 }
                 a2d.addChartData(false, false, i, sum/100, Color.RED);
+                a2d.addAxisDataY(sum/100.0, sum/100+"");
             }
             
             /*
@@ -110,8 +108,57 @@ public class AmortizedCostPlots {
         
     }
     
+    private void binaryPlot() {
+        
+        BinarySearchST<String, Integer> sst = 
+                new BinarySearchST<String, Integer>();
+        Adjustable2DChart a2d;
+        StdDraw.setFont(new Font("consolas", Font.PLAIN, 15));
+        a2d = new Adjustable2DChart(0.1, 0.1, 0, 0);
+        a2d.setAxisDescDistanceChart(-.3);
+        a2d.setAxisDescDistanceY(.12);
+        a2d.setRadius(.0005);
+        a2d.setChartDesc("binary plot avg-385");
+        a2d.setAxisXDesc("operations");
+        a2d.setAxisYDesc("cost");
+        a2d.setColorForChar(Color.RED);
+        a2d.setColorForData(Color.GRAY);
+        
+        for (int i=0; i<txt.length; i++) {
+            
+            int cpTime = sst.put4Cmp(txt[i]);
+            calcAvg[i] = cpTime;
+            a2d.addChartData(false, false, i, cpTime);
+            
+            if(i>0 && i%100 == 0) {
+                int sum = 0;
+                for (int j=i-100; j<i; j++) {
+                    sum += calcAvg[j];
+                }
+                a2d.addChartData(false, false, i, sum/100, Color.RED);
+            }
+            
+            if(i == txt.length - 1) {
+                int sum = 0;
+                for (int j=i-100; j<i; j++) {
+                    sum += calcAvg[j];
+                }
+                a2d.addChartData(false, false, i, sum/100, Color.RED);
+                a2d.addAxisDataY(sum/100.0, sum/100+"");
+            }
+            
+        }
+        a2d.addAxisDataX((double)txt.length, txt.length+"");
+        a2d.addAxisDataY((double)calcAvg[txt.length-1], calcAvg[txt.length-1]+"");
+        
+        a2d.reDraw();
+        
+        
+    }
+    
     public static void main(String[] args) {
-        new AmortizedCostPlots().sequentialPlot();
+//        new AmortizedCostPlots().sequentialPlot();
+        new AmortizedCostPlots().binaryPlot();
     }
 
 }
