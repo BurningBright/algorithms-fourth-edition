@@ -13,6 +13,10 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     
     private int M;
     private int N;
+    
+    private double upperLimit = 1.5;
+    private double lowerLimit = 0.33;
+    
     SequentialSearchST<Key, Value> boot[];
     
     SeparateChainingHashST() {
@@ -28,12 +32,14 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     }
     
     public void put(Key key, Value val) {
+        checkCapacity();
         N -= boot[hash(key)].size();
         boot[hash(key)].put(key, val);
         N += boot[hash(key)].size();
     }
     
     void delete(Key key) {
+        checkCapacity();
         N -= boot[hash(key)].size();
         boot[hash(key)].delete(key);
         N += boot[hash(key)].size();
@@ -66,11 +72,52 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     }
     
     private void checkCapacity() {
-        // TODO resize boot , rehash key-value pair
+        // resize boot , rehash key-value pair
+        if (M > 10 && Math.sqrt(size()) >= upperLimit * M) {
+            boot = resize(2 * M, M);
+        } else if (M > 10 && Math.sqrt(size()) <= lowerLimit * M) {
+            boot = resize(M / 2, M);
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    private SequentialSearchST<Key, Value>[] resize(int cap, int ori) {
+        
+        SequentialSearchST<Key, Value>[] tmp = 
+                (SequentialSearchST<Key, Value>[])new SequentialSearchST[cap];
+        
+        for(int i=0; i<cap; i++)
+            tmp[i] = new SequentialSearchST<Key, Value>();
+        
+        // new capacity
+        M = cap;
+        N = 0;
+        for(int i=0; i<ori; i++) {
+            Object[][] entrys = boot[i].entrys();
+            for(int j=0; j<entrys[0].length; j++) {
+                boot[hash((Key)entrys[0][j])].put((Key)entrys[0][j], (Value)entrys[1][j]);
+            }
+            N += entrys[0].length;
+        }
+        
+        return tmp;
     }
     
     private int hash(Key key) {
         return (key.hashCode() & 0x7fffffff) % M;
+    }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<M; i++) {
+            Object[][] entrys = boot[i].entrys();
+            for(int j=0; j<entrys[0].length; j++) 
+                sb.append(entrys[0][j].toString()).append(":").
+                append(entrys[1][j].toString()).append(" <- ");
+            
+            sb.append("\r\n");
+        }
+        return sb.toString();
     }
     
     public static void main(String[] args) {

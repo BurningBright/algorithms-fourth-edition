@@ -82,5 +82,15 @@ public class SequentialSearchST <Key extends Comparable<Key>, Value> {
             queue.enqueue(x.key);
         return queue;
     }
-
+    
+    public Object[][] entrys() {
+        Object[][] tmp = new Object[2][size()];
+        int i = 0;
+        for (Node x = first; x != null; x = x.next) {
+            tmp[0][i] = x.key;
+            tmp[1][i] = x.val;
+        }
+        return tmp;
+    }
+    
 }
