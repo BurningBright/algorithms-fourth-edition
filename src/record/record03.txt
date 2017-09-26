@@ -38,5 +38,8 @@ class0303
 class0304
 	DrawHashFrequencies.java			3.4.0			散列分布
 	EasyQution.java						3.4.1			简单分布问题
-	SeparateChainingHashST.java			3.4.2			简单散列表
+	PerfectHash.java					3.4.4			完美散列
+	SeparateChainingHashST.java			3.4.2/9			简单散列表
 	SequentialSearchST.java				3.4.2			简单顺序链表
+	Transaction.java					3.4.25			散列缓存
+	
