@@ -11,7 +11,9 @@ public class SeparateHashSTB <Key extends Comparable<Key>, Value>
 
     @Override
     int hash(Key key) {
-        return 0;
+        int code = (key.hashCode() & 0x7fffffff) % M;
+        code = code-1 < 0 ? 0: code;
+        return code;
     }
 
 }

@@ -11,7 +11,7 @@ public class SeparateHashSTA <Key extends Comparable<Key>, Value>
 
     @Override
     int hash(Key key) {
-        return 0;
+        return (key.hashCode() & 0x7fffffff) % M;
     }
 
 }

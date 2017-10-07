@@ -1,5 +1,7 @@
 package class0304;
 
+import class0304.SequentialST.Node;
+
 /**
  * @Description 3.4.31
  *      基础散列表
@@ -8,8 +10,8 @@ package class0304;
  */
 public abstract class SeparateHashST <Key extends Comparable<Key>, Value> {
 
-    private int M;
-    private int N;
+    int M;
+    int N;
     
     private double upperLimit = 1.5;
     private double lowerLimit = 0.33;
@@ -35,11 +37,13 @@ public abstract class SeparateHashST <Key extends Comparable<Key>, Value> {
         N += boot[hash(key)].size();
     }
     
-    void delete(Key key) {
+    @SuppressWarnings("rawtypes")
+    boolean delete(Key key) {
         checkCapacity();
-        N -= boot[hash(key)].size();
-        boot[hash(key)].delete(key);
-        N += boot[hash(key)].size();
+        Node n = boot[hash(key)].delete(key);
+        if(n != null)
+            N--;
+        return n != null;
     }
     
     public Value get(Key key) {
