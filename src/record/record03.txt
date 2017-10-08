@@ -37,6 +37,8 @@ class0303
 	TwoThreeST.java						3.3.35			两种节点自建23平衡树
 class0304
 	CuckooHashing.java					3.4.31			布谷鸟散列
+	DoubleHashing.java					3.4.28			线性探测散列的二次散列
+	DoubleProbing.java					3.4.27			分布链散列的二次探测
 	DrawHashFrequencies.java			3.4.0			散列分布
 	EasyQution.java						3.4.1			简单分布问题
 	HashAttack.java						3.4.32			寻找相同散列对象
