@@ -42,12 +42,16 @@ class0304
 	DrawHashFrequencies.java			3.4.0			散列分布
 	EasyQution.java						3.4.1			简单分布问题
 	HashAttack.java						3.4.32			寻找相同散列对象
+	LinearHashST.java					3.4.0			抽象线性探测二次散列
+	LinearProbingCuckooHashSTA.java		3.4.31			布谷鸟散列A
+	LinearProbingCuckooHashSTB.java		3.4.31			布谷鸟散列B
 	LinearProbingHashST.java			3.4.26			线性探测散列延迟删除
+	LinearProbingHashSTPlot.java		3.4.40			代码侵入，计数比较次数
 	PerfectHash.java					3.4.4			完美散列
+	PlotsSeparate.java					3.4.40			分布链散列的消耗
+	PlotsLinear.java					3.4.40			线性探测散列的消耗
 	SeparateChainingHashST.java			3.4.2/9			简单散列表
-	SeparateHashST.java					3.4.0			简单散列抽象
-	SeparateHashSTA.java				3.4.0			简单散列A
-	SeparateHashSTB.java				3.4.0			简单散列B
+	SeparateChainingHashSTPlot.java		3.4.40			代码侵入，计数比较次数
 	SequentialSearchST.java				3.4.2			简单顺序链表
 	SequentialST.java					3.4.0			简单顺序链表
 	Transaction.java					3.4.25			散列缓存

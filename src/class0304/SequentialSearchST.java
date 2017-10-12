@@ -10,7 +10,7 @@ import rlgs4.Queue;
  * @author Kevin Wayne
  * @date 2017-08-29 11:01:37
  */
-public class SequentialSearchST <Key extends Comparable<Key>, Value> {
+public class SequentialSearchST <Key, Value> {
     private int n;
     private Node first;
     
@@ -46,20 +46,24 @@ public class SequentialSearchST <Key extends Comparable<Key>, Value> {
         return null;
     }
 
-    public void put(Key key, Value val) {
+    private int CMP;
+    public int put(Key key, Value val) {
+        CMP = 0;
         if (val == null) {
             delete(key);
-            return;
+            return CMP;
         }
 
         for (Node x = first; x != null; x = x.next) {
+            CMP++;
             if (key.equals(x.key)) {
                 x.val = val;
-                return;
+                return CMP;
             }
         }
         first = new Node(key, val, first);
         n++;
+        return CMP;
     }
 
     public void delete(Key key) {

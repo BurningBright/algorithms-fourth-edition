@@ -8,11 +8,11 @@ package class0304;
  */
 public class CuckooHashing<Key extends Comparable<Key>, Value> {
 
-    SeparateHashSTA<Key, Value> sta = new SeparateHashSTA<Key, Value>();
-    SeparateHashSTB<Key, Value> stb = new SeparateHashSTB<Key, Value>();
+    LinearProbingCuckooHashSTA<Key, Value> sta = new LinearProbingCuckooHashSTA<Key, Value>();
+    LinearProbingCuckooHashSTB<Key, Value> stb = new LinearProbingCuckooHashSTB<Key, Value>();
     
     public int size() {
-        return sta.N + stb.N;
+        return sta.size() + stb.size();
     }
     
     public boolean isEmpty() {
@@ -25,11 +25,12 @@ public class CuckooHashing<Key extends Comparable<Key>, Value> {
     
     public void put(Key key, Value val) {
         // what's the 'If this process cycles, restart' mean ???
+        sta.putCuckoo(key, val, stb);
     }
     
     public void delete(Key key) {
-        if(!sta.delete(key))
-            stb.delete(key);
+        if(!sta.deleteCuckoo(key))
+            stb.deleteCuckoo(key);
     }
     
     public static void main(String[] args) {
