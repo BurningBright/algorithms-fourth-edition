@@ -55,4 +55,5 @@ class0304
 	SequentialSearchST.java				3.4.2			简单顺序链表
 	SequentialST.java					3.4.0			简单顺序链表
 	Transaction.java					3.4.25			散列缓存
-	
+class0305
+	SequentialSearchSET.java			3.5.2			简单顺序集合	
