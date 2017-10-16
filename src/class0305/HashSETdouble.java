@@ -1,32 +1,33 @@
 package class0305;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import rlgs4.Queue;
 import stdlib.StdOut;
 
 /**
- * @Description 3.5.4/6
+ * @Description 3.5.6
  *          原始类型散列
  * @author Leon
  * @date 2017-10-16 15:04:00
  */
-public class HashSTint {
+public class HashSETdouble {
     private static final int INIT_CAPACITY = 4;
 
     private int n;           // number of key-value pairs in the symbol table
     private int m;           // size of linear probing table
-    private int[] keys;      // the keys
-    private boolean zero;    // keys[0] = 0 true/false
+    private double[] keys;      // the keys
+    private boolean zero;    // keys[0] = .0 true/false
 
-    public HashSTint() {
+    public HashSETdouble() {
         this(INIT_CAPACITY);
     }
 
-    public HashSTint(int capacity) {
+    public HashSETdouble(int capacity) {
         m = capacity;
         n = 0;
-        keys = new int[m];
+        keys = new double[m];
     }
 
     public int size() {
@@ -37,28 +38,30 @@ public class HashSTint {
         return size() == 0;
     }
 
-    public boolean contains(int key) {
+    public boolean contains(double key) {
         return get(key) != null;
     }
 
     // hash function for keys - returns value between 0 and M-1
-    private int hash(Integer key) {
+    private int hash(Double key) {
         return (key.hashCode() & 0x7fffffff) % m;
     }
 
     // resizes the hash table to the given capacity by re-hashing all of the keys
     private void resize(int capacity) {
-        HashSTint temp = new HashSTint(capacity);
-        for (int i = 0; i < m; i++) 
-            if(keys[i] != 0)
+        HashSETdouble temp = new HashSETdouble(capacity);
+        for (int i = 0; i < m; i++) {
+            if (keys[i] != 0) {
                 temp.put(keys[i]);
+            }
+        }
         keys = temp.keys;
         m    = temp.m;
     }
 
-    public void put(Integer key) {
-
-        if(key == 0){
+    public void put(double key) {
+        
+        if(key == .0){
             zero = true;
             return;
         }
@@ -66,28 +69,28 @@ public class HashSTint {
         // double table size if 50% full
         if (n >= m/2) resize(2*m);
 
-        // if keys[0] is a key then loop
         int i;
-        for (i = hash(key); keys[i] != 0 || zero; i = (i + 1) % m)
-            if (keys[i] == key) 
+        for (i = hash(key); keys[i] != .0 || zero; i = (i + 1) % m) 
+            if (keys[i] ==key) 
                 return;
-        
+            
         keys[i] = key;
         n++;
     }
 
-    public Integer get(int key) {
-        for (int i = hash(key); keys[i] != 0 || zero; i = (i + 1) % m)
+    public Double get(double key) {
+        for (int i = hash(key); keys[i] != .0 || zero; i = (i + 1) % m)
             if (keys[i] == key)
                 return key;
         return null;
     }
 
-    public void delete(int key) {
-        if(key == 0) {
+    public void delete(double key) {
+        if(key == .0) {
             zero = false;
             return;
         }
+        
         if (!contains(key)) return;
 
         // find position i of key
@@ -103,7 +106,7 @@ public class HashSTint {
         i = (i + 1) % m;
         while (keys[i] != 0 || zero) {
             // delete keys[i] an vals[i] and reinsert
-            int keyToRehash = keys[i];
+            double keyToRehash = keys[i];
             keys[i] = 0;
             n--;
             put(keyToRehash);
@@ -118,8 +121,8 @@ public class HashSTint {
         assert check();
     }
 
-    public Iterable<Integer> keys() {
-        Queue<Integer> queue = new Queue<Integer>();
+    public Iterable<Double> keys() {
+        Queue<Double> queue = new Queue<Double>();
         for (int i = 0; i < m; i++)
             if (keys[i] != 0 || zero) queue.enqueue(keys[i]);
         return queue;
@@ -146,13 +149,25 @@ public class HashSTint {
         return true;
     }
     
+    public static double add(double v1,double v2){
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.add(b2).doubleValue();
+    }
+    
+    public static double sub(double v1,double v2){
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.subtract(b2).doubleValue();
+    }
+    
     public static void main(String[] args) {
-        HashSTint hst = new HashSTint();
-        for(int i=300; i<400; i++) {
+        HashSETdouble hst = new HashSETdouble();
+        for(double i=.1; i<1; i=add(i, .1)) {
             hst.put(i);
         }
         StdOut.println(Arrays.toString(hst.keys));
-        for(int i=399; i>299; i--) {
+        for(double i=1; i>0; i=sub(i, .1)) {
             hst.delete(i);
         }
         StdOut.println(Arrays.toString(hst.keys));

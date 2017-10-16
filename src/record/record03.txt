@@ -56,6 +56,9 @@ class0304
 	SequentialST.java					3.4.0			简单顺序链表
 	Transaction.java					3.4.25			散列缓存
 class0305
-	SequentialSearchSET.java			3.5.2			简单顺序集合
 	BinarySearchSET.java				3.5.3			二叉搜索集合
-	
+	HashSETdouble						3.5.6			原始型线性探索散列集合
+	HashSETint							3.5.6			原始型线性探索散列集合
+	SequentialSearchSET.java			3.5.2			简单顺序集合
+	SETdouble							3.5.7			原始型红黑树集合
+	SETint								3.5.7			原始型红黑树集合
