@@ -59,6 +59,10 @@ class0305
 	BinarySearchSET.java				3.5.3			二叉搜索集合
 	HashSETdouble						3.5.6			原始型线性探索散列集合
 	HashSETint							3.5.6			原始型线性探索散列集合
+	LinearProbingDupHashST.java			3.5.8			保存多值的线性探索散列表
+	LookupCSV.java						3.5.12			遍历CSV
+	RangeLookupCSV						3.5.13			范围遍历CSV
+	RedBlackDupBST.java					3.5.10			保存多值红黑符号表
 	SequentialSearchSET.java			3.5.2			简单顺序集合
 	SETdouble							3.5.7			原始型红黑树集合
 	SETint								3.5.7			原始型红黑树集合
