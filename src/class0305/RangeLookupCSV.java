@@ -1,5 +1,13 @@
 package class0305;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rlgs4.ST;
+import stdlib.In;
+import stdlib.StdIn;
+import stdlib.StdOut;
+
 /**
  * @Description 3.5.13
  *          范围遍历CSV
@@ -9,7 +17,40 @@ package class0305;
 public class RangeLookupCSV {
 
     public static void main(String[] args) {
+        In in = new In(args[0]);
+        int keyField = Integer.parseInt(args[1]);
+        int valField = Integer.parseInt(args[2]);
         
+        String min = args[3];
+        String max = args[4];
+        
+        ST<String, List<String>> st = new ST<String, List<String>>();
+        while (in.hasNextLine()) {
+            String line = in.readLine();
+            String[] tokens = line.split(",");
+            String key = tokens[keyField];
+            String val = tokens[valField];
+            
+            if(key.compareTo(min) < 0 || key.compareTo(max) > 0)
+                continue;
+            
+            if (st.contains(key)) {
+                if (!st.get("st").contains(val))
+                    st.get("st").add(val);
+            } else {
+                List<String> tmp = new ArrayList<String>();
+                tmp.add(val);
+                st.put(key, tmp);
+            }
+        }
+        StdOut.println("Ready");
+        while (!StdIn.isEmpty()) {
+            String query = StdIn.readString();
+            if ("exit".equalsIgnoreCase(query) || "quit".equalsIgnoreCase(query))
+                break;
+            if (st.contains(query))
+                StdOut.println(st.get(query).toString());
+        }
     }
 
 }
