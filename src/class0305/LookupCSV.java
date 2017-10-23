@@ -10,6 +10,7 @@ import stdlib.StdOut;
 
 /**
  * @Description 3.5.12 遍历CSV
+ *              resource/3.5/amino.csv 0 3
  * @author Leon
  * @date 2017-10-17 17:04:00
  */
