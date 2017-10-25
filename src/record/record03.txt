@@ -68,5 +68,7 @@ class0305
 	SequentialSearchSET.java			3.5.2			简单顺序集合
 	SETdouble.java						3.5.7			原始型红黑树集合
 	SETint.java							3.5.7			原始型红黑树集合
-	SparseVector.java					3.5.16			空间向量
+	SparseMatrix.java					3.5.22			稀疏矩阵
+	SparseVector.java					3.5.16			稀疏空间向量
 	SpellChecker.java					3.5.31			黑名单检查拼写错误
+	STList.java							3.5.23			符号链表？
