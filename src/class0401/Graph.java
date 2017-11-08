@@ -2,7 +2,6 @@ package class0401;
 
 import rlgs4.Bag;
 import stdlib.In;
-import stdlib.StdOut;
 
 /**
  * @Description 4.1.4/5

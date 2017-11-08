@@ -64,7 +64,6 @@ public class GraphProperties {
                 }
                 count++;
             }
-            
         }
         if(s == 0) {
             min = max = count;
@@ -100,12 +99,88 @@ public class GraphProperties {
         return c;
     }
     
+    private boolean searched[];   // is reached?
+    private Queue<Integer> cycle;
+    private Queue<Integer> current;
+    
+    public int girth() {
+        
+        for (Integer i: G.adj(0)) {
+            searched = new boolean[G.V()];
+            current = new Queue<Integer>();
+            bfs(i, 0);
+            
+            if(cycle == null || cycle.size() > current.size())
+                cycle = current;
+//            StdOut.println(i + "  " + bfs(i, 0));
+        }
+        
+        for(Integer i: cycle) {
+            StdOut.print(i + "  ");
+        }
+        StdOut.println();
+        
+        return 0;
+    }
+    
+    private int bfs(int s, int p) {
+        Queue<Integer> queueA = new Queue<Integer>();
+        Queue<Integer> queueB = new Queue<Integer>();
+        
+        
+        queueA.enqueue(s);
+//        current.enqueue(s);
+        
+        searched[s] = true;
+        int count = 1;
+        while (!queueA.isEmpty() || !queueB.isEmpty()) {
+            if(queueB.isEmpty()) {
+                while(!queueA.isEmpty()) {
+                    int v = queueA.dequeue();
+                    for(Integer i: G.adj(v)) {
+                        
+                        if(count == 1 && i == p)
+                            continue;
+                        else if(i == p) 
+                            return ++count;
+                        
+                        if(!searched[i]) {
+                            searched[i] = true;
+                            queueB.enqueue(i);
+//                            current.enqueue(i);
+                        }
+                    }
+                }
+                count++;
+            }
+            
+            if(queueA.isEmpty()) {
+                while(!queueB.isEmpty()) {
+                    int v = queueB.dequeue();
+                    for(Integer i: G.adj(v)) {
+                        if(i == p) 
+                            return ++count;
+                        
+                        if(!searched[i]) {
+                            searched[i] = true;
+                            queueA.enqueue(i);
+//                            current.enqueue(i);
+                        }
+                    }
+                }
+                count++;
+            }
+        }
+        return count;
+    }
+    
     public static void main(String[] args) {
-        Graph g = new Graph(new In("resource/4.1/mediumG.txt"));
+        Graph g = new Graph(new In("resource/4.1/tinyG3.txt"));
         GraphProperties gp = new GraphProperties(g);
-        StdOut.println(gp.diameter());
-        StdOut.println(gp.radius());
-        StdOut.println(gp.center());
+//        StdOut.println(gp.diameter());
+//        StdOut.println(gp.radius());
+//        StdOut.println(gp.center());
+        StdOut.println(gp.girth());
     }
 
 }

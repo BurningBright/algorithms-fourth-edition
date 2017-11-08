@@ -14,6 +14,7 @@ import stdlib.StdOut;
  */
 public class OscarNominees {
     
+    @SuppressWarnings("unused")
     private static void nameTranslate() {
         /*
         String a = "Gosling, Ryan (I)";
