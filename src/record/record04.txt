@@ -1,10 +1,12 @@
 class0401
+	AnalysisMovies.java					4.1.24			电影联系分析
 	BaconHistogram.java					4.1.23			演员指数分布
 	BreadthFirstPathsDistTo.java		4.1.13			最短路径计数，双队列分离层次
+	CC.java								4.1.0			图元件分析，DFS
 	DegreesOfSeparation.java			4.1.25			电影过滤年份
 	DrawMedium.java						4.1.0			画图
 	Graph.java							4.1.4/5			图基础结构
-	GraphProperties.java				4.1.16			图的偏心属性
+	GraphProperties.java				4.1.16/18		图的偏心/最小环属性
 	OscarNominees.java					4.1.22			演员的Kevin Bacon值
 	SymbolGraph.java					4.1.22			符号图，二分图？
 	UFSearch.java						4.1.8			联合搜索

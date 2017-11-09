@@ -54,13 +54,21 @@ public class Graph {
     public void addEdge(int v, int w) {
         if (v < 0 || v >= V) throw new IndexOutOfBoundsException();
         if (w < 0 || w >= V) throw new IndexOutOfBoundsException();
+        /*
         if (v == w) throw new IllegalArgumentException("self-loops");
         if (adj[v] != null) {
             for(Integer i: adj[v])
                 if(i == w)
                     throw new IllegalArgumentException("parallel edges");
         }
-        
+        */
+        if (v == w)
+            return;
+        if (adj[v] != null) {
+            for(Integer i: adj[v])
+                if(i == w)
+                    return;
+        }
         adj[v].add(w); // Add w to v’s list.
         adj[w].add(v); // Add v to w’s list.
         E++;
