@@ -1,11 +1,14 @@
 package class0401;
 
 import rlgs4.Bag;
+import rlgs4.SET;
 import stdlib.In;
+import stdlib.StdOut;
 
 /**
- * @Description 4.1.4/5
+ * @Description 4.1.4/5/32
  *          图 - 禁止平行连接、自连接，增加连接判断方法
+ *          统计平行连线数
  * @author Leon
  * @date 2017-11-03 11:15:00
  */
@@ -76,5 +79,30 @@ public class Graph {
 
     public Iterable<Integer> adj(int v) {
         return adj[v];
+    }
+    
+    public int parallel() {
+        int[] c = new int[V];
+        for (int i=0; i<V; i++) {
+            SET<Integer> set = new SET<Integer>();
+            int pSize = adj[i].size();
+            // 剔除自连接
+            for (Integer j: adj[i])
+                if(j != i)
+                    set.add(j);
+                else
+                    pSize--;
+            c[i] = pSize - set.size();
+        }
+        int count = 0;
+        for (int i=0; i<V; i++) {
+            count += c[i];
+        }
+        return count/2;
+    }
+    
+    public static void main(String args[]) {
+        Graph g = new Graph(new In("resource/4.1/tinyG5.txt"));
+        StdOut.println(g.parallel());
     }
 }

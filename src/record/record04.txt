@@ -8,7 +8,7 @@ class0401
 	DegreesOfSeparationDFS.java			4.1.26			DFS探索分离度
 	DepthFirstPaths.java				4.1.0			深度优先
 	DrawMedium.java						4.1.0			画图
-	Graph.java							4.1.4/5			图基础结构
+	Graph.java							4.1.4/5/32		图基础结构，计数平行连接
 	GraphProperties.java				4.1.16/18		图的偏心/最小环属性
 	Maze.java							web.5			迷宫
 	OscarNominees.java					4.1.22			演员的Kevin Bacon值
