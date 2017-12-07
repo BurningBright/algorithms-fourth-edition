@@ -38,6 +38,7 @@ public class EdgeWeightedDigraph {
     private final int V;
     private int E;
     private Bag<DirectedEdge>[] adj;
+    private Bag<DirectedEdge>[] idj;
     
     /**
      * Initializes an empty edge-weighted digraph with <tt>V</tt> vertices and 0 edges.
@@ -50,8 +51,10 @@ public class EdgeWeightedDigraph {
         this.V = V;
         this.E = 0;
         adj = (Bag<DirectedEdge>[]) new Bag[V];
-        for (int v = 0; v < V; v++)
+        for (int v = 0; v < V; v++) {
             adj[v] = new Bag<DirectedEdge>();
+            idj[v] = new Bag<DirectedEdge>();
+        }
     }
 
     /**
@@ -112,6 +115,7 @@ public class EdgeWeightedDigraph {
             }
             for (DirectedEdge e : reverse) {
                 adj[v].add(e);
+                idj[e.to()].add(e);
             }
         }
     }
@@ -139,6 +143,7 @@ public class EdgeWeightedDigraph {
     public void addEdge(DirectedEdge e) {
         int v = e.from();
         adj[v].add(e);
+        idj[e.to()].add(e);
         E++;
     }
 
@@ -180,6 +185,11 @@ public class EdgeWeightedDigraph {
     public int outdegree(int v) {
         if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
         return adj[v].size();
+    }
+    
+    public int indegree(int v) {
+        if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
+        return idj[v].size();
     }
 
     /**

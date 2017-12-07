@@ -124,6 +124,9 @@ public class SymbolDigraph {
         return G;
     }
 
+    public Digraph digraph() {
+        return G;
+    }
 
     /**
      * Unit tests the <tt>SymbolDigraph</tt> data type.

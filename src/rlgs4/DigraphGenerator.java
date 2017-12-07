@@ -1,23 +1,24 @@
 package rlgs4;
 
-import stdlib.*;
+import stdlib.StdOut;
+import stdlib.StdRandom;
 
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac DigraphGenerator.java
  *  Execution:    java DigraphGenerator V E
  *  Dependencies: Digraph.java
  *
  *  A digraph generator.
  *  
- *************************************************************************/
+ ******************************************************************************/
 
 /**
- *  The <tt>DigraphGenerator</tt> class provides static methods for creating
+ *  The {@code DigraphGenerator} class provides static methods for creating
  *  various digraphs, including Erdos-Renyi random digraphs, random DAGs,
  *  random rooted trees, random rooted DAGs, random tournaments, path digraphs,
  *  cycle digraphs, and the complete digraph.
  *  <p>
- *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
+ *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  *  @author Robert Sedgewick
@@ -25,12 +26,14 @@ import stdlib.*;
  */
 public class DigraphGenerator {
     private static final class Edge implements Comparable<Edge> {
-        private int v;
-        private int w;
+        private final int v;
+        private final int w;
+
         private Edge(int v, int w) {
             this.v = v;
             this.w = w;
         }
+
         public int compareTo(Edge that) {
             if (this.v < that.v) return -1;
             if (this.v > that.v) return +1;
@@ -40,12 +43,15 @@ public class DigraphGenerator {
         }
     }
 
+    // this class cannot be instantiated
+    private DigraphGenerator() { }
+
     /**
-     * Returns a random simple digraph containing <tt>V</tt> vertices and <tt>E</tt> edges.
+     * Returns a random simple digraph containing {@code V} vertices and {@code E} edges.
      * @param V the number of vertices
      * @param E the number of vertices
-     * @return a random simple digraph on <tt>V</tt> vertices, containing a total
-     *     of <tt>E</tt> edges
+     * @return a random simple digraph on {@code V} vertices, containing a total
+     *     of {@code E} edges
      * @throws IllegalArgumentException if no such simple digraph exists
      */
     public static Digraph simple(int V, int E) {
@@ -66,14 +72,14 @@ public class DigraphGenerator {
     }
 
    /**
-     * Returns a random simple digraph on <tt>V</tt> vertices, with an 
-     * edge between any two vertices with probability <tt>p</tt>. This is sometimes
+     * Returns a random simple digraph on {@code V} vertices, with an 
+     * edge between any two vertices with probability {@code p}. This is sometimes
      * referred to as the Erdos-Renyi random digraph model.
-     * This implementations takes time propotional to V^2 (even if <tt>p</tt> is small).
+     * This implementations takes time propotional to V^2 (even if {@code p} is small).
      * @param V the number of vertices
      * @param p the probability of choosing an edge
-     * @return a random simple digraph on <tt>V</tt> vertices, with an edge between
-     *     any two vertices with probability <tt>p</tt>
+     * @return a random simple digraph on {@code V} vertices, with an edge between
+     *     any two vertices with probability {@code p}
      * @throws IllegalArgumentException if probability is not between 0 and 1
      */
     public static Digraph simple(int V, double p) {
@@ -89,21 +95,21 @@ public class DigraphGenerator {
     }
 
     /**
-     * Returns the complete digraph on <tt>V</tt> vertices.
+     * Returns the complete digraph on {@code V} vertices.
      * @param V the number of vertices
-     * @return the complete digraph on <tt>V</tt> vertices
+     * @return the complete digraph on {@code V} vertices
      */
     public static Digraph complete(int V) {
         return simple(V, V*(V-1));
     }
 
     /**
-     * Returns a random simple DAG containing <tt>V</tt> vertices and <tt>E</tt> edges.
+     * Returns a random simple DAG containing {@code V} vertices and {@code E} edges.
      * Note: it is not uniformly selected at random among all such DAGs.
      * @param V the number of vertices
      * @param E the number of vertices
-     * @return a random simple DAG on <tt>V</tt> vertices, containing a total
-     *     of <tt>E</tt> edges
+     * @return a random simple DAG on {@code V} vertices, containing a total
+     *     of {@code E} edges
      * @throws IllegalArgumentException if no such simple DAG exists
      */
     public static Digraph dag(int V, int E) {
@@ -112,7 +118,8 @@ public class DigraphGenerator {
         Digraph G = new Digraph(V);
         SET<Edge> set = new SET<Edge>();
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
         while (G.E() < E) {
             int v = StdRandom.uniform(V);
@@ -128,24 +135,31 @@ public class DigraphGenerator {
 
     // tournament
     /**
-     * Returns a random tournament digraph on <tt>V</tt> vertices. A tournament digraph
-     * is a DAG in which for every two vertices, there is one direted edge.
+     * Returns a random tournament digraph on {@code V} vertices. A tournament digraph
+     * is a DAG in which for every two vertices, there is one directed edge.
      * A tournament is an oriented complete graph.
      * @param V the number of vertices
-     * @return a random tournament digraph on <tt>V</tt> vertices
+     * @return a random tournament digraph on {@code V} vertices
      */
     public static Digraph tournament(int V) {
-        return dag(V, V*(V-1)/2);
+        Digraph G = new Digraph(V);
+        for (int v = 0; v < G.V(); v++) {
+            for (int w = v+1; w < G.V(); w++) {
+                if (StdRandom.bernoulli(0.5)) G.addEdge(v, w);
+                else                          G.addEdge(w, v);
+            }
+        }
+        return G;
     }
 
     /**
-     * Returns a random rooted-in DAG on <tt>V</tt> vertices and <tt>E</tt> edges.
+     * Returns a random rooted-in DAG on {@code V} vertices and {@code E} edges.
      * A rooted in-tree is a DAG in which there is a single vertex
      * reachable from every other vertex.
      * The DAG returned is not chosen uniformly at random among all such DAGs.
      * @param V the number of vertices
      * @param E the number of edges
-     * @return a random rooted-in DAG on <tt>V</tt> vertices and <tt>E</tt> edges
+     * @return a random rooted-in DAG on {@code V} vertices and {@code E} edges
      */
     public static Digraph rootedInDAG(int V, int E) {
         if (E > (long) V*(V-1) / 2) throw new IllegalArgumentException("Too many edges");
@@ -155,7 +169,8 @@ public class DigraphGenerator {
 
         // fix a topological order
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
 
         // one edge pointing from each vertex, other than the root = vertices[V-1]
@@ -179,13 +194,13 @@ public class DigraphGenerator {
     }
 
     /**
-     * Returns a random rooted-out DAG on <tt>V</tt> vertices and <tt>E</tt> edges.
+     * Returns a random rooted-out DAG on {@code V} vertices and {@code E} edges.
      * A rooted out-tree is a DAG in which every vertex is reachable from a
      * single vertex.
      * The DAG returned is not chosen uniformly at random among all such DAGs.
      * @param V the number of vertices
      * @param E the number of edges
-     * @return a random rooted-out DAG on <tt>V</tt> vertices and <tt>E</tt> edges
+     * @return a random rooted-out DAG on {@code V} vertices and {@code E} edges
      */
     public static Digraph rootedOutDAG(int V, int E) {
         if (E > (long) V*(V-1) / 2) throw new IllegalArgumentException("Too many edges");
@@ -195,7 +210,8 @@ public class DigraphGenerator {
 
         // fix a topological order
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
 
         // one edge pointing from each vertex, other than the root = vertices[V-1]
@@ -219,38 +235,39 @@ public class DigraphGenerator {
     }
 
     /**
-     * Returns a random rooted-in tree on <tt>V</tt> vertices.
+     * Returns a random rooted-in tree on {@code V} vertices.
      * A rooted in-tree is an oriented tree in which there is a single vertex
      * reachable from every other vertex.
      * The tree returned is not chosen uniformly at random among all such trees.
      * @param V the number of vertices
-     * @return a random rooted-in tree on <tt>V</tt> vertices
+     * @return a random rooted-in tree on {@code V} vertices
      */
     public static Digraph rootedInTree(int V) {
         return rootedInDAG(V, V-1);
     }
 
     /**
-     * Returns a random rooted-out tree on <tt>V</tt> vertices. A rooted out-tree
+     * Returns a random rooted-out tree on {@code V} vertices. A rooted out-tree
      * is an oriented tree in which each vertex is reachable from a single vertex.
      * It is also known as a <em>arborescence</em> or <em>branching</em>.
      * The tree returned is not chosen uniformly at random among all such trees.
      * @param V the number of vertices
-     * @return a random rooted-out tree on <tt>V</tt> vertices
+     * @return a random rooted-out tree on {@code V} vertices
      */
     public static Digraph rootedOutTree(int V) {
         return rootedOutDAG(V, V-1);
     }
 
     /**
-     * Returns a path digraph on <tt>V</tt> vertices.
+     * Returns a path digraph on {@code V} vertices.
      * @param V the number of vertices in the path
-     * @return a digraph that is a directed path on <tt>V</tt> vertices
+     * @return a digraph that is a directed path on {@code V} vertices
      */
     public static Digraph path(int V) {
         Digraph G = new Digraph(V);
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
         for (int i = 0; i < V-1; i++) {
             G.addEdge(vertices[i], vertices[i+1]);
@@ -259,14 +276,15 @@ public class DigraphGenerator {
     }
 
     /**
-     * Returns a complete binary tree digraph on <tt>V</tt> vertices.
+     * Returns a complete binary tree digraph on {@code V} vertices.
      * @param V the number of vertices in the binary tree
-     * @return a digraph that is a complete binary tree on <tt>V</tt> vertices
+     * @return a digraph that is a complete binary tree on {@code V} vertices
      */
     public static Digraph binaryTree(int V) {
         Digraph G = new Digraph(V);
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
         for (int i = 1; i < V; i++) {
             G.addEdge(vertices[i], vertices[(i-1)/2]);
@@ -275,14 +293,15 @@ public class DigraphGenerator {
     }
 
     /**
-     * Returns a cycle digraph on <tt>V</tt> vertices.
+     * Returns a cycle digraph on {@code V} vertices.
      * @param V the number of vertices in the cycle
-     * @return a digraph that is a directed cycle on <tt>V</tt> vertices
+     * @return a digraph that is a directed cycle on {@code V} vertices
      */
     public static Digraph cycle(int V) {
         Digraph G = new Digraph(V);
         int[] vertices = new int[V];
-        for (int i = 0; i < V; i++) vertices[i] = i;
+        for (int i = 0; i < V; i++)
+            vertices[i] = i;
         StdRandom.shuffle(vertices);
         for (int i = 0; i < V-1; i++) {
             G.addEdge(vertices[i], vertices[i+1]);
@@ -291,10 +310,59 @@ public class DigraphGenerator {
         return G;
     }
 
+    /**
+     * Returns an Eulerian cycle digraph on {@code V} vertices.
+     *
+     * @param  V the number of vertices in the cycle
+     * @param  E the number of edges in the cycle
+     * @return a digraph that is a directed Eulerian cycle on {@code V} vertices
+     *         and {@code E} edges
+     * @throws IllegalArgumentException if either {@code V <= 0} or {@code E <= 0}
+     */
+    public static Digraph eulerianCycle(int V, int E) {
+        if (E <= 0)
+            throw new IllegalArgumentException("An Eulerian cycle must have at least one edge");
+        if (V <= 0)
+            throw new IllegalArgumentException("An Eulerian cycle must have at least one vertex");
+        Digraph G = new Digraph(V);
+        int[] vertices = new int[E];
+        for (int i = 0; i < E; i++)
+            vertices[i] = StdRandom.uniform(V);
+        for (int i = 0; i < E-1; i++) {
+            G.addEdge(vertices[i], vertices[i+1]);
+        }
+        G.addEdge(vertices[E-1], vertices[0]);
+        return G;
+    }
+
+    /**
+     * Returns an Eulerian path digraph on {@code V} vertices.
+     *
+     * @param  V the number of vertices in the path
+     * @param  E the number of edges in the path
+     * @return a digraph that is a directed Eulerian path on {@code V} vertices
+     *         and {@code E} edges
+     * @throws IllegalArgumentException if either {@code V <= 0} or {@code E < 0}
+     */
+    public static Digraph eulerianPath(int V, int E) {
+        if (E < 0)
+            throw new IllegalArgumentException("negative number of edges");
+        if (V <= 0)
+            throw new IllegalArgumentException("An Eulerian path must have at least one vertex");
+        Digraph G = new Digraph(V);
+        int[] vertices = new int[E+1];
+        for (int i = 0; i < E+1; i++)
+            vertices[i] = StdRandom.uniform(V);
+        for (int i = 0; i < E; i++) {
+            G.addEdge(vertices[i], vertices[i+1]);
+        }
+        return G;
+    }
+
    /**
-     * Returns a random simple digraph on <tt>V</tt> vertices, <tt>E</tt>
-     * edges and (at least) <tt>c</tt> strong components. The vertices are randomly
-     * assigned integer labels between <tt>0</tt> and <tt>c-1</tt> (corresponding to 
+     * Returns a random simple digraph on {@code V} vertices, {@code E}
+     * edges and (at least) {@code c} strong components. The vertices are randomly
+     * assigned integer labels between {@code 0} and {@code c-1} (corresponding to 
      * strong components). Then, a strong component is creates among the vertices
      * with the same label. Next, random edges (either between two vertices with
      * the same labels or from a vetex with a smaller label to a vertex with a 
@@ -304,9 +372,9 @@ public class DigraphGenerator {
      * @param V the number of vertices
      * @param E the number of edges
      * @param c the (maximum) number of strong components
-     * @return a random simple digraph on <tt>V</tt> vertices and
-               <tt>E</tt> edges, with (at most) <tt>c</tt> strong components
-     * @throws IllegalArgumentException if <tt>c</tt> is larger than <tt>V</tt>
+     * @return a random simple digraph on {@code V} vertices and
+               {@code E} edges, with (at most) {@code c} strong components
+     * @throws IllegalArgumentException if {@code c} is larger than {@code V}
      */
     public static Digraph strong(int V, int E, int c) {
         if (c >= V || c <= 0)
@@ -375,54 +443,64 @@ public class DigraphGenerator {
     }
 
     /**
-     * Unit tests the <tt>DigraphGenerator</tt> library.
+     * Unit tests the {@code DigraphGenerator} library.
+     *
+     * @param args the command-line arguments
      */
     public static void main(String[] args) {
         int V = Integer.parseInt(args[0]);
         int E = Integer.parseInt(args[1]);
-        System.out.println("complete graph");
-        System.out.println(complete(V));
-        System.out.println();
+        StdOut.println("complete graph");
+        StdOut.println(complete(V));
+        StdOut.println();
 
-        System.out.println("simple");
-        System.out.println(simple(V, E));
-        System.out.println();
+        StdOut.println("simple");
+        StdOut.println(simple(V, E));
+        StdOut.println();
 
-        System.out.println("path");
-        System.out.println(path(V));
-        System.out.println();
+        StdOut.println("path");
+        StdOut.println(path(V));
+        StdOut.println();
 
-        System.out.println("cycle");
-        System.out.println(cycle(V));
-        System.out.println();
+        StdOut.println("cycle");
+        StdOut.println(cycle(V));
+        StdOut.println();
 
-        System.out.println("binary tree");
-        System.out.println(binaryTree(V));
-        System.out.println();
+        StdOut.println("Eulierian path");
+        StdOut.println(eulerianPath(V, E));
+        StdOut.println();
 
-        System.out.println("tournament");
-        System.out.println(tournament(V));
-        System.out.println();
+        StdOut.println("Eulierian cycle");
+        StdOut.println(eulerianCycle(V, E));
+        StdOut.println();
 
-        System.out.println("DAG");
-        System.out.println(dag(V, E));
-        System.out.println();
+        StdOut.println("binary tree");
+        StdOut.println(binaryTree(V));
+        StdOut.println();
 
-        System.out.println("rooted-in DAG");
-        System.out.println(rootedInDAG(V, E));
-        System.out.println();
+        StdOut.println("tournament");
+        StdOut.println(tournament(V));
+        StdOut.println();
 
-        System.out.println("rooted-out DAG");
-        System.out.println(rootedOutDAG(V, E));
-        System.out.println();
+        StdOut.println("DAG");
+        StdOut.println(dag(V, E));
+        StdOut.println();
 
-        System.out.println("rooted-in tree");
-        System.out.println(rootedInTree(V));
-        System.out.println();
+        StdOut.println("rooted-in DAG");
+        StdOut.println(rootedInDAG(V, E));
+        StdOut.println();
 
-        System.out.println("rooted-out DAG");
-        System.out.println(rootedOutTree(V));
-        System.out.println();
+        StdOut.println("rooted-out DAG");
+        StdOut.println(rootedOutDAG(V, E));
+        StdOut.println();
+
+        StdOut.println("rooted-in tree");
+        StdOut.println(rootedInTree(V));
+        StdOut.println();
+
+        StdOut.println("rooted-out DAG");
+        StdOut.println(rootedOutTree(V));
+        StdOut.println();
     }
 
 }

@@ -20,3 +20,5 @@ class0401
 	StdDraw.java						4.1.0			新版画图？
 	SymbolGraph.java					4.1.22			符号图，二分图？
 	UFSearch.java						4.1.8			联合搜索
+class0402
+	
