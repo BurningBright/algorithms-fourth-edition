@@ -1,26 +1,80 @@
 package class0402;
 
 import java.awt.Color;
+import java.awt.Font;
+
 import class0401.StdDraw;
+import rlgs4.Digraph;
+import stdlib.In;
 
 /**
  * @Description 4.2.2
  *          画小有向图
  * @author Leon
- * @date 2017-11-10 09:32:00
+ * @date 2017-12-07 19:32:00
  */
 public class DrawTinyDG {
-
+    
+    static double SX = 100;
+    static double SY = 100;
+    static double cRadius = 3.5;
+    static double pRadius = .005;
+    
     public static void main(String[] args) {
-        StdDraw.setScale(0, 10);
-        drawArrow(3, 5, 7, 2, .01, StdDraw.GRAY);
+        StdDraw.setXscale(0, SX);
+        StdDraw.setYscale(SY, 0);
+        
+        double[] px = {28.0, 48.0, 48.0, 66.2, 66.2, 28.0, 66.2, 28.0, 48.0, 48.0, 48.0, 28.0};
+        double[] py = {10.8, 73.0, 26.4, 37.6, 66.4, 45.8, 10.8, 58.0, 58.0, 89.2, 45.8, 73.0};
+        boolean[] painted = new boolean[px.length];
+        
+        StdDraw.setPenRadius(.003);
+        StdDraw.setFont(new Font("MyriadPro", Font.BOLD, 20));
+        Digraph dgh = new Digraph(new In("resource/4.2/tinyDGex2.txt"));
+        for(int i=0; i<dgh.V(); i++) {
+            for(Integer j: dgh.adj(i)) {
+                if(!painted[j]) {
+                    StdDraw.text(px[j], py[j]+.3, j+"");
+                    StdDraw.circle(px[j], py[j], cRadius);
+                    painted[j] = true;
+                }
+                
+                drawEdge(px[i], py[i], px[j], py[j], StdDraw.BLACK);
+                
+            }
+            if(!painted[i]) {
+                StdDraw.text(px[i], py[i]+.3, i+"");
+                StdDraw.circle(px[i], py[i], cRadius);
+                painted[i] = true;
+            }
+        }
+        
     }
     
-    public static void drawArrow(double x0, double y0, double x1, double y1,
-            double radius, Color color) {
+    public static void drawEdge(double x0, double y0, double x1, double y1, Color color) {
         
-        double M1 = 30;
-        double M2 = 15;
+        double xFrom, yFrom, xTo, yTo;
+        if(x0-x1 > 0) {
+            double angle = Math.atan((y0-y1)/(x0-x1));
+            xTo = x1 + Math.cos(angle) * cRadius;
+            yTo = y1 + Math.sin(angle) * cRadius;
+            xFrom = x0 - Math.cos(angle) * cRadius;
+            yFrom = y0 - Math.sin(angle) * cRadius;
+        } else {
+            double angle = Math.atan((y0-y1)/(x1-x0));
+            xTo = x1 - Math.cos(angle) * cRadius;
+            yTo = y1 + Math.sin(angle) * cRadius;
+            xFrom = x0 + Math.cos(angle) * cRadius;
+            yFrom = y0 - Math.sin(angle) * cRadius;
+        }
+        drawArrow(xFrom, yFrom, xTo, yTo, SX, SY, pRadius, color);
+    }
+    
+    public static void drawArrow(double x0, double y0, double x1, double y1, 
+            double scaleX, double scaleY, double radius, Color color) {
+        
+        double M1 = 3 * Math.abs(scaleX);
+        double M2 = 1.5 * Math.abs(scaleY);
         
         Color oldCol = StdDraw.getPenColor();
         double oldRad = StdDraw.getPenRadius();
