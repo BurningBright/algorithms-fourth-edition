@@ -76,9 +76,19 @@ public class Graph {
         adj[w].add(v); // Add v to w’s list.
         E++;
     }
-
+    
+    private void validate(int v) {
+        if (v < 0 || v >= V) throw new IndexOutOfBoundsException();
+    }
+    
     public Iterable<Integer> adj(int v) {
+        validate(v);
         return adj[v];
+    }
+    
+    public int degree(int v) {
+        validate(v);
+        return adj[v].size();
     }
     
     public int parallel() {

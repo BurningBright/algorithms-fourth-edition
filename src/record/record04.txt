@@ -21,6 +21,8 @@ class0401
 	SymbolGraph.java					4.1.22			符号图，二分图？
 	UFSearch.java						4.1.8			联合搜索
 class0402
+	CheckTopologicalOrder.java			4.2.9			验证拓扑排序顺序，有环即非DAG
 	Degrees.java						4.2.7			有向图的度
 	Digraph.java						4.2.4			判断有向边
 	DrawTinyDG.java						4.2.2			画有向图
+	
