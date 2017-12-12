@@ -25,4 +25,5 @@ class0402
 	Degrees.java						4.2.7			有向图的度
 	Digraph.java						4.2.4			判断有向边
 	DrawTinyDG.java						4.2.2			画有向图
-	
+	LowestCommonAncestor.java			4.2.21/22		公共最低祖先节点问题
+	StrongComponent.java				4.2.23			强联通元件的原始实现
