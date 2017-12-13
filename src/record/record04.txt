@@ -23,7 +23,13 @@ class0401
 class0402
 	CheckTopologicalOrder.java			4.2.9			验证拓扑排序顺序，有环即非DAG
 	Degrees.java						4.2.7			有向图的度
+	DepthFirstOrder.java				4.2.0			有向图深度优先探索
 	Digraph.java						4.2.4			判断有向边
+	DirectedCycle.java					4.2.0			环探索，寻找强联通
+	DirectedEulerianCycle.java			4.2.20			有向欧拉环路径，每个边访问一次。节点出入度要相同
 	DrawTinyDG.java						4.2.2			画有向图
+	HamiltonianPath.java				4.2.24			有向汉密尔顿路径，每个节点访问一次。拓扑顺序要前后相连
 	LowestCommonAncestor.java			4.2.21/22		公共最低祖先节点问题
 	StrongComponent.java				4.2.23			强联通元件的原始实现
+	Topological.java					4.2.0/25		拓扑顺序，以环探索DirectedCycle[强联通元件]为基础；有汉密尔顿路径的拓扑顺序是唯一的
+	
