@@ -1,8 +1,8 @@
 package class0402;
 
-import rlgs4.Digraph;
+import java.util.Iterator;
+
 import rlgs4.SET;
-import rlgs4.Topological;
 import stdlib.In;
 
 /**
@@ -19,13 +19,30 @@ public class CheckTopologicalOrder {
             throw new IllegalArgumentException();
         SET<Integer> set = new SET<Integer>();
         set.add(order[0]);
-        for(int i=1; i<order.length; i++) {
+        for(int v=1; v<order.length; v++) {
             // check cycle
-            for(int j: dgh.adj(order[i]))
-                if(set.contains(j)) {
+            for(int w: dgh.adj(order[v]))
+                if(set.contains(w)) {
                     return false;
                 }
-            set.add(order[i]);
+            set.add(order[v]);
+        }
+        return true;
+    }
+    
+    public static boolean checkOrder(Digraph dgh, Iterator<Integer> order) {
+        if(dgh == null || dgh.V() < 1 || order == null || !order.hasNext())
+            throw new IllegalArgumentException();
+        SET<Integer> set = new SET<Integer>();
+        set.add(order.next());
+        while (order.hasNext()) {
+            int v = order.next();
+            // check cycle
+            for(int w: dgh.adj(v))
+                if(set.contains(w)) {
+                    return false;
+                }
+            set.add(v);
         }
         return true;
     }
