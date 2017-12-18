@@ -36,6 +36,16 @@ public class EuclideanGraph extends Graph{
         this.y[i] = y;
     }
     
+    public double getVerticalX(int i) {
+        if (i < 0 || i >= V()) throw new IndexOutOfBoundsException();
+        return this.x[i];
+    }
+    
+    public double getVerticalY(int i) {
+        if (i < 0 || i >= V()) throw new IndexOutOfBoundsException();
+        return this.y[i];
+    }
+    
     public void show() {
         
         double xMax = .0;
