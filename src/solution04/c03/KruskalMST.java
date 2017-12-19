@@ -1,6 +1,7 @@
 package solution04.c03;
 
 import rlgs4.Edge;
+import rlgs4.MinPQ;
 import rlgs4.Queue;
 import rlgs4.UF;
 import stdlib.In;

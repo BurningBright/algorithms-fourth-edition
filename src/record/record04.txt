@@ -37,4 +37,6 @@ class0403
 	DrawMST.java						4.3.0			用随机欧几里德图画蛮力最小生成树
 	Edge.java							4.3.0			权重边
 	EdgeWeightedGraph.java				4.3.9			权重图
+	LazyPrimMST.java					4.3.31			未优化的Prim
 	MST.java							4.3.0			蛮力最小生成树
+	PrimMST.java						4.3.0			优化后的Prim
