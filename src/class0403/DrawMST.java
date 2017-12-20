@@ -16,7 +16,7 @@ public class DrawMST {
     
     public static void main(String[] args) {
         // create a weighted Random Euclidean graph
-        double d = 30;
+        double d = 28;
         int v = 250;
         
         EuclideanGraph eg = new EuclideanGraph(v);
@@ -51,10 +51,19 @@ public class DrawMST {
         StdDraw.setPenRadius(.003);
         ewg.show();
         
-        // minimum spanning tree
         StdDraw.setPenRadius(.005);
+        /*
+        // minimum spanning tree
         MST mst = new MST(ewg);
         mst.show();
+        
+        PrimMST mst = new PrimMST(ewg);
+        mst.show();
+        */
+        
+        KruskalMST mst = new KruskalMST(ewg);
+        mst.show();
+        
     }
     
 }

@@ -1,34 +1,29 @@
 package class0403;
 
-import java.awt.Color;
-
 import rlgs4.Bag;
 import stdlib.In;
-import stdlib.StdDraw;
 
 /**
- * @Description 4.3.9
- *          权重图
+ * @Description 4.3.10
+ *          权重图 - 稠密图的矩阵实现
  * @author Leon
- * @date 2017-12-18 16:26:00
+ * @date 2017-12-20 16:36:00
  */
-public class EdgeWeightedGraph {
+public class EdgeWeightedGraphInMatrix {
     
-    private final int V; // number of vertices
-    private int E; // number of edges
-    private Bag<Edge>[] adj; // adjacency lists
-
-    @SuppressWarnings("unchecked")
-    public EdgeWeightedGraph(int V) {
+    private final int V;
+    private int E;
+    private boolean[][] adj;
+    private double[][] weight;
+    
+    public EdgeWeightedGraphInMatrix(int V) {
         this.V = V;
         this.E = 0;
-        adj = (Bag<Edge>[]) new Bag[V];
-        for (int v = 0; v < V; v++)
-            adj[v] = new Bag<Edge>();
+        adj = new boolean[V][V];
+        weight = new double[V][V];
     }
-
-    // See Exercise 4.3.9.
-    public EdgeWeightedGraph(In in) {
+    
+    public EdgeWeightedGraphInMatrix(In in) {
         
         this(in.readInt());
         int E = in.readInt();
@@ -41,6 +36,7 @@ public class EdgeWeightedGraph {
         }
         
     }
+    
 
     public int V() {
         return V;
@@ -52,29 +48,26 @@ public class EdgeWeightedGraph {
 
     public void addEdge(Edge e) {
         int v = e.either(), w = e.other(v);
-        adj[v].add(e);
-        adj[w].add(e);
+        adj[v][w] = adj[w][v] = true;
+        weight[v][w] = weight[w][v] = e.weight();
         E++;
     }
 
     public Iterable<Edge> adj(int v) {
-        return adj[v];
+        Bag<Edge> bag = new Bag<Edge>();
+        for (int w=0; w<V; w++)
+            if (adj[v][w])
+                bag.add(new Edge(v, w, weight[v][w]));
+        return bag;
     }
     
-    // See page 609.
     public Iterable<Edge> edges() {
         Bag<Edge> b = new Bag<Edge>();
         for (int v = 0; v < V; v++)
-            for (Edge e : adj[v])
+            for (Edge e : adj(v))
                 if (e.other(v) > v)
                     b.add(e);
         return b;
-    }
-    
-    public void show() {
-        StdDraw.setPenColor(Color.gray);
-        for (Edge e: edges())
-            e.show();
     }
     
 }

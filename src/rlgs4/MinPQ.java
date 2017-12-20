@@ -4,6 +4,8 @@ import stdlib.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -84,6 +86,22 @@ public class MinPQ<Key> implements Iterable<Key> {
         assert isMinHeap();
     }
 
+    @SuppressWarnings("unchecked")
+    public MinPQ(Iterable<Key> keys) {
+        List<Key> list = new LinkedList<Key>();
+        for (Key k: keys)
+            list.add(k);
+        
+        Key[] keyArray = (Key[])list.toArray();
+        N = keyArray.length;
+        pq = (Key[]) new Object[keyArray.length + 1];
+        for (int i = 0; i < N; i++)
+            pq[i+1] = keyArray[i];
+        for (int k = N/2; k >= 1; k--)
+            sink(k);
+        assert isMinHeap();
+    }
+    
     /**
      * Is the priority queue empty?
      * @return true if the priority queue is empty; false otherwise

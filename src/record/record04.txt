@@ -34,9 +34,11 @@ class0402
 	Topological.java					4.2.0/25		拓扑顺序，以环探索DirectedCycle[强联通元件]为基础；有汉密尔顿路径的拓扑顺序是唯一的
 	TopologicalInQueue.java				4.2.30			队列解决拓扑顺序问题，以源节点为起点，循环寻找入度率先达0节点
 class0403
-	DrawMST.java						4.3.0			用随机欧几里德图画蛮力最小生成树
+	DrawMST.java						4.3.0			用随机欧几里德图画最小生成树
 	Edge.java							4.3.0			权重边
-	EdgeWeightedGraph.java				4.3.9			权重图
+	EdgeWeightedGraph.java				4.3.9			稀疏权重图
+	EdgeWeightedGraphInMatrix.java		4.3.10			稠密权重图
+	KruskalMST.java						4.3.31			Kruskal算法
 	LazyPrimMST.java					4.3.31			未优化的Prim
 	MST.java							4.3.0			蛮力最小生成树
-	PrimMST.java						4.3.0			优化后的Prim
+	PrimMST.java						4.3.21			优化后的Prim
