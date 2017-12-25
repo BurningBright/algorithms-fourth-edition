@@ -7,7 +7,7 @@ import stdlib.In;
 import stdlib.StdDraw;
 
 /**
- * @Description 4.3.9
+ * @Description 4.3.9/17
  *          权重图
  * @author Leon
  * @date 2017-12-18 16:26:00
@@ -77,4 +77,10 @@ public class EdgeWeightedGraph {
             e.show();
     }
     
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Edge e: edges())
+            sb.append(e.toString()).append("\n");
+        return sb.toString();
+    }
 }

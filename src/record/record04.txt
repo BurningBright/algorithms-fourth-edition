@@ -36,9 +36,11 @@ class0402
 class0403
 	DrawMST.java						4.3.0			用随机欧几里德图画最小生成树
 	Edge.java							4.3.0			权重边
-	EdgeWeightedGraph.java				4.3.9			稀疏权重图
+	EdgeWeightedGraph.java				4.3.9/17		稀疏权重图
 	EdgeWeightedGraphInMatrix.java		4.3.10			稠密权重图
 	KruskalMST.java						4.3.31			Kruskal算法
 	LazyPrimMST.java					4.3.31			未优化的Prim
+	Maze.java							web.2			最小生成树生成迷宫
+	MSF.java							4.3.22			最小生成深林
 	MST.java							4.3.0			蛮力最小生成树
 	PrimMST.java						4.3.21			优化后的Prim

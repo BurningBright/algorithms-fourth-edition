@@ -35,9 +35,6 @@ public class PrimMST {
         while (!pq.isEmpty())
             visit(G, pq.delMin());  // Add closest vertex to tree.
         
-        for (int i=1; i<edgeTo.length; i++) {
-            
-        }
     }
 
     private void visit(EdgeWeightedGraph G, int v) { // Add v to tree; update
