@@ -57,6 +57,26 @@ public class EdgeWeightedGraph {
         E++;
     }
 
+    public Edge delEdge(Edge e) {
+        EdgeWeightedGraph G = new EdgeWeightedGraph(V);
+        boolean flag = false;
+        for (Edge n: edges())
+            if (!n.equals(e))
+                G.addEdge(n);
+            else
+                flag = true;
+        this.adj = G.adj;
+        this.E = G.E;
+        return flag? e: null;
+    }
+    
+    public Edge getEdge(int v, int w) {
+        for (Edge e: adj(v))
+            if (e.other(v) == w)
+                return e;
+        return null;
+    }
+
     public Iterable<Edge> adj(int v) {
         return adj[v];
     }

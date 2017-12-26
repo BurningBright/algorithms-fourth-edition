@@ -44,3 +44,5 @@ class0403
 	MSF.java							4.3.22			最小生成深林
 	MST.java							4.3.0			蛮力最小生成树
 	PrimMST.java						4.3.21			优化后的Prim
+	ReverseDeleteMST.java				4.3.24			反向删边，删除当前权最大的边如果不分裂为2个图；直到有MST
+	VyssotskyMST.java					4.3.23			每次加边都排除环权的最大边，直到有MST
