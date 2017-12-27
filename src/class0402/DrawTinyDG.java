@@ -39,7 +39,8 @@ public class DrawTinyDG {
                     painted[j] = true;
                 }
                 
-                drawEdge(px[i], py[i], px[j], py[j], StdDraw.BLACK);
+                drawDirectedEdgeBetweenTwoCircle(
+                        px[i], py[i], px[j], py[j], SX, SY, cRadius, pRadius, StdDraw.BLACK);
                 
             }
             if(!painted[i]) {
@@ -51,8 +52,37 @@ public class DrawTinyDG {
         
     }
     
-    public static void drawEdge(double x0, double y0, double x1, double y1, Color color) {
+    public static void drawNodirectedEdgeBetweenTwoCircle(double x0, double y0, double x1, double y1, 
+            double cRadius, double pRadius, Color color) {
+        double xFrom, yFrom, xTo, yTo;
+        double radius = cRadius;
+        if(x0-x1 > 0) {
+            double angle = Math.atan((y0-y1)/(x0-x1));
+            xTo = x1 + Math.cos(angle) * radius;
+            yTo = y1 + Math.sin(angle) * radius;
+            xFrom = x0 - Math.cos(angle) * radius;
+            yFrom = y0 - Math.sin(angle) * radius;
+        } else {
+            double angle = Math.atan((y0-y1)/(x1-x0));
+            xTo = x1 - Math.cos(angle) * radius;
+            yTo = y1 + Math.sin(angle) * radius;
+            xFrom = x0 + Math.cos(angle) * radius;
+            yFrom = y0 - Math.sin(angle) * radius;
+        }
         
+        Color oldCol = StdDraw.getPenColor();
+        double oldRad = StdDraw.getPenRadius();
+        StdDraw.setPenColor(color);
+        StdDraw.setPenRadius(pRadius);
+        
+        StdDraw.line(xFrom, yFrom, xTo, yTo);
+        
+        StdDraw.setPenColor(oldCol);
+        StdDraw.setPenRadius(oldRad);
+    }
+    
+    public static void drawDirectedEdgeBetweenTwoCircle(double x0, double y0, double x1, double y1, 
+            double scaleX, double scaleY, double cRadius,  double pRadius, Color color) {
         double xFrom, yFrom, xTo, yTo;
         if(x0-x1 > 0) {
             double angle = Math.atan((y0-y1)/(x0-x1));
@@ -67,7 +97,7 @@ public class DrawTinyDG {
             xFrom = x0 + Math.cos(angle) * cRadius;
             yFrom = y0 - Math.sin(angle) * cRadius;
         }
-        drawArrow(xFrom, yFrom, xTo, yTo, SX, SY, pRadius, color);
+        drawArrow(xFrom, yFrom, xTo, yTo, scaleX, scaleY, pRadius, color);
     }
     
     public static void drawArrow(double x0, double y0, double x1, double y1, 
