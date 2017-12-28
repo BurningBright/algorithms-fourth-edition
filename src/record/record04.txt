@@ -35,6 +35,8 @@ class0402
 	TopologicalInQueue.java				4.2.30			队列解决拓扑顺序问题，以源节点为起点，循环寻找入度率先达0节点
 class0403
 	AnimationsTinyEWG.java				4.3.27			画page 621 Prim例子
+	Certification.java					4.3.33			命题J检查一组边是否是MST
+	DenseGraphMST.java					4.3.29			稠密图的Prim实现V2增长级
 	DrawMST.java						4.3.0			用随机欧几里德图画最小生成树
 	Edge.java							4.3.0			权重边
 	EdgeWeightedGraph.java				4.3.9/17		稀疏权重图
