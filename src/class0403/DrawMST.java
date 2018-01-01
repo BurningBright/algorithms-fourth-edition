@@ -1,14 +1,11 @@
 package class0403;
 
-import java.util.Random;
-
-import class0401.EuclideanGraph;
 import stdlib.StdDraw;
-import stdlib.StdOut;
 
 /**
- * @Description 4.3.0
+ * @Description 4.3.0/35
  *          page 615
+ *          直接使用结构，不用组合结构
  * @author Leon
  * @date 2017-12-18 16:15:00
  */
@@ -18,7 +15,7 @@ public class DrawMST {
         // create a weighted Random Euclidean graph
         double d = 28;
         int v = 250;
-        
+        /*
         EuclideanGraph eg = new EuclideanGraph(v);
         EdgeWeightedGraph ewg = new EdgeWeightedGraph(v);
         
@@ -44,14 +41,19 @@ public class DrawMST {
                 }
             }
         }
+        */
+        
+        EdgeWeightedGraph eg = CaseGenerator.euclidean(v, d);
         
         StdDraw.setScale(0, v);
         
         // draw weighted graph
         StdDraw.setPenRadius(.003);
-        ewg.show();
+//        ewg.show();
+        eg.show();
         
         StdDraw.setPenRadius(.005);
+        
         /*
         // minimum spanning tree
         MST mst = new MST(ewg);
@@ -61,7 +63,8 @@ public class DrawMST {
         mst.show();
         */
         
-        KruskalMST mst = new KruskalMST(ewg);
+//        KruskalMST mst = new KruskalMST(ewg);
+        KruskalMST mst = new KruskalMST(eg);
         mst.show();
         
     }

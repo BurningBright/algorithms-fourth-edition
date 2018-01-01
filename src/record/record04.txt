@@ -35,18 +35,22 @@ class0402
 	TopologicalInQueue.java				4.2.30			队列解决拓扑顺序问题，以源节点为起点，循环寻找入度率先达0节点
 class0403
 	AnimationsTinyEWG.java				4.3.27			画page 621 Prim例子
+	BoruvkaMST.java						4.3.43			Kruskal的一种变体，将筛选过程分布在树的成长过程中，“维护”树连接的最近树的边[更新]  **总结**
 	Certification.java					4.3.33			命题J检查一组边是否是MST
+	CaseGenerator.java					4.3.25			案例生成
 	DenseGraphMST.java					4.3.29			稠密图的Prim实现V2增长级
 	DrawMST.java						4.3.0			用随机欧几里德图画最小生成树
 	Edge.java							4.3.0			权重边
 	EdgeWeightedGraph.java				4.3.9/17		稀疏权重图
 	EdgeWeightedGraphInMatrix.java		4.3.10			稠密权重图
-	KruskalMST.java						4.3.31			Kruskal算法
-	LazyPrimMST.java					4.3.31			未优化的Prim
+	EuclideanEdgeWeightedGraph.java		4.3.35			权重欧几里得图结构
+	KruskalMST.java						4.3.31			Kruskal算法，直接构建**全数据**优先队列，直接找下一个不在同一个树里的边[直取]
+	LazyPrimMST.java					4.3.31			未优化的Prim，优先队列里会有当前树周边的所有边[直取]
 	Maze.java							web.2			最小生成树生成迷宫
 	MSF.java							4.3.22			最小生成深林
 	MST.java							4.3.0			蛮力最小生成树
-	PrimMST.java						4.3.21			优化后的Prim
+	Partitioning.java					4.3.42			快排替代 kruskal中的优先队列
+	PrimMST.java						4.3.21			优化后的Prim，优先队列里只“维护”和周边节点最近的边[更新]
+	PrimVersusKruskal.java				4.3.38			懒惰/积极 Prim， Kruskal性能对比
 	ReverseDeleteMST.java				4.3.24			反向删边，删除当前权最大的边如果不分裂为2个图；直到有MST
 	VyssotskyMST.java					4.3.23			每次加边都排除环权的最大边，直到有MST
-	WorstCaseGenerator.java				4.3.25			最糟案例生成
