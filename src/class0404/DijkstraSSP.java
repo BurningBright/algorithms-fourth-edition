@@ -94,12 +94,19 @@ public class DijkstraSSP {
         for (int i=0; i<8; i++)
             StdOut.printf("%s \t\t\t %.3f\r\n", dj.pathTo(i), dj.distTo(i));
         
-        StdOut.println("-----");
+        StdOut.println("-------------------");
         
         DijkstraSSP dj1 = new DijkstraSSP(
                 new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD.txt")), 0);
         for (int i=0; i<8; i++)
             StdOut.printf("%s \t\t\t %.3f\r\n", dj1.pathTo(i), dj1.distTo(i));
+        
+        StdOut.println("-------------------");
+        
+        DijkstraSSP dj2 = new DijkstraSSP(
+              new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD2.txt")), 0);
+        for (int i=0; i<4; i++)
+            StdOut.printf("%s \t\t\t %.3f\r\n", dj2.pathTo(i), dj2.distTo(i));
     }
     
 }
