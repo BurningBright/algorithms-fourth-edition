@@ -6,8 +6,8 @@ package class0402;
  * @date 2017-12-13 10:50:00
  */
 public class Topological {
+    
     private Iterable<Integer> order; // topological order
-    private boolean unique;         // is unique or not
     
     public Topological(Digraph G) {
         DirectedCycle cyclefinder = new DirectedCycle(G);
@@ -15,8 +15,6 @@ public class Topological {
             DepthFirstOrder dfs = new DepthFirstOrder(G);
             order = dfs.reversePost();
             
-            HamiltonianPath hp = new HamiltonianPath(G);
-            unique = hp.havePath();
         }
     }
 
@@ -28,7 +26,4 @@ public class Topological {
         return order != null;
     }
     
-    public boolean isUnique() {
-        return unique;
-    }
 }

@@ -13,15 +13,20 @@ package solution04.c04;
 
 import com.javamex.classmexer.MemoryUtil;
 
+import rlgs4.MultipleLinearRegression;
 import stdlib.StdOut;
 import stdlib.StdRandom;
 
 public class MemoryOfEdgeWeightedDigraph {
 
     public static void main(String[] args) {
-        DirectedEdge e = new DirectedEdge(123456, 654321, 1.0);
+        DirectedEdge e = new DirectedEdge(0, 1, 1.0);
         StdOut.println("size of DirectedEdge = " + MemoryUtil.memoryUsageOf(e) + " bytes");
-
+        
+        EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(2);
+        ewd.addEdge(e);
+        StdOut.println("size of Digraph = " + MemoryUtil.deepMemoryUsageOf(ewd) + " bytes");
+        
         int n = 40;
         int[] V = new int[n];
         int[] E = new int[n];
@@ -54,12 +59,12 @@ public class MemoryOfEdgeWeightedDigraph {
             x[i][2] = E[i];
         }
 
-        /*
+        
         MultipleLinearRegression regression = new MultipleLinearRegression(x, y);
         StdOut.println("memory of an EdgeWeightedDigraph with V vertices and E edges:");
         StdOut.printf("%.2f + %.2f V + %.2f E bytes (R^2 = %.3f)\n",
                       regression.beta(0), regression.beta(1), regression.beta(2), regression.R2());
-        */
+        
     }
     
 }
