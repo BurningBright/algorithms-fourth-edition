@@ -13,13 +13,13 @@ import stdlib.StdOut;
 public class EdgeWeightedCycleFinder {
     
     private boolean[] marked;
-    private int[] edgeTo;
-    private Stack<Integer> cycle; // vertices on a cycle (if one exists)
+    private DirectedEdge[] edgeTo;
+    private Stack<DirectedEdge> cycle; // vertices on a cycle (if one exists)
     private boolean[] onStack; // vertices on recursive call stack
 
     public EdgeWeightedCycleFinder(EdgeWeightedDigraph G) {
         onStack = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
         marked = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++)
             if (!marked[v])
@@ -34,14 +34,21 @@ public class EdgeWeightedCycleFinder {
             if (this.hasCycle())
                 return;
             else if (!marked[w]) {
-                edgeTo[w] = v;
+                edgeTo[w] = e;
                 dfs(G, w);
             } else if (onStack[w]) {
-                cycle = new Stack<Integer>();
-                for (int x = v; x != w; x = edgeTo[x])
-                    cycle.push(x);
-                cycle.push(w);
-                cycle.push(v);
+                cycle = new Stack<DirectedEdge>();
+                // 这种循环不对，启示的顺序应该是以w-7开始，这里先入栈v-4
+//                for (int x = v; x != w; x = edgeTo[x])
+//                    cycle.push(x);
+//                cycle.push(w);
+//                cycle.push(v);
+                
+                for (DirectedEdge now = e; ; now = edgeTo[now.from()]) {
+                    cycle.push(now);
+                    if (now.from() == w) 
+                        break;
+                }
             }
         }
         onStack[v] = false;
@@ -51,7 +58,7 @@ public class EdgeWeightedCycleFinder {
         return cycle != null;
     }
 
-    public Iterable<Integer> cycle() {
+    public Iterable<DirectedEdge> cycle() {
         return cycle;
     }
     

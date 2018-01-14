@@ -55,7 +55,12 @@ class0403
 	ReverseDeleteMST.java				4.3.24			反向删边，删除当前权最大的边如果不分裂为2个图；直到有MST
 	VyssotskyMST.java					4.3.23			每次加边都排除环权的最大边，直到有MST
 class0404
-	DepthFirstOrder.java				4.4.0
+	AcyclicLP.java						4.4.18			无环最短路径
+	AcyclicSP.java						4.4.19			无环最长路径
+	Arbitrage.java						4.4.19			套利
+	BellmanFordSP.java					4.4.0			贝尔曼-福特 最短路径
+	CPM.java							4.4.18			关键路径法
+	DepthFirstOrder.java				4.4.0			有向权重图 深度优先遍历
 	DiameterByDijkstra.java				4.4.8			有向权重图的直径
 	DijkstraSP							4.4.0			迪杰斯特拉-最短路径
 	DijkstraSSP							4.4.7			迪杰斯特拉-第二最短路径

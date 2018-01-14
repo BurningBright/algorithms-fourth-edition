@@ -1,50 +1,39 @@
 package class0404;
 
-import rlgs4.IndexMinPQ;
 import rlgs4.Stack;
 
 /**
- * @Description 4.4.0
- *          Dijkstra 最小路径树
- *          
- * @author Robert Sedgewick
- * @author Kevin Wayne
- * @date 2018-01-10 15:40:00
+ * @Description 4.4.19
+ *          无环 - 最短路径
+ * @author Leon
+ * @date 2018-01-14 21:10:00
  */
-public class DijkstraSP {
+public class AcyclicSP {
     
     private DirectedEdge[] edgeTo;
     private double[] distTo;
-    private IndexMinPQ<Double> pq;
     
-    public DijkstraSP(EdgeWeightedDigraph G, int s) {
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
-        
-        pq = new IndexMinPQ<Double>(G.V());
-        for (int v = 0; v < G.V(); v++) 
+        for (int v = 0; v < G.V(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
-        
         distTo[s] = 0.0;
-        pq.insert(s, 0.0);
-        while (!pq.isEmpty()) 
-            relax(G, pq.delMin());
+        EdgeWeightedTopological top = new EdgeWeightedTopological(G);
+        for (int v : top.order())
+            relax(G, v);
     }
-    
+
     private void relax(EdgeWeightedDigraph G, int v) {
         for (DirectedEdge e : G.adj(v)) {
             int w = e.to();
             if (distTo[w] > distTo[v] + e.weight()) {
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
-                if (pq.contains(w))
-                    pq.changeKey(w, distTo[w]);
-                else
-                    pq.insert(w, distTo[w]);
             }
         }
     }
-    
+
     public double distTo(int v) {
         return distTo[v];
     }
@@ -57,10 +46,9 @@ public class DijkstraSP {
         if (!hasPathTo(v))
             return null;
         Stack<DirectedEdge> path = new Stack<DirectedEdge>();
-        // 向根遍历
-        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()])
+        // 倒着向根追溯
+        for (DirectedEdge e=edgeTo[v]; e!=null; e=edgeTo[e.from()])
             path.push(e);
         return path;
     }
-    
 }
