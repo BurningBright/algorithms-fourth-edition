@@ -53,22 +53,31 @@ public class DrawTinyDG {
         
     }
     
+    /**
+     * 两圆间的无向连线
+     * @param x0        第一个节点圆心x轴
+     * @param y0        第一个节点圆心y轴
+     * @param x1        第二个节点圆心x轴
+     * @param y1        第二个节点圆心y轴
+     * @param cRadius   节点半径
+     * @param pRadius   画笔半径
+     * @param color     线-箭头颜色
+     */
     public static void drawNodirectedEdgeBetweenTwoCircle(double x0, double y0, double x1, double y1, 
             double cRadius, double pRadius, Color color) {
         double xFrom, yFrom, xTo, yTo;
-        double radius = cRadius;
         if(x0-x1 > 0) {
             double angle = Math.atan((y0-y1)/(x0-x1));
-            xTo = x1 + Math.cos(angle) * radius;
-            yTo = y1 + Math.sin(angle) * radius;
-            xFrom = x0 - Math.cos(angle) * radius;
-            yFrom = y0 - Math.sin(angle) * radius;
+            xTo = x1 + Math.cos(angle) * cRadius;
+            yTo = y1 + Math.sin(angle) * cRadius;
+            xFrom = x0 - Math.cos(angle) * cRadius;
+            yFrom = y0 - Math.sin(angle) * cRadius;
         } else {
             double angle = Math.atan((y0-y1)/(x1-x0));
-            xTo = x1 - Math.cos(angle) * radius;
-            yTo = y1 + Math.sin(angle) * radius;
-            xFrom = x0 + Math.cos(angle) * radius;
-            yFrom = y0 - Math.sin(angle) * radius;
+            xTo = x1 - Math.cos(angle) * cRadius;
+            yTo = y1 + Math.sin(angle) * cRadius;
+            xFrom = x0 + Math.cos(angle) * cRadius;
+            yFrom = y0 - Math.sin(angle) * cRadius;
         }
         
         Color oldCol = StdDraw.getPenColor();
@@ -81,6 +90,40 @@ public class DrawTinyDG {
         StdDraw.setPenColor(oldCol);
         StdDraw.setPenRadius(oldRad);
     }
+    
+    /**
+     * 两节点间的偏移线-箭头
+     * @param x0        第一个节点圆心x轴
+     * @param y0        第一个节点圆心y轴
+     * @param x1        第二个节点圆心x轴
+     * @param y1        第二个节点圆心y轴
+     * @param offset    偏移量
+     * @param dash      是否是虚线
+     * @param scaleX    x轴放大倍率
+     * @param scaleY    y轴放大倍率
+     * @param cRadius   节点半径
+     * @param pRadius   画笔半径
+     * @param color     线-箭头颜色
+     */
+    public static void drawDirectedEdgeBetweenTwoOffsetCircle(double x0, double y0, double x1, double y1, 
+            double offset, boolean dash, double scaleX, double scaleY, double cRadius,  double pRadius, Color color) {
+        double angle = Math.atan(Math.abs((y1-y0)/(x1-x0)));
+        int signX = x1>x0? -1: 1;
+        int signY = y1>y0? -1: 1;
+        if (x0 == x1)
+            signX = y1>y0? -1: 1;
+        if (y0 == y1)
+            signY = x1>x0? -1: 1;
+        double offsetX = signX * offset * Math.sin(angle);
+        double offsetY = signY * offset * Math.cos(angle);
+        if (dash)
+            drawDirectedDashEdgeBetweenTwoCircle(x0 + offsetX, y0 + offsetY, x1 + offsetX, y1 + offsetY, 
+                    scaleX, scaleY, cRadius, pRadius, color);
+        else
+            drawDirectedEdgeBetweenTwoCircle(x0 + offsetX, y0 + offsetY, x1 + offsetX, y1 + offsetY, 
+                    scaleX, scaleY, cRadius, pRadius, color);
+    }
+    
     /**
      * 两节点间的线-箭头
      * @param x0        第一个节点圆心x轴
@@ -272,8 +315,6 @@ public class DrawTinyDG {
                 qX.enqueue(p1x + xt);
                 qY.enqueue(p1y + yt);
             } else {
-//                qX.enqueue(x0);
-//                qY.enqueue(y0);
                 break;
             }
             count++;
@@ -285,7 +326,6 @@ public class DrawTinyDG {
             x[i] = qX.dequeue();
             y[i] = qY.dequeue();
         }
-        
         
         for (int i=0; i<x.length; i+=2)
             if(i+1 != x.length)

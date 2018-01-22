@@ -65,6 +65,7 @@ import java.util.NoSuchElementException;
 import javax.imageio.ImageIO;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -1865,8 +1866,20 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         }
     }
 
-
-
+    /***************************************************************************
+     *  Outside trigger
+     ***************************************************************************/
+    public static void setOutsideHandle(ActionListener action) {
+        JMenuBar menuBar = createMenuBar();
+        JButton button = new JButton("trigger");
+        button.addActionListener(action);
+        menuBar.add(button);
+        frame.setVisible(false);
+        frame.setJMenuBar(menuBar);
+        frame.pack();
+        frame.requestFocusInWindow();
+        frame.setVisible(true);
+    }
 
     /**
      * Test client.

@@ -1,4 +1,4 @@
-package class0403;
+package class0404;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,33 +15,33 @@ import stdlib.In;
 import stdlib.StdOut;
 
 /**
- * @Description 4.3.27
- *      最小生成树动画， 书上的例子有点看不懂
+ * @Description 4.4.46
+ *      draw Dijkstra
  *      灰色节点        未标记节点
  *      白色节点        已标记节点
- *      黑色细边        未探索边
- *      黑色粗边        MST
- *      红色细边        可能的最小权边，权在pq里
- *      红色粗边        当前找到的MST队尾
- *      灰色边        非MST[被替代边/已探索节点边]
+ *      黑色细箭头        未探索边
+ *      黑色粗箭头        MST
+ *      红色细箭头        可能的最小权边，权在pq里
+ *      红色粗箭头        当前找到的SPT队尾
+ *      灰色箭头        非SPT[被替代边/已探索节点边]
  *      
- *      书上的灰色边有点奇怪，网站上的图倒是合理的
  * @author Leon
- * @date 2017-12-27 10:05:00
+ * @date 2018-01-22 09:53:00
  */
-public class AnimationsTinyEWG {
-    
+public class AnimateDijkstra {
     int V;
     int E;
     
-    double pBigRadius = .02;    // 画笔大小
-    double pNorRadius = .01;
+    double pBigRadius = .015;    // 画笔大小
+    double pNorRadius = .006;
     Color grey = new Color(189, 189, 191);
     
     double xSc = 300;           // 缩放比例
     double ySc = 300;
     
-    double cRadius = 15;
+    double cRadius = 15;        // 圆半径
+    double offset = 5;          // 双向联线偏移量
+    
     // 预设坐标
     double[] px = {132, 120, 191, 191, 45, 45, 270, 108};
     double[] py = {153, 80, 130, 89, 185, 101, 185, 122};
@@ -52,10 +52,10 @@ public class AnimationsTinyEWG {
     // v-w to lines 边到线的映射
     Map<String, Integer> mapping;
     
-    EdgeWeightedGraph G;
+    EdgeWeightedDigraph G;
     
-    public AnimationsTinyEWG(EdgeWeightedGraph G) {
-        
+    public AnimateDijkstra(EdgeWeightedDigraph G) {
+
         this.V = G.V();
         this.E = G.E();
         this.G = G;
@@ -76,31 +76,34 @@ public class AnimationsTinyEWG {
         
         // init lines
         int count = 0;
-        for (Edge e: G.edges()) {
-            int v = e.either();
-            int w = e.other(v);
+        for (DirectedEdge e: G.edges()) {
+            int v = e.from();
+            int w = e.to();
             mapping.put(v + "-" + w, count);
             lines[count++] = new Line(v, w, e.weight());
         }
         
         // set tigger
         StdDraw.setOutsideHandle(new Tigger());
-        
         // begin
         StdDraw.enableDoubleBuffering();
         show();
-        StdDraw.pause(300);
         
-        primMST(G);
+        Dijkstra(0);
     }
     
     public void show() {
         // draw lines
         for (int e=0; e<lines.length; e++) {
             Line l = lines[e];
-            DrawTinyDG.drawNodirectedEdgeBetweenTwoCircle(
-                    circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
-                    cRadius, l.radius, l.color);
+            if(mapping.containsKey(l.w + "-" + l.v))
+                DrawTinyDG.drawDirectedEdgeBetweenTwoOffsetCircle(
+                        circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
+                        offset, false, xSc, ySc, cRadius, l.radius, l.color);
+            else
+                DrawTinyDG.drawDirectedEdgeBetweenTwoCircle(
+                        circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
+                        xSc, ySc, cRadius, l.radius, l.color);
         }
         
         // reset pen radius
@@ -123,38 +126,31 @@ public class AnimationsTinyEWG {
     }
     
     
+    private DirectedEdge[] edgeTo;
+    private double[] distTo;
+    private IndexMinPQ<Double> pq;
+    private Queue<Line> spt = new Queue<Line>();
     
-    
-    private Edge[] edgeTo;          // shortest edge from tree vertex
-    private double[] distTo;        // distTo[w] = edgeTo[w].weight()
-    private boolean[] marked;       // true if v on tree
-    private IndexMinPQ<Double> pq;  // eligible crossing edges
-    private Queue<Line> mst = new Queue<Line>();
-    
-    private void primMST(EdgeWeightedGraph G) {
-        edgeTo = new Edge[V];
-        distTo = new double[V];
-        marked = new boolean[V];
-        for (int v = 0; v < V; v++)
+    private void Dijkstra(int s) {
+        edgeTo = new DirectedEdge[G.V()];
+        distTo = new double[G.V()];
+        
+        pq = new IndexMinPQ<Double>(G.V());
+        for (int v = 0; v < G.V(); v++) 
             distTo[v] = Double.POSITIVE_INFINITY;
-        pq = new IndexMinPQ<Double>(V);
-        distTo[0] = 0.0;
-        pq.insert(0, 0.0);          // Initialize pq with 0, weight 0.
+        
+        distTo[s] = 0.0;
+        
+        pq.insert(s, 0.0);
         /*
-//        int count = 1;
         while (!pq.isEmpty()) {
-//            StdDraw.save("pic/4.3/ani_prim_" + count++ + ".png");
-            
-            StdDraw.clear();
-            StdDraw.show();
-            
             int min = pq.delMin();
             StdOut.println(min);
-            visit(G, min);  // Add closest vertex to tree.
+            relax(G, min);
             
             show();
+            StdDraw.pause(3000);
         }
-//        StdDraw.save("pic/4.3/ani_prim_" + count++ + ".png");
         */
     }
     
@@ -164,83 +160,65 @@ public class AnimationsTinyEWG {
         public void actionPerformed(ActionEvent e) {
             if (!pq.isEmpty()) {
                 StdDraw.clear();
-                StdDraw.show();
-                
                 int min = pq.delMin();
                 StdOut.println(min);
-                visit(G, min);  // Add closest vertex to tree.
+                relax(G, min);
                 
                 show();
             }
         }
         
     }
-
-    private void visit(EdgeWeightedGraph G, int v) { // Add v to tree; update
-                                                     // data structures.
-        marked[v] = true;
+    
+    private void relax(EdgeWeightedDigraph G, int v) {
         circles[v].color = StdDraw.WHITE;
-        for (Edge e : G.adj(v)) {
-            int w = e.other(v);
+        for (DirectedEdge e : G.adj(v)) {
+            int w = e.to();
             
-            int index = mapping.get(e.either() + "-" + e.other(e.either()));
+            int index = mapping.get(v + "-" + w);
             Line l = lines[index];
-            l.color = StdDraw.RED;          // 邻接的箭头变红色
+            l.color = StdDraw.RED;          // 邻接的边变红色
             
-            
-            if (marked[w]) {
-                l.color = grey;             // MST也变
-                continue;                   // v-w is ineligible.
-            }
-            if (e.weight() < distTo[w]) {   // Edge e is new best connection from
-                                            // tree to w.
+            if (distTo[w] > distTo[v] + e.weight()) {
                 
                 // 被更新的边置成灰色
                 if (pq.contains(w)) {
-                    Edge old = edgeTo[w];
-                    Integer i = mapping.get(old.either() + "-" + old.other(old.either()));
+                    DirectedEdge old = edgeTo[w];
+                    Integer i = mapping.get(old.from() + "-" + old.to());
                     Line oldL = lines[i];
                     oldL.color = grey;
                 }
                 
+                distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
-                distTo[w] = e.weight();
-                if (pq.contains(w))
+                if (pq.contains(w)) {
                     pq.changeKey(w, distTo[w]);
-                else
+                } else {
                     pq.insert(w, distTo[w]);
+                }
+            } else {
+                l.color = grey;
             }
-//            if (!pq.contains(w))
-//                l.color = grey;
         }
-        /*
-        for (Edge e: edgeTo)
-            StdOut.println(e);
-        StdOut.println();
-        */
+        
         if (!pq.isEmpty()) {
-            /*
-            for (int i: pq)
-                StdOut.print(i + " ");
-            StdOut.println();
-            */
             int next = pq.minIndex();
-            Edge e = edgeTo[next];
-            Line l = lines[mapping.get(e.either() + "-" + e.other(e.either()))];
+            DirectedEdge e = edgeTo[next];
+            
+            Line l = lines[mapping.get(e.from() + "-" + e.to())];
             // 加入最小生成树的边变粗
             l.radius = pBigRadius;
             l.color = StdDraw.RED;
             
-            // MST在探索过程中部分变grey，重置回black
-            for (Line old: mst)
+            // SPT在探索过程中部分变grey，重置回black
+            for (Line old: spt)
                 old.color = StdDraw.BLACK;
             
-            mst.enqueue(l);
+            spt.enqueue(l);
         } else {
-            for (Line old: mst)
+            for (Line old: spt)
                 old.color = StdDraw.BLACK;
         }
-        
     }
     
     class Line {
@@ -266,16 +244,8 @@ public class AnimationsTinyEWG {
     
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        AnimationsTinyEWG ani = new AnimationsTinyEWG(
-                new EdgeWeightedGraph(new In("resource/4.3/tinyEWG.txt")));
-        
-        /*
-        StdDraw.setPenRadius(.03);
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.circle(.2, .2, .1);
-        StdDraw.circle(.6, .6, .1);
-        DrawTinyDG.drawNodirectedEdgeBetweenTwoCircle(.2, .2, .6, .6, .1, .03, StdDraw.GRAY);
-        */
+        AnimateDijkstra ani = new AnimateDijkstra(
+                new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD.txt")));
     }
 
 }
