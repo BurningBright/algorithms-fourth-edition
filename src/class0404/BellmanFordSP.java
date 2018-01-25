@@ -54,6 +54,8 @@ public class BellmanFordSP {
     }
     
     public double distTo(int v) {
+        if (hasNegativeCycle())
+            throw new UnsupportedOperationException("Negative cost cycle exists");
         return distTo[v];
     }
 
@@ -62,6 +64,8 @@ public class BellmanFordSP {
     }
 
     public Iterable<DirectedEdge> pathTo(int v) {
+        if (hasNegativeCycle())
+            throw new UnsupportedOperationException("Negative cost cycle exists");
         if (!hasPathTo(v))
             return null;
         Stack<DirectedEdge> path = new Stack<DirectedEdge>();
