@@ -57,14 +57,16 @@ class0403
 class0404
 	AcyclicLP.java						4.4.18			无环最短路径
 	AcyclicSP.java						4.4.19			无环最长路径
+	AnimateBellmanFord.java				4.4.0			贝尔曼福特-动画
 	AnimateDijkstra.java				4.4.46			迪杰斯特拉-动画
 	Arbitrage.java						4.4.19			套利
 	BellmanFordSP.java					4.4.0			贝尔曼-福特 最短路径
 	CPM.java							4.4.18			关键路径法
 	DepthFirstOrder.java				4.4.0			有向权重图 深度优先遍历
 	DiameterByDijkstra.java				4.4.8			有向权重图的直径
-	DijkstraSP							4.4.0			迪杰斯特拉-最短路径
-	DijkstraSSP							4.4.7			迪杰斯特拉-第二最短路径
+	DijkstraLazySP.java					4.4.39			模仿Prim的Lazy版实现
+	DijkstraSP.java						4.4.0			迪杰斯特拉-最短路径
+	DijkstraSSP.java					4.4.7			迪杰斯特拉-第二最短路径
 	DirectedEdge.java					4.4.0			有向权重边
 	EdgeWeightedCycleFinder.java		4.4.12			寻找有向权重图的环
 	EdgeWeightedDigraph.java			4.4.0/2			有向权重图
@@ -72,3 +74,4 @@ class0404
 	EdgeWeightedTopological.java		4.4.12			有向权重图的拓扑顺序
 	MemoryCost.java						4.4.11			内存模型
 	MultisourceShortestPaths.java		4.4.24			多源最短路径
+	ParentCheckingHeuristic.java		4.4.32			父节点的启发式优化 贝尔曼-福特

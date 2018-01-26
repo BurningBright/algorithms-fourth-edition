@@ -38,12 +38,22 @@ public class EdgeWeightedTopological {
         StdOut.println(tp.order);
         
         StdOut.println("-------------");
+        /**
+         *   ↗ 1 ↖
+         * 0       3
+         *   ↘ 2 ↗ 
+         */
         EdgeWeightedTopological tp1 = new EdgeWeightedTopological(
                 new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD2.txt")));
         StdOut.println(tp1.isDAG());
         StdOut.println(tp1.order);
         
         StdOut.println("-------------");
+        /**
+         *   ↗ 1 ↖
+         * 0       3 ← 4
+         *   ↘ 2 ↗ 
+         */
         EdgeWeightedTopological tp2 = new EdgeWeightedTopological(
                 new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD3.txt")));
         StdOut.println(tp2.isDAG());

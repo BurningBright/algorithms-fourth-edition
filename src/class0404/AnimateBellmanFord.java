@@ -9,31 +9,33 @@ import java.util.Map;
 
 import class0401.StdDraw;
 import class0402.DrawTinyDG;
-import rlgs4.IndexMinPQ;
 import rlgs4.Queue;
 import stdlib.In;
-import stdlib.StdOut;
 
 /**
- * @Description 4.4.46
- *      draw Dijkstra
+ * /**
+ * @Description 4.4.0
+ *          动画 贝尔曼-福特
+ *          动画 不检查负环
+ *          
  *      灰色节点        未标记节点
  *      白色节点        已标记节点
- *      黑色细箭头        未探索边
- *      黑色粗箭头        SPT
- *      红色细箭头        可能的最小权边，权在pq里
- *      红色粗箭头        当前找到的SPT队尾
- *      灰色箭头        非SPT[被替代边/已探索节点边]
+ *      红色节点        队头节点
+ *      
+ *      灰色箭头        未探索边
+ *      黑箭头         SPT
+ *      
+ *      虚线箭头        负权边
  *      
  * @author Leon
- * @date 2018-01-22 09:53:00
+ * @date 2018-01-26 15:30:00
  */
-public class AnimateDijkstra {
+public class AnimateBellmanFord {
     int V;
     int E;
     
-    double pBigRadius = .015;    // 画笔大小
-    double pNorRadius = .006;
+//    double pBigRadius = .015;
+    double pNorRadius = .006;    // 画笔大小
     Color grey = new Color(189, 189, 191);
     
     double xSc = 300;           // 缩放比例
@@ -54,7 +56,8 @@ public class AnimateDijkstra {
     
     EdgeWeightedDigraph G;
     
-    public AnimateDijkstra(EdgeWeightedDigraph G) {
+
+    public AnimateBellmanFord(EdgeWeightedDigraph G) {
 
         this.V = G.V();
         this.E = G.E();
@@ -89,21 +92,27 @@ public class AnimateDijkstra {
         StdDraw.enableDoubleBuffering();
         show();
         
-        Dijkstra(0);
+        bellmanFord(0);
     }
     
     public void show() {
         // draw lines
         for (int e=0; e<lines.length; e++) {
             Line l = lines[e];
-            if(mapping.containsKey(l.w + "-" + l.v))
+            if (mapping.containsKey(l.w + "-" + l.v))
                 DrawTinyDG.drawDirectedEdgeBetweenTwoOffsetCircle(
                         circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
                         offset, false, xSc, ySc, cRadius, l.radius, l.color);
-            else
-                DrawTinyDG.drawDirectedEdgeBetweenTwoCircle(
-                        circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
-                        xSc, ySc, cRadius, l.radius, l.color);
+            else {
+                if (l.weight > 0)
+                    DrawTinyDG.drawDirectedEdgeBetweenTwoCircle(
+                            circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
+                            xSc, ySc, cRadius, l.radius, l.color);
+                else
+                    DrawTinyDG.drawDirectedDashEdgeBetweenTwoCircle(
+                            circles[l.v].x, circles[l.v].y, circles[l.w].x, circles[l.w].y, 
+                            xSc, ySc, cRadius, l.radius, l.color);
+            }
         }
         
         // reset pen radius
@@ -116,8 +125,8 @@ public class AnimateDijkstra {
         }
         
         // draw circles
-        StdDraw.setPenColor(StdDraw.BLACK);
         for (int v=0; v<circles.length; v++) {
+            StdDraw.setPenColor(circles[v].penColor);
             StdDraw.circle(circles[v].x, circles[v].y, cRadius);
             StdDraw.text(circles[v].x, circles[v].y, v+"");
         }
@@ -125,104 +134,78 @@ public class AnimateDijkstra {
         StdDraw.show();
     }
     
+    private double[] distTo;                // length of path to v
+    private DirectedEdge[] edgeTo;          // last edge on path to v
+    private boolean[] onQ;                  // Is this vertex on the queue?
+    private Queue<Integer> queue;           // vertices being relaxed
     
-    private DirectedEdge[] edgeTo;
-    private double[] distTo;
-    private IndexMinPQ<Double> pq;
-    private Queue<Line> spt = new Queue<Line>();
-    
-    private void Dijkstra(int s) {
-        edgeTo = new DirectedEdge[G.V()];
+    private void bellmanFord(int s) {
         distTo = new double[G.V()];
-        
-        pq = new IndexMinPQ<Double>(G.V());
-        for (int v = 0; v < G.V(); v++) 
+        edgeTo = new DirectedEdge[G.V()];
+        onQ = new boolean[G.V()];
+        queue = new Queue<Integer>();
+        for (int v = 0; v < G.V(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
-        
         distTo[s] = 0.0;
+        queue.enqueue(s);
+        onQ[s] = true;
+    }
+    
+    private void relax(EdgeWeightedDigraph G, int v) {
+        // 恢复圆的黑色画笔
+        for (int i=0; i<V; i++)
+            circles[i].penColor = StdDraw.BLACK;
+        // 队列节点圈红
+        for (Integer i: queue)
+            circles[i].penColor = StdDraw.RED;
         
-        pq.insert(s, 0.0);
-        /*
-        while (!pq.isEmpty()) {
-            int min = pq.delMin();
-            StdOut.println(min);
-            relax(G, min);
+        circles[v].color = StdDraw.WHITE;
+        circles[v].penColor = StdDraw.RED;
+        
+        for (DirectedEdge e : G.adj(v)) {
+            int w = e.to();
+            Integer i = mapping.get(v + "-" + w);
+            Line line = lines[i];
             
-            show();
-            StdDraw.pause(3000);
+            if (distTo[w] > distTo[v] + e.weight()) {
+                line.color = StdDraw.BLACK;
+                distTo[w] = distTo[v] + e.weight();
+                edgeTo[w] = e;
+                
+                if (!onQ[w]) {
+                    queue.enqueue(w);
+                    onQ[w] = true;
+                }
+            }
+            
+//            if (cost++ % G.V() == 0)
+//                findNegativeCycle();
         }
-        */
     }
     
     class Tigger implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!pq.isEmpty()) {
+            if (!queue.isEmpty()) {
                 StdDraw.clear();
-                int min = pq.delMin();
-                StdOut.println(min);
-                relax(G, min);
+                int v = queue.dequeue();
+                onQ[v] = false;
+                relax(G, v);
                 
+                show();
+            } else {
+                // 恢复圆的黑色画笔
+                for (int i=0; i<V; i++)
+                    circles[i].penColor = StdDraw.BLACK;
                 show();
             }
         }
         
     }
     
-    private void relax(EdgeWeightedDigraph G, int v) {
-        circles[v].color = StdDraw.WHITE;
-        for (DirectedEdge e : G.adj(v)) {
-            int w = e.to();
-            
-            int index = mapping.get(v + "-" + w);
-            Line l = lines[index];
-            l.color = StdDraw.RED;          // 邻接的边变红色
-            
-            if (distTo[w] > distTo[v] + e.weight()) {
-                
-                // 被更新的边置成灰色
-                if (pq.contains(w)) {
-                    DirectedEdge old = edgeTo[w];
-                    Integer i = mapping.get(old.from() + "-" + old.to());
-                    Line oldL = lines[i];
-                    oldL.color = grey;
-                }
-                
-                distTo[w] = distTo[v] + e.weight();
-                edgeTo[w] = e;
-                if (pq.contains(w)) {
-                    pq.changeKey(w, distTo[w]);
-                } else {
-                    pq.insert(w, distTo[w]);
-                }
-            } else {
-                l.color = grey;
-            }
-        }
-        
-        if (!pq.isEmpty()) {
-            int next = pq.minIndex();
-            DirectedEdge e = edgeTo[next];
-            
-            Line l = lines[mapping.get(e.from() + "-" + e.to())];
-            // 加入最小生成树的边变粗
-            l.radius = pBigRadius;
-            l.color = StdDraw.RED;
-            
-            // SPT在探索过程中部分变grey，重置回black
-            for (Line old: spt)
-                old.color = StdDraw.BLACK;
-            
-            spt.enqueue(l);
-        } else {
-            for (Line old: spt)
-                old.color = StdDraw.BLACK;
-        }
-    }
-    
     class Line {
-        Color color = StdDraw.BLACK;
+        Color color = grey;
         double radius = pNorRadius;
         double weight;
         int v, w;
@@ -236,6 +219,7 @@ public class AnimateDijkstra {
     class Circle {
         double x, y;
         Color color = grey;
+        Color penColor = StdDraw.BLACK;
         public Circle(double x, double y) {
             this.x = x;
             this.y = y;
@@ -244,8 +228,8 @@ public class AnimateDijkstra {
     
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        AnimateDijkstra ani = new AnimateDijkstra(
-                new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD.txt")));
+        AnimateBellmanFord ani = new AnimateBellmanFord(
+                new EdgeWeightedDigraph(new In("resource/4.4/tinyEWD4.txt")));
     }
 
 }
