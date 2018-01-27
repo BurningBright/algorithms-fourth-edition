@@ -2,6 +2,9 @@ package class0403;
 
 import java.util.Random;
 
+import class0404.DirectedEdge;
+import class0404.EdgeWeightedDigraph;
+import class0404.EuclideanEdgeWeightedDigraph;
 import stdlib.StdOut;
 import stdlib.StdRandom;
 
@@ -42,11 +45,10 @@ public class CaseGenerator {
     }
     
     /**
-     * 
+     * 欧几里德无向权重图
      * @param v 节点个数
      * @param d 联通半径
-     * @return 权重图
-     * 
+     * @return 无向权重图
      */
     public static EdgeWeightedGraph euclidean(int v, double d) {
         EuclideanEdgeWeightedGraph eg = new EuclideanEdgeWeightedGraph(v);
@@ -64,6 +66,42 @@ public class CaseGenerator {
                             eg.addEdge(new Edge(i, j, eg.distance(i, j), 
                                     eg.getVerticalX(i), eg.getVerticalY(i), 
                                     eg.getVerticalX(j), eg.getVerticalY(j)));
+                            // prevent parallel link
+                            check[i][j] = check[j][i] = true;
+                        }
+                    }
+                }
+            }
+        }
+        return eg;
+    }
+    
+    /**
+     * 欧几里德有向权重图
+     * @param v 节点个数
+     * @param d 联通半径
+     * @return 有向权重图
+     * 
+     */
+    public static EdgeWeightedDigraph euclideanInDigraph(int v, double d) {
+        EuclideanEdgeWeightedDigraph eg = new EuclideanEdgeWeightedDigraph(v);
+        Random r = new Random();
+        for(int i=0; i<v; i++) 
+            eg.setVertical(i, r.nextDouble() * v, r.nextDouble() * v);
+        
+        boolean[][] check = new boolean[v][v];
+        for(int i=0; i<v; i++) {
+            for(int j=0; j<v; j++) {
+                if(!check[i][j] && !check[j][i]) {
+                    if(j != i) {
+                        double dt = eg.distance(i, j);
+                        if(dt <= d) {
+                            eg.addEdge(new DirectedEdge(i, j, eg.distance(i, j), 
+                                    eg.getVerticalX(i), eg.getVerticalY(i), 
+                                    eg.getVerticalX(j), eg.getVerticalY(j)));
+                            eg.addEdge(new DirectedEdge(j, i, eg.distance(i, j), 
+                                    eg.getVerticalX(j), eg.getVerticalY(j), 
+                                    eg.getVerticalX(i), eg.getVerticalY(i)));
                             // prevent parallel link
                             check[i][j] = check[j][i] = true;
                         }

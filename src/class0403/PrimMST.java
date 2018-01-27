@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import rlgs4.IndexMinPQ;
 import rlgs4.Queue;
-import stdlib.StdDraw;
+import class0401.StdDraw;
 
 /**
  * @Description 4.3.21

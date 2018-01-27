@@ -1,6 +1,6 @@
 package class0403;
 
-import stdlib.StdDraw;
+import class0401.StdDraw;
 
 /**
  * @Description 4.3.0/35

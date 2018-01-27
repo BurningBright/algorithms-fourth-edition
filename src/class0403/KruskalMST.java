@@ -5,7 +5,7 @@ import java.awt.Color;
 import rlgs4.MinPQ;
 import rlgs4.Queue;
 import rlgs4.UF;
-import stdlib.StdDraw;
+import class0401.StdDraw;
 
 /**
  * @Description 4.3.31
@@ -44,8 +44,10 @@ public class KruskalMST {
     
     public void show() {
         StdDraw.setPenColor(Color.BLACK);
-        for (Edge e: edges()) 
+        for (Edge e: edges()) {
+            StdDraw.pause(10);
             e.show();
+        }
         
         /*
         int i = 0;

@@ -1,5 +1,8 @@
 package class0404;
 
+import java.awt.Color;
+
+import class0401.StdDraw;
 import rlgs4.Bag;
 import stdlib.In;
 import stdlib.StdOut;
@@ -72,6 +75,12 @@ public class EdgeWeightedDigraph {
             for (DirectedEdge e : adj[v])
                 sb.append(e.toString()).append(NEWLINE);
         return sb.toString();
+    }
+    
+    public void show() {
+        StdDraw.setPenColor(Color.gray);
+        for (DirectedEdge e: edges())
+            e.show();
     }
     
     public static void main(String[] args) {

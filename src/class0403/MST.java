@@ -5,7 +5,7 @@ import java.awt.Color;
 import rlgs4.Queue;
 import rlgs4.SET;
 import stdlib.In;
-import stdlib.StdDraw;
+import class0401.StdDraw;
 import stdlib.StdOut;
 
 /**
