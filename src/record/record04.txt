@@ -61,6 +61,8 @@ class0404
 	AnimateDijkstra.java				4.4.46			迪杰斯特拉-动画
 	Arbitrage.java						4.4.19			套利
 	BellmanFordSP.java					4.4.0			贝尔曼-福特 最短路径
+	BellmanFordTransformation.java		4.4.30			转换图，使迪杰斯特拉兼容负路径
+	CostOfLaziness.java					4.4.54			性能对比积极、懒惰
 	CPM.java							4.4.18			关键路径法
 	DepthFirstOrder.java				4.4.0			有向权重图 深度优先遍历
 	DiameterByDijkstra.java				4.4.8			有向权重图的直径
