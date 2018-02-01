@@ -79,3 +79,4 @@ class0404
 	MemoryCost.java						4.4.11			内存模型
 	MultisourceShortestPaths.java		4.4.24			多源最短路径
 	ParentCheckingHeuristic.java		4.4.32			父节点的启发式优化 贝尔曼-福特
+	YensOptimize.java					web.5			Yen's 优化 贝尔曼-福特，4.4.7的想法是错的
