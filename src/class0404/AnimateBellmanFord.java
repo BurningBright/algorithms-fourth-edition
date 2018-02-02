@@ -156,19 +156,28 @@ public class AnimateBellmanFord {
         for (int i=0; i<V; i++)
             circles[i].penColor = StdDraw.BLACK;
         // 队列节点圈红
-        for (Integer i: queue)
+        for (Integer i: queue) {
+            circles[i].color = StdDraw.WHITE;
             circles[i].penColor = StdDraw.RED;
+        }
         
         circles[v].color = StdDraw.WHITE;
         circles[v].penColor = StdDraw.RED;
         
         for (DirectedEdge e : G.adj(v)) {
             int w = e.to();
-            Integer i = mapping.get(v + "-" + w);
-            Line line = lines[i];
+            Integer vertex = mapping.get(v + "-" + w);
+            Line line = lines[vertex];
             
             if (distTo[w] > distTo[v] + e.weight()) {
                 line.color = StdDraw.BLACK;
+                
+                if (edgeTo[w] != null && edgeTo[w] != e) {
+                    vertex = mapping.get(edgeTo[w].from() + "-" + edgeTo[w].to());
+                    Line replaced = lines[vertex];
+                    replaced.color = StdDraw.GRAY;
+                }
+                
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
                 
