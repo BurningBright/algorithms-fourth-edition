@@ -1,2 +1,4 @@
-class0401
-	SublinearSort.java					4.1.15			LSD+插排 低于线性增长级
+class0501
+	SublinearSort.java					5.1.15			LSD+插排 低于线性增长级
+class0502
+	StringSET.java						5.2.6			trie型字符串集合
