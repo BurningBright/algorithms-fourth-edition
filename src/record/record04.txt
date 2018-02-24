@@ -68,7 +68,7 @@ class0404
 	DiameterByDijkstra.java				4.4.8			有向权重图的直径
 	DijkstraLazySP.java					4.4.39			模仿Prim的Lazy版实现
 	DijkstraSP.java						4.4.0			迪杰斯特拉-最短路径
-	DijkstraSSP.java					4.4.7			迪杰斯特拉-第二最短路径
+	DijkstraSSP.java					4.4.7			迪杰斯特拉-第二最短路径(错误)
 	DirectedEdge.java					4.4.0			有向权重边
 	DrawSPT.java						4.4.0			贝尔曼福 - 欧几里德图SPT
 	EdgeWeightedCycleFinder.java		4.4.12			寻找有向权重图的环
@@ -79,4 +79,5 @@ class0404
 	MemoryCost.java						4.4.11			内存模型
 	MultisourceShortestPaths.java		4.4.24			多源最短路径
 	ParentCheckingHeuristic.java		4.4.32			父节点的启发式优化 贝尔曼-福特
+	YansSSP.java						4.4.0			Yen's n最短路径
 	YensOptimize.java					web.5			Yen's 优化 贝尔曼-福特，4.4.7的想法是错的

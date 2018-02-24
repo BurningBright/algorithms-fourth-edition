@@ -8,7 +8,7 @@ import class0401.StdDraw;
  * @author Leon
  * @date 2018-01-09 14:22:00
  */
-public class DirectedEdge {
+public class DirectedEdge implements Comparable<DirectedEdge>{
     
     private final int v;            // edge source
     private final int w;            // edge target
@@ -50,6 +50,12 @@ public class DirectedEdge {
     
     public String toString() {
         return String.format("%d->%d %.2f", v, w, weight);
+    }
+
+    @Override
+    public int compareTo(DirectedEdge o) {
+        double m = weight - o.weight;
+        return m > 0? 1 : (m < 0? -1 : (v-w-o.v+o.w)); 
     }
     
 }

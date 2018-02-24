@@ -63,4 +63,14 @@ public class DijkstraSP {
         return path;
     }
     
+    // 方便 YenSSP 计数
+    public int stepTo(int v) {
+        if (!hasPathTo(v))
+            return 0;
+        int cnt = 0;
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()])
+            cnt++;
+        return cnt;
+    }
+    
 }
