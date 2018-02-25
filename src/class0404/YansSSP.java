@@ -40,16 +40,28 @@ public class YansSSP {
             // 候选路径中最小权值即 kth最短
             double pri = Double.POSITIVE_INFINITY;
             DijkstraSP kth = null;
-            Queue<DijkstraSP> tmp = new Queue<DijkstraSP>();;
+            int index = 0;
+            int cnt=0;
+            
+            // 定位最小路径
             for (DijkstraSP sp: candidate) {
                 if (sp.distTo(sink) < pri) {
                     pri = sp.distTo(sink);
                     kth = sp;
-                } else
-                    tmp.enqueue(sp);
+                    index = cnt;
+                }
+                cnt++;
+            }
+            cnt++;
+            
+            // 出列
+            for (int i=0; i<cnt; i++) {
+                if(index == i)
+                    candidate.dequeue();
+                else
+                    candidate.enqueue(candidate.dequeue());
             }
             paths[k] = kth;         // 胜选
-            candidate = tmp;        // 遗留候选
         }
     }
     
