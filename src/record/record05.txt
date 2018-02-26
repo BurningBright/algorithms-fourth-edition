@@ -1,5 +1,7 @@
 class0501
+	Alphabet.java						5.1.12			字母表
 	LSDOptimze.java						5.1.9			LSD 适配不同长度字符串
+	QueueCount.java						5.1.7			队列计数？
 	SublinearSort.java					5.1.15			LSD+插排 低于线性增长级
 class0502
 	StringSET.java						5.2.6			trie型字符串集合

@@ -8,7 +8,7 @@ import stdlib.StdOut;
  * @Description 5.1.9
  *          LSD 适配不同长度字符串
  * @author Leon
- * @date 2018-02-13 14:34:00
+ * @date 2018-02-25 19:34:00
  */
 public class LSDOptimze {
 
