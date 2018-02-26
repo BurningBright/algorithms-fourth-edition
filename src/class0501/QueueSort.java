@@ -16,50 +16,50 @@ public class QueueSort {
     private static int R = 256;
     
     public static void sort(Alphabet alp, String[] a) {
-        sort(a, 0);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private static void sort(String[] a, int d) {
-        
-        Queue<String>[] queue = (Queue<String>[]) new Queue[R];
-        Queue<String>[] aux = (Queue<String>[]) new Queue[R];
-        
-        for (int i=0; i<R; i++) 
-            queue[i] = new Queue<String>();
-        
-        for (int i=0; i<a.length; i++)
-            if (a[i].length()-1 >= d)
-                queue[a[i].charAt(d)].enqueue(a[i]);
-        
-        for (int i=0; i<R; i++)
-            aux[i] = sort(queue[i], d+1);
+        // data prepare
+        Queue<String> q = new Queue<String>();
+        for (int i=0; i<a.length; i++) 
+            q.enqueue(a[i]);
+        // sort
+        q = sort(q, 0);
         
         // copy back
         int cnt = 0;
-        for (int i=0; i<R; i++)
-            if(aux[i] != null)
-                for (String s: aux[i])
-                    a[cnt++] = s;
-        
+        for (String s: q)
+            a[cnt++] = s;
     }
     
     @SuppressWarnings("unchecked")
     private static Queue<String> sort(Queue<String> q, int d) {
-        if (q == null || q.size() == 0 ) return null;
-        Queue<String>[] queue = (Queue<String>[]) new Queue[R];
-        for (int i=0; i<R; i++) 
+        // basic case
+        boolean flag = false;
+        for (String s: q)
+            if (s.length()-1 >= d)
+                flag = true;
+        if (!flag)
+            return q;
+        
+        // 散列
+        Queue<String>[] queue = (Queue<String>[]) new Queue[R+1];
+        for (int i=0; i<R+1; i++) 
             queue[i] = new Queue<String>();
         
         for (String s: q)
-            if (s.length()-1 >= d) {
-                queue[s.charAt(d)].enqueue(s);
-            }
+            if (s.length()-1 >= d) 
+                queue[s.charAt(d)+1].enqueue(s);
+            else
+                queue[0].enqueue(s);
         
+        // 排序子块
+        for (int i=0; i<R+1; i++)
+            queue[i] = sort(queue[i], d+1);
+        
+        // 整理区块
         Queue<String> aux = new Queue<String>();
-        for (int i=0; i<R; i++)
+        for (int i=0; i<R+1; i++)
             for (String s: queue[i])
                 aux.enqueue(s);
+        
         return aux;
     }
     
