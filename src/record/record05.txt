@@ -1,8 +1,12 @@
 class0501
 	Alphabet.java						5.1.12			字母表
+	HybridSort.java						5.1.13			混合 MSD & Quick-3
 	LSDOptimze.java						5.1.9			LSD 适配不同长度字符串
 	QueueCount.java						5.1.7			队列计数？
 	QueueSort.java						5.1.11			队列
+	Quick3String.java					5.1.0			三道快排
+	RandomCase.java						5.1.18-21		随机案例
 	SublinearSort.java					5.1.15			LSD+插排 低于线性增长级
+	Timings.java						5.1.22			性能对比
 class0502
 	StringSET.java						5.2.6			trie型字符串集合
