@@ -12,3 +12,5 @@ class0502
 	NonrecursiveTrieST.java				5.2.5			非递归TrieST
 	NonrecursiveTST.java				5.2.5			非递归TST
 	StringSET.java						5.2.6			trie型字符串集合
+	TrieST.java							5.2.8			补齐ST的API 递归型
+	TST.java							5.2.9			补齐TST 递归型
