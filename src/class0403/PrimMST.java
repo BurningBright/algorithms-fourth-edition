@@ -76,9 +76,10 @@ public class PrimMST {
 
     public void show() {
         StdDraw.setPenColor(Color.BLACK);
-        for (Edge e: edges()) 
+        for (Edge e: edges()) {
+            StdDraw.pause(10);
             e.show();
-        
+        }
         /*
         int i = 0;
         boolean a, b, c;

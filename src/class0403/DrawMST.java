@@ -54,18 +54,16 @@ public class DrawMST {
         
         StdDraw.setPenRadius(.005);
         
-        /*
+        
         // minimum spanning tree
-        MST mst = new MST(ewg);
+//        MST mst = new MST(eg);
+//        mst.show();
+        
+        PrimMST mst = new PrimMST(eg);
         mst.show();
         
-        PrimMST mst = new PrimMST(ewg);
-        mst.show();
-        */
-        
-//        KruskalMST mst = new KruskalMST(ewg);
-        KruskalMST mst = new KruskalMST(eg);
-        mst.show();
+//        KruskalMST mst = new KruskalMST(eg);
+//        mst.show();
         
     }
     

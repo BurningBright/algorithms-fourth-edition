@@ -9,8 +9,9 @@ class0501
 	SublinearSort.java					5.1.15			LSD+插排 低于线性增长级
 	Timings.java						5.1.22			性能对比
 class0502
+	HybridTST.java						5.2.13			混合trie + TST
 	NonrecursiveTrieST.java				5.2.5			非递归TrieST
 	NonrecursiveTST.java				5.2.5			非递归TST
-	StringSET.java						5.2.6			trie型字符串集合
+	StringSET.java						5.2.6/10		trie型字符串集合, 积极型size()
 	TrieST.java							5.2.8			补齐ST的API 递归型
 	TST.java							5.2.9			补齐TST 递归型
