@@ -12,6 +12,9 @@ class0502
 	HybridTST.java						5.2.13			混合trie + TST
 	NonrecursiveTrieST.java				5.2.5			非递归TrieST
 	NonrecursiveTST.java				5.2.5			非递归TST
-	StringSET.java						5.2.6/10		trie型字符串集合, 积极型size()
+	SpellChecker.java					5.2.24			与散列表对比性能 3.5.31
+	SpellChecking.java					5.2.17			拼写检查
+	StringSET.java						5.2.6/10/20		trie型字符串集合, 积极型size()
 	TrieST.java							5.2.8			补齐ST的API 递归型
 	TST.java							5.2.9			补齐TST 递归型
+	UniqueSubstringsL.java				5.2.14			独特字符串

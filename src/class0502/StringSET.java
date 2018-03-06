@@ -164,6 +164,11 @@ public class StringSET implements Iterable<String> {
             collectNode(x.next[c], pre + c, q);
     }
     
+    public boolean containsPrefix(String prefix) {
+        Node x = get(root, prefix, 0);
+        return x != null? true: false;
+    }
+    
     public static void main(String[] args) {
         String[] src = "she sells sea shells by the sea shore".split(" ");
         StringSET set = new StringSET();
