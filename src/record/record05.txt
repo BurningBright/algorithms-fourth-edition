@@ -19,5 +19,10 @@ class0502
 	TST.java							5.2.9			补齐TST 递归型
 	UniqueSubstringsL.java				5.2.14			独特字符串
 class0503
-	Brute.java							5.3.1			蛮力型
-	Manacher							web.5.3.15		最大回文字符串
+	BlanksCheck.java					5.3.4			检查空白字符串
+	BoyerMoore.java						5.3.9			boyer-moore 滑行匹配
+	Brute.java							5.3.1/7			蛮力型
+	BruteForceRL.java					5.3.5			从右向左的蛮力
+	KMP.java							5.3.8			Knuth-morris-pratt 状态机匹配
+	Manacher.java						web.5.3.15		最大回文字符串
+	RabinKarp.java						5.3.10			rabin-karp 指纹匹配
