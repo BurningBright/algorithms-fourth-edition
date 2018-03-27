@@ -27,3 +27,4 @@ class0503
 	Manacher.java						web.5.3.15		最大回文字符串
 	RabinKarp.java						5.3.10			rabin-karp 指纹匹配
 	RabinKarpPalindrome.java			5.3.23			rabin-karp 探查回文
+	RabinKarpWildcard.java				5.3.21			Rabin-Karp 指纹通配
