@@ -21,7 +21,7 @@ public class RabinKarp {
         this.pat = pat; // save pattern (only needed for Las Vegas)
         this.M = pat.length();
 //        Q = longRandomPrime(); // See Exercise 5.3.33.
-        Q = 453l;
+        Q = 457l;
         RM = 1;
         for (int i = 1; i <= M - 1; i++) // Compute R^(M-1) % Q for use
             RM = (R * RM) % Q;          // in removing leading digit.

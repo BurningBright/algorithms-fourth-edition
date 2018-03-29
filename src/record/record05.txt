@@ -29,3 +29,5 @@ class0503
 	RabinKarpMatrix.java				5.3.22			rabin-karp 字符串数组匹配
 	RabinKarpPalindrome.java			5.3.23			rabin-karp 探查回文
 	RabinKarpWildcard.java				5.3.21			Rabin-Karp 指纹通配
+	StraightLine.java					5.3.34			状态机的代码跳转形式
+	UniqueSubstringsL.java				5.3.32			独特字符串
