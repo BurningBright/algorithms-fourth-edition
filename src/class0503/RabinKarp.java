@@ -1,5 +1,8 @@
 package class0503;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 import stdlib.StdOut;
 
 /**
@@ -18,16 +21,20 @@ public class RabinKarp {
     private long RM;            // R^(M-1) % Q
 
     public RabinKarp(String pat) {
-        this.pat = pat; // save pattern (only needed for Las Vegas)
+        this.pat = pat;             // save pattern (only needed for Las Vegas)
         this.M = pat.length();
-//        Q = longRandomPrime(); // See Exercise 5.3.33.
-        Q = 457l;
+        Q = longRandomPrime();      // See Exercise 5.3.33.
         RM = 1;
         for (int i = 1; i <= M - 1; i++) // Compute R^(M-1) % Q for use
             RM = (R * RM) % Q;          // in removing leading digit.
         patHash = hash(pat, M);
     }
-
+    
+    private static long longRandomPrime() {
+        BigInteger prime = BigInteger.probablePrime(31, new Random());
+        return prime.longValue();
+    }
+    
     public boolean check(int i) // Monte Carlo (See text.)
     {
         return true;
@@ -40,21 +47,20 @@ public class RabinKarp {
         return h;
     }
     
-    @SuppressWarnings("unused")
-    private int search(String txt) { // Search for hash match in text.
+    public int search(String txt) {     // Search for hash match in text.
         int N = txt.length();
-        long txtHash = hash(txt, M); // init hash value
+        long txtHash = hash(txt, M);    // init hash value
         if (patHash == txtHash)
             return 0; // Match at beginning.
-        for (int i = M; i < N; i++) { // Remove leading digit, add trailing
-                                      // digit, check for match.
+        for (int i = M; i < N; i++) {   // Remove leading digit, add trailing
+                                        // digit, check for match.
             txtHash = (txtHash + Q - RM * txt.charAt(i - M) % Q) % Q;
             txtHash = (txtHash * R + txt.charAt(i)) % Q;
             if (patHash == txtHash)
                 if (check(i - M + 1))
-                    return i - M + 1; // match
+                    return i - M + 1;   // match
         }
-        return N; // no match found
+        return N;                       // no match found
     }
 
     public int count(String txt) {
