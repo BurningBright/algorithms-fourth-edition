@@ -32,3 +32,5 @@ class0503
 	StraightLine.java					5.3.34			状态机的代码跳转形式
 	Timings.java						5.3.39			时间对比
 	UniqueSubstringsL.java				5.3.32			独特字符串
+class0504
+	PatternExample.java					5.4.12			例子
