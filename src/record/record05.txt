@@ -33,4 +33,6 @@ class0503
 	Timings.java						5.3.39			时间对比
 	UniqueSubstringsL.java				5.3.32			独特字符串
 class0504
-	PatternExample.java					5.4.12			例子
+	GREPmatch.java						5.4.7			Generalized Regular Expression Pattern-matching
+	NFA.java							5.4.0			无限状态自动机
+	PatternExample.java					5.4.8/10/12/13/14	例子
