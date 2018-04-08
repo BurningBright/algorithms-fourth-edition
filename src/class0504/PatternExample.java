@@ -65,9 +65,8 @@ public class PatternExample {
         // Divisible by 2
         Pattern a4 = Pattern.compile("[0-1]+0");
         // Divisible by 3
-        Pattern b4 = Pattern.compile("");//?
-        // Divisible by 123
-        Pattern c4 = Pattern.compile("");//?
+        Pattern b4 = Pattern.compile("1(01*0|10*1)*10*");
+        // Divisible by 123?
         
 //        Matcher m2 = d2.matcher("01011");
 //        Matcher m2 = e2.matcher("11101");
