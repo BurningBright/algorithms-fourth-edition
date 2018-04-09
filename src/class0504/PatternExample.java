@@ -62,10 +62,12 @@ public class PatternExample {
         Pattern d3 = Pattern.compile(".*(?:(?!11).)*");
         
         // 5.4.14
-        // Divisible by 2
-        Pattern a4 = Pattern.compile("[0-1]+0");
-        // Divisible by 3
+        // Divisible by 2               1->1
+        Pattern a4 = Pattern.compile("1(1|01)*0");
+        // Divisible by 3               1->2 2->1
         Pattern b4 = Pattern.compile("1(01*0|10*1)*10*");
+        // Divisible by 4                1->3          3->3           3->1
+        Pattern c4 = Pattern.compile("1((1|01|000*11)|(1|01|000*11)*|(000*1))*000*");
         // Divisible by 123?
         
 //        Matcher m2 = d2.matcher("01011");

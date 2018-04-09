@@ -34,5 +34,12 @@ class0503
 	UniqueSubstringsL.java				5.3.32			独特字符串
 class0504
 	GREPmatch.java						5.4.7			Generalized Regular Expression Pattern-matching
-	NFA.java							5.4.0			无限状态自动机
+	NFA.java							5.4.0			无限状态自动机接口
+	NFAComplement.java					5.4.21			元字符集的补集
+	NFAMultiOr.java						5.4.16			多或型
+	NFAOneOrMore.java					5.4.18			+ 一个或多个量词
+	NFAOrigin.java						5.4.0			原始模式 仅单或、括号、星号
+	NFARange.java						5.4.20			元字符集的范围表达
+	NFASet.java							5.4.19			元字符集
+	NFAWildcards.java					5.4.17			通配符
 	PatternExample.java					5.4.8/10/12/13/14	例子
