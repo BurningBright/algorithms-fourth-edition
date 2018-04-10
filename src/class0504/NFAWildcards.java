@@ -9,6 +9,7 @@ import stdlib.StdOut;
 /**
  * @Description 5.4.17
  *              通配模式构建自动机
+ *              在识别时已做过滤，看起来和原始型没什么区别
  * @author Leon
  * @date 2018-04-09 10:00:00
  */
@@ -41,11 +42,6 @@ public class NFAWildcards implements NFA{
                 // lookahead
                 G.addEdge(lp, i + 1);
                 G.addEdge(i + 1, lp);
-                // 通配的自循环路径
-                if (re[i] == '.') {
-                    G.addEdge(i, i + 1);
-                    G.addEdge(i + 1, i);
-                }
             }
             if (re[i] == '(' || re[i] == '*' || re[i] == ')')
                 G.addEdge(i, i + 1);

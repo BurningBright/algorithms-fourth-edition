@@ -24,6 +24,7 @@ public class NFAOneOrMore implements NFA{
         re = regexp.toCharArray();
         M = re.length;
         G = new Digraph(M + 1);
+        
         for (int i = 0; i < M; i++) {
             int lp = i;
             if (re[i] == '(' || re[i] == '|')
@@ -37,25 +38,17 @@ public class NFAOneOrMore implements NFA{
                 } else
                     lp = or;
             }
-            if (i < M - 1 && (re[i + 1] == '*' || re[i + 1] == '+')) {
+            if (i < M - 1 && re[i + 1] == '*') {
                 // lookahead
                 G.addEdge(lp, i + 1);
                 G.addEdge(i + 1, lp);
             }
+            if (i < M - 1 && re[i + 1] == '+') {
+                // lookahead
+                G.addEdge(i + 1, lp);
+            }
             if (re[i] == '(' || re[i] == '*' || re[i] == '+' || re[i] == ')')
                 G.addEdge(i, i + 1);
-            
-            // 至少发生一次 , 去除前边
-            if (re[i] == '+') {
-                if (G.hasEdge(lp-1, lp)) {
-                    Digraph g = new Digraph(G.V());
-                    for (int v=0; v<G.V(); v++)
-                        for (Integer w: G.adj(v))
-                            if (v != lp-1 || w != lp)
-                                g.addEdge(v, w);
-                    G = g;
-                }
-            }
             
         }
     }

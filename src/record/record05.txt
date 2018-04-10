@@ -39,6 +39,7 @@ class0504
 	NFAMultiOr.java						5.4.16			多或型
 	NFAOneOrMore.java					5.4.18			+ 一个或多个量词
 	NFAOrigin.java						5.4.0			原始模式 仅单或、括号、星号
+	NFAProof.java						5.4.22			实现简单正则识别，显示路径
 	NFARange.java						5.4.20			元字符集的范围表达
 	NFASet.java							5.4.19			元字符集
 	NFAWildcards.java					5.4.17			通配符
