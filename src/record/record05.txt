@@ -44,3 +44,5 @@ class0504
 	NFASet.java							5.4.19			元字符集
 	NFAWildcards.java					5.4.17			通配符
 	PatternExample.java					5.4.8/10/12/13/14	例子
+class0505
+	CreateRandomData.java				5.5.0			测试随机数据压缩率
