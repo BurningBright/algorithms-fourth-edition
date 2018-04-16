@@ -1,6 +1,5 @@
 package solution05.c05;
 
-import rlgs4.TST;
 import stdlib.BinaryStdIn;
 import stdlib.BinaryStdOut;
 

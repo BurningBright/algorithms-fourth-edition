@@ -45,4 +45,7 @@ class0504
 	NFAWildcards.java					5.4.17			通配符
 	PatternExample.java					5.4.8/10/12/13/14	例子
 class0505
+	BinaryCharIn.java					5.5.0			读字节的 0/1形式
 	CreateRandomData.java				5.5.0			测试随机数据压缩率
+	QBitToPic.java						5.5.0			文本输入、字节输入  转图片
+	QPicToBit.java						5.5.0			图片 转文本输出、字节输出
