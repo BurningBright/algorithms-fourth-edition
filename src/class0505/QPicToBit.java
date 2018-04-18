@@ -15,8 +15,8 @@ import javax.imageio.ImageIO;
 public class QPicToBit {
     
     public static void writeChar() throws Exception {
-        BufferedImage image = ImageIO.read(new FileInputStream("resource\\5.5\\q64x96.png"));
-        FileOutputStream fos = new FileOutputStream("resource\\5.5\\q64x96.txt");
+        BufferedImage image = ImageIO.read(new FileInputStream("resource\\5.5\\q128x192.png"));
+        FileOutputStream fos = new FileOutputStream("resource\\5.5\\q128x192.txt");
         int width = image.getWidth();
         int height = image.getHeight();
         for (int i=0; i<height; i++) {
@@ -29,8 +29,8 @@ public class QPicToBit {
     }
     
     public static void writeBit() throws Exception {
-        BufferedImage image = ImageIO.read(new FileInputStream("resource\\5.5\\q32x48.png"));
-        FileOutputStream fos = new FileOutputStream("resource\\5.5\\q32x48.bin");
+        BufferedImage image = ImageIO.read(new FileInputStream("resource\\5.5\\q128x192.png"));
+        FileOutputStream fos = new FileOutputStream("resource\\5.5\\q128x192.bin");
         int width = image.getWidth();
         int height = image.getHeight();
         int a = 0;
@@ -48,6 +48,7 @@ public class QPicToBit {
     
     public static void main(String[] args) {
         try {
+//            writeChar();
             writeBit();
         } catch (Exception e) {
             e.printStackTrace();
