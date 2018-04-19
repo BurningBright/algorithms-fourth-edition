@@ -47,6 +47,10 @@ class0504
 class0505
 	BinaryCharIn.java					5.5.0			读字节的 0/1形式
 	CreateRandomData.java				5.5.0			测试随机数据压缩率
+	EstimateRatio.java					5.5.7/8/9		测试各压缩算法压缩率趋势
+	Huffman.java						5.5.0			非标准输入、输出版	huffman
+	LZW.java							5.5.0			非标准输入、输出版	lzw
 	QBitToPic.java						5.5.0			文本输入、字节输入  转图片
 	QPicToBit.java						5.5.0			图片 转文本输出、字节输出
+	RunLength.java						5.5.0			非标准输入、输出版	run-length
 	RunLengthExp.java					5.5.5			测试行程编码压缩

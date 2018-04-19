@@ -23,17 +23,17 @@ public class RunLengthExp {
     public static void main(String[] args) throws Exception {
         
         String workPath = System.getProperty("user.dir") + File.separator + "bin";
-        String command = "java solution05.c05.BinaryDump 0 ";
-        Process p = Runtime.getRuntime().exec(command, null, new File(workPath));
+        // String command = "java solution05.c05.BinaryDump 0 < ../resource/5.5/q128x192.bin";
+        String command = "java solution05.c05.RunLength - < ../resource/5.5/q128x192.bin | java solution05.c05.BinaryDump 0";
+        Process p = Runtime.getRuntime().exec(new String[]{"D:\\Program Files\\Git\\bin\\sh.exe", "-c", command}, null, new File(workPath));
         
         // 读取命令的输出信息
         InputStream is = p.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         p.waitFor();
-        StdOut.println(is.available());
         if (p.exitValue() != 0) 
             StdOut.println(p.exitValue() + "error");
-
+        
         // 打印输出信息
         String s = null;
         while ((s = reader.readLine()) != null) {
