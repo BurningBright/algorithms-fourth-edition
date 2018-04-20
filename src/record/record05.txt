@@ -49,7 +49,9 @@ class0505
 	CreateRandomData.java				5.5.0			测试随机数据压缩率
 	EstimateRatio.java					5.5.7/8/9		测试各压缩算法压缩率趋势
 	Huffman.java						5.5.0			非标准输入、输出版	huffman
+	LongRepeats.java					5.5.27			长重复随机数据的压缩率变化
 	LZW.java							5.5.0			非标准输入、输出版	lzw
+	LZWRebuilding.java					5.5.26			重建字典型LZW
 	QBitToPic.java						5.5.0			文本输入、字节输入  转图片
 	QPicToBit.java						5.5.0			图片 转文本输出、字节输出
 	RunLength.java						5.5.0			非标准输入、输出版	run-length

@@ -55,7 +55,7 @@ public class EstimateRatio {
         }
     }
     
-    private static void exp(String txt, int N) {
+    public static void exp(String txt, int N) {
         int a = runLength(txt);
         int b = huffman(txt);
         int c= lzw(txt);
