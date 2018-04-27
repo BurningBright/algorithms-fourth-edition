@@ -41,7 +41,7 @@ public class Particle3D {
         radius = StdRandom.uniform(1.0, 5.0);
         mass   = 0.5;
         color  = Color.BLACK;
-        sphere = Primitives.getSphere((float)radius*2);
+        sphere = Primitives.getSphere((float)radius);
         draw();
     }
     
@@ -71,7 +71,8 @@ public class Particle3D {
         this.radius = radius;
         this.mass = mass;
         color  = Color.BLACK;
-        sphere = Primitives.getSphere((float)radius*2);
+        sphere = Primitives.getSphere((float)radius);
+        draw();
     }
     
     void move(double dt) {

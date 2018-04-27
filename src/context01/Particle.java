@@ -157,4 +157,10 @@ public class Particle {
         count++;
     }
     
+    void rewind() {
+        vx = -vx;
+        vy = -vy;
+        count = 0;
+    }
+    
 }

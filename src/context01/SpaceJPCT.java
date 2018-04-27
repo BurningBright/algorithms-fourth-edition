@@ -20,6 +20,12 @@ import com.threed.jpct.util.Light;
 
 import stdlib.StdOut;
 
+/**
+ * @Description context01.0
+ *              3D 空间构建
+ * @author Leon
+ * @date 2018-04-26 09:20:00
+ */
 public class SpaceJPCT extends JFrame {
     private static final long serialVersionUID = 1L;
     // Graphics

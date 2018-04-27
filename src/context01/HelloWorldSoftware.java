@@ -4,7 +4,8 @@ import com.threed.jpct.*;
 import javax.swing.*;
 
 /**
- * A simple HelloWorld using the Software-renderer and rendering into a frame
+ * A simple HelloWorld using the 
+ * Software-renderer and rendering into a frame
  * using active rendering.
  * jpct demo
  * @author EgonOlsen

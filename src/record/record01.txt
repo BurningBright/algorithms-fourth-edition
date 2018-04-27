@@ -1,5 +1,5 @@
 class0101
-	BinaryBruteForce.java				1.1.38	 	蛮力对决二叉	相差大约730倍
+	BinaryBruteForce.java				1.1.38		蛮力对决二叉	相差大约730倍
 	CircleRanLine.java					1.1.31		均匀分布点事件连线
 	Euclid.java							1.1.24		欧几里德算法
 	HandMath.java						1.1.14		手动算开方整数部分

@@ -18,6 +18,12 @@ import com.threed.jpct.util.KeyMapper;
 import com.threed.jpct.util.KeyState;
 import com.threed.jpct.util.Light;
 
+/**
+ * @Description context01.3
+ *              3D粒子绘制基础类
+ * @author Leon
+ * @date 2018-04-26 13:20:00
+ */
 public class CollisionDraw {
     
     private static JFrame frame;

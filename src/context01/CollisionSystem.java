@@ -104,13 +104,49 @@ public class CollisionSystem {
             predictCollisions(b, limit);
         }
     }
-
+    
+    public void outSimulateInit(double limit, boolean rewind) {
+        
+        if (rewind) {
+            for (int i = 0; i < particles.length; i++) {
+                particles[i].rewind();
+                predictCollisions(particles[i], limit);
+            }
+        } else {
+            pq = new MinPQ<Event>();
+            for (int i = 0; i < particles.length; i++)
+                predictCollisions(particles[i], limit);
+            pq.insert(new Event(0, null, null));
+        }
+    }
+    
+    public void outSimulateStep(double limit, double Hz) {
+        if (!pq.isEmpty()) {
+            Event event = pq.delMin();
+            if (!event.isValid()) return;
+            for (int i = 0; i < particles.length; i++)
+                particles[i].move(event.time - t);
+            t = event.time;
+            Particle a = event.a, b = event.b;
+            if (a != null && b != null)
+                a.bounceOff(b);
+            else if (a != null && b == null)
+                a.bounceOffHorizontalWall();
+            else if (a == null && b != null)
+                b.bounceOffVerticalWall();
+            else if (a == null && b == null)
+                redraw(limit, Hz);
+            predictCollisions(a, limit);
+            predictCollisions(b, limit);
+        }
+    }
+    
     public static void main(String[] args) {
         int N = 25;
         StdDraw.enableDoubleBuffering();
         Particle[] particles = new Particle[N];
         for (int i = 0; i < N; i++)
-        particles[i] = new Particle(.0001);
+            particles[i] = new Particle(.0001);
         CollisionSystem system = new CollisionSystem(particles);
         system.simulate(10000, .5);
     }
