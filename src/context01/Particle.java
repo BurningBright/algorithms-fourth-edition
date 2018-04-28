@@ -71,6 +71,17 @@ public class Particle {
         this.mass = mass;
         color  = Color.BLACK;
     }
+    
+    Particle(double rx, double ry, double vx, double vy, 
+            double radius, double mass, int R, int G, int B) {
+        this.rx = rx;
+        this.ry = ry;
+        this.vx = vx;
+        this.vy = vy;
+        this.radius = radius;
+        this.mass = mass;
+        color  = new Color(R, G, B);
+    }
 
     void draw() {
         StdDraw.setPenColor(color);

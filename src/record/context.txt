@@ -8,4 +8,5 @@ context01	collision
 	Particle.java						c.1.0		粒子
 	Particle3D.java						c.1.3		三维粒子
 	Rewind.java							c.1.10		碰撞的反向过程
+	Science.java						c.1.6		温度、布朗运动
 	SpaceJPCT.java						c.1.0		JPCT空间构件
