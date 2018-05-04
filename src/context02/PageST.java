@@ -2,6 +2,13 @@ package context02;
 
 import rlgs4.Queue;
 
+/**
+ * @Description context02.16 
+ *              B-tree 符号表节点
+ *              部分方法不够优雅
+ * @author Leon
+ * @date 2018-05-04 15:00:00
+ */
 public class PageST <Key extends Comparable<Key>, Value> {
     
     private boolean bottom;
@@ -89,6 +96,38 @@ public class PageST <Key extends Comparable<Key>, Value> {
         nodes[flag].probe = page;
     }
     
+    public Value get(Key key) {
+        for (int i=0; i<n; i++) 
+            if (eq(key, nodes[i].key))
+                return nodes[i].val;
+        return null;
+    }
+    
+    public void delete(Key key) {
+        if (key == null) return;
+        
+        for (int i=0; i<n; i++) 
+            if (eq(key, nodes[i].key)) {
+                nodes[i].probe = null;
+                if (!eq(key, "*"))
+                    nodes[i] = null;
+                n--;
+                for (int j=i; j<M-1; j++)
+                    nodes[j] = nodes[j+1];
+                break;
+            }
+        if (nodes[0] == null || nodes[0].probe == null)
+            bottom = true;
+    }
+    
+    public void delete(Key deleted, Key key) {
+        for (int i=0; i<n; i++) 
+            if (eq(deleted, nodes[i].key)) {
+                nodes[i].key = key;
+                break;
+            }
+    }
+    
     public PageST<Key, Value> split() {
         PageST<Key, Value> another = new PageST<Key, Value>(bottom, M);
         for (int i=M/2; i < M && nodes[i] != null; i++) {
@@ -117,15 +156,13 @@ public class PageST <Key extends Comparable<Key>, Value> {
         return false;
     }
     
-    @SuppressWarnings("unchecked")
     public Key min() {
-        if (eq((Key)"*", nodes[0].key))
-            return nodes[1].key;
+        if (nodes[0] == null) return null;
         return nodes[0].key;
     }
     
     public Key max() {
-        return nodes[n].key;
+        return nodes[n-1].key;
     }
     
     public boolean isExternal() {
@@ -136,8 +173,33 @@ public class PageST <Key extends Comparable<Key>, Value> {
         return n == M;
     }
     
+    @SuppressWarnings("unchecked")
+    public boolean isEmpty() {
+        return n == 0 || (n == 1 && eq((Key)"*", nodes[0].key)) ;
+    }
+    
     public int size() {
         return n;
+    }
+    
+    public Key floor(Key key) {
+        int flag = 0;
+        for (int i=0; i<n; i++)
+            if (eq(key, nodes[i].key))
+                return key;
+            else if (less(nodes[i].key, key))
+                flag = i;
+        return nodes[flag].key;
+    }
+    
+    public Key ceiling(Key key) {
+        int flag = 0;
+        for (int i=n-1; i>=0; i--)
+            if (eq(key, nodes[i].key))
+                return key;
+            else if (more(nodes[i].key, key))
+                flag = i;
+        return nodes[flag].key;
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })

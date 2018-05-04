@@ -6,6 +6,7 @@ import stdlib.StdOut;
 /**
  * @Description context02.16 
  *              B-tree 符号表
+ *              部分方法不够优雅
  * @author Leon
  * @date 2018-05-03 14:00:00
  */
@@ -16,12 +17,11 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
 
     // create an ordered symbol table
     @SuppressWarnings("unchecked")
-    BTreeST() {
+    public BTreeST() {
         put((Key)"*", null);
     }
 
-    // put key-value pair into the table (remove key from table if value is
-    // null)
+    // put key-value pair into the table (remove key from table if value is null)
     public void put(Key key, Value val) {
         put(root, key, val);
         if (root.isFull()) {
@@ -46,27 +46,74 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     }
 
     // value paired with key (null if key is absent)
-    Value get(Key key) {
-        return null;
+    public Value get(Key key) {
+        return get(root, key);
+    }
+
+    private Value get(PageST<Key, Value> h, Key key) {
+        if (h.isExternal())
+            return h.get(key);
+        return get(h.next(key), key);
     }
 
     // remove key (and its value) from table
-    void delete(Key key) {
+    public void delete(Key key) {
+        delete(root, key);
+    }
+    
+    public Key delete(PageST<Key, Value> page, Key key) {
+        if (page.isExternal()) {
+            Key min = page.min();
+            page.delete(key);
+            return key.equals(min)? page.min(): null;
+        } else {
+            Key dkey = delete(page.next(key), key);
+            if (dkey != null) {
+                page.delete(key, dkey);
+                return dkey;
+            }
+        }
+        return null;
     }
 
     // is there a value paired with key?
     boolean contains(Key key) {
-        return false;
+        return contains(root, key) != null? true: false;
+    }
+
+    private PageST<Key, Value> contains(PageST<Key, Value> h, Key key) {
+        if (h.isExternal())
+            return h.contains(key)? h: null;
+        return contains(h.next(key), key);
     }
 
     // is the table empty?
     boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
 
     // number of key-value pairs
     int size() {
-        return 0;
+        return size(min(), max());
+    }
+    
+    // number of keys in [lo..hi]
+    int size(Key lo, Key hi) {
+        Queue<PageST<Key, Value>> q = new Queue<PageST<Key, Value>>();
+        q.enqueue(root);
+        while (!q.peek().isExternal()) {
+            PageST<Key, Value> p = q.dequeue();
+            for (PageST<Key, Value> pa: p.pages())
+                q.enqueue(pa);
+        }
+        Queue<Key> keys = new Queue<Key>();
+        while (!q.isEmpty()) {
+            PageST<Key, Value> p = q.dequeue();
+            for (Key k: p.keys())
+                if (k.compareTo(lo) >= 0 && k.compareTo(hi) <= 0)
+                    keys.enqueue(k);
+        }
+        return keys.size();
     }
 
     // smallest key
@@ -83,19 +130,42 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
 
     // largest key
     Key max() {
-        return null;
+        return max(root);
+    }
+    
+    private Key max(PageST<Key, Value> node) {
+        Key key = node.max();
+        PageST<Key, Value> next = node.next(key);
+        if (next == null) return key;
+        return max(next);
     }
 
     // largest key less than or equal to key
-    Key floor(Key key) {
-        return null;
+    public Key floor(Key key) {
+        return floor(root, key);
+    }
+    
+    private Key floor(PageST<Key, Value> page, Key key) {
+        if (page.isExternal())
+            return page.floor(key);
+        Key cur = page.floor(key);
+        if (cur == null) return null; 
+        return floor(page.next(cur), key);
     }
 
     // smallest key greater than or equal to key
-    Key ceiling(Key key) {
-        return null;
+    public Key ceiling(Key key) {
+        return ceiling(root, key);
     }
 
+    private Key ceiling(PageST<Key, Value> page, Key key) {
+        if (page.isExternal())
+            return page.ceiling(key);
+        Key cur = page.ceiling(key);
+        if (cur == null) return null; 
+        return ceiling(page.next(cur), key);
+    }
+    
     // number of keys less than key
     int rank(Key key) {
         return 0;
@@ -107,26 +177,67 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     }
 
     // delete smallest key
-    void deleteMin() {
+    public void deleteMin() {
+        deleteMin(root);
     }
 
+    private boolean deleteMin(PageST<Key, Value> page) {
+        if (page.isExternal()) {
+            page.delete(page.min());
+        } else {
+            Key key = page.min();
+            boolean isDelete = deleteMin(page.next(key));
+            if (isDelete)
+                page.delete(key);
+        }
+        if (page.isEmpty())
+            return true;
+        return false;
+    }
+    
     // delete largest key
-    void deleteMax() {
+    public void deleteMax() {
+        deleteMax(root);
     }
 
-    // number of keys in [lo..hi]
-    int size(Key lo, Key hi) {
-        return 0;
+    private boolean deleteMax(PageST<Key, Value> page) {
+        if (page.isExternal()) {
+            page.delete(page.max());
+        } else {
+            Key key = page.max();
+            boolean isDelete = deleteMax(page.next(key));
+            if (isDelete)
+                page.delete(key);
+        }
+        if (page.isEmpty())
+            return true;
+        return false;
     }
 
     // keys in [lo..hi], in sorted order
     Iterable<Key> keys(Key lo, Key hi) {
-        return null;
+        
+        Queue<PageST<Key, Value>> q = new Queue<PageST<Key, Value>>();
+        q.enqueue(root);
+        while (!q.peek().isExternal()) {
+            PageST<Key, Value> p = q.dequeue();
+            for (PageST<Key, Value> pa: p.pages())
+                q.enqueue(pa);
+        }
+        Queue<Key> keys = new Queue<Key>();
+        while (!q.isEmpty()) {
+            PageST<Key, Value> p = q.dequeue();
+            for (Key k: p.keys())
+                if (k.compareTo(lo) >= 0 && k.compareTo(hi) <= 0)
+                    keys.enqueue(k);
+        }
+        return keys;
+        
     }
 
     // all keys in the table, in sorted order
     Iterable<Key> keys() {
-        return null;
+        return keys(min(), max());
     }
 
     public String toString() {
@@ -159,6 +270,37 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
             st.put(keysArray[i], valsArray[i]);
         
         StdOut.println(st);
+        
+        StdOut.println(st.get("L"));
+        
+        st.deleteMax();
+        StdOut.println(st);
+        st.deleteMax();
+        StdOut.println(st);
+        st.deleteMax();
+        StdOut.println(st);
+        
+        StdOut.println(st.get("D"));
+        
+        st.deleteMin();
+        StdOut.println(st);
+        st.deleteMin();
+        StdOut.println(st);
+        st.deleteMin();
+        StdOut.println(st);
+        
+        st.delete("D");
+        StdOut.println(st);
+        StdOut.println(st.get("D"));
+        
+        StdOut.println(st.floor("D"));
+        StdOut.println(st.ceiling("D"));
+        
+        StdOut.println(st.keys());
+        StdOut.println(st.keys("G", "M"));
+        
+        StdOut.println(st.size());
+        StdOut.println(st.size("G", "M"));
     }
 
 }
