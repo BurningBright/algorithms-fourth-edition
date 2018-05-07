@@ -62,9 +62,11 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     }
     
     public Key delete(PageST<Key, Value> page, Key key) {
+        // 找到key所在的底层节点并删除
         if (page.isExternal()) {
             Key min = page.min();
             page.delete(key);
+            // 删除路径上的空节点
             return key.equals(min)? page.min(): null;
         } else {
             Key dkey = delete(page.next(key), key);
@@ -148,6 +150,7 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     private Key floor(PageST<Key, Value> page, Key key) {
         if (page.isExternal())
             return page.floor(key);
+        // 不断寻找当前页中，不大于floor的最大键
         Key cur = page.floor(key);
         if (cur == null) return null; 
         return floor(page.next(cur), key);
@@ -162,6 +165,7 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
         if (page.isExternal())
             return page.ceiling(key);
         Key cur = page.ceiling(key);
+        // 不断寻找当前页中，不小于ceiling的最小键
         if (cur == null) return null; 
         return ceiling(page.next(cur), key);
     }
@@ -182,6 +186,7 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     }
 
     private boolean deleteMin(PageST<Key, Value> page) {
+        // 找到最下层，最左位置的节点并删除
         if (page.isExternal()) {
             page.delete(page.min());
         } else {
@@ -201,6 +206,7 @@ public class BTreeST<Key extends Comparable<Key>, Value> {
     }
 
     private boolean deleteMax(PageST<Key, Value> page) {
+        // 找到最下层，最右位置的节点并删除
         if (page.isExternal()) {
             page.delete(page.max());
         } else {

@@ -78,6 +78,7 @@ public class BTreeSET<Key extends Comparable<Key>> {
         Queue<Page<Key>> q = new Queue<Page<Key>>();
         q.enqueue(page);
         int prv = 1;
+        // 广度分层遍历B-tree
         while(!q.isEmpty()) {
             Page<Key> p = q.dequeue();
             sb.append(p.toString()).append(" | ");

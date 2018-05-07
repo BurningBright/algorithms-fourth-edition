@@ -34,6 +34,7 @@ public class Page<Key extends Comparable<Key>> {
     void put(Key key) {
         if (key == null) return;
         int flag = 0;
+        // 腾出正确位置给新键
         for (int i=0; i<M; i++) {
             if (keys[i]!= null && eq(key, keys[i]))
                 return;
@@ -54,6 +55,7 @@ public class Page<Key extends Comparable<Key>> {
         Key key = p.keys().iterator().next();
         boolean isAdd = false;
         int flag = 0;
+        // 腾出正确位置给引用页首键
         for (int i=0; i<M; i++) {
             if (n == 0) {
                 isAdd = true;
@@ -93,6 +95,7 @@ public class Page<Key extends Comparable<Key>> {
     
     // the subtree that could contain the key
     Page<Key> next(Key key) {
+        // 找键的位置，返回引用页
         for (int i=0; i<M; i++) {
             if (keys[i] == null || less(key, keys[i]))
                 return pages[i-1];
@@ -114,6 +117,7 @@ public class Page<Key extends Comparable<Key>> {
     // move the highest-ranking half of the keys in the page to a new page
     Page<Key> split() {
         Page<Key> another = new Page<Key>(isExternal, M);
+        // 对半节点数据，放到新节点
         for (int i=M/2; i < M && keys[i] != null; i++) {
             another.put(keys[i]);
             another.put(pages[i]);
