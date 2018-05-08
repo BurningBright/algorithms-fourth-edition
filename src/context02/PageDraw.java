@@ -25,7 +25,7 @@ public class PageDraw<Key extends Comparable<Key>> {
     // Y轴间隔
     private double offsetY    = .05;
     // 格子半宽
-    private double halfWidth  = .01;
+    private double halfWidth  = .009;
     // 格子半高
     private double halfHeight = .015;
     
@@ -247,7 +247,7 @@ public class PageDraw<Key extends Comparable<Key>> {
             StdDraw.rectangle(start + i*(halfWidth*2), y, halfWidth, halfHeight);
             // 绘文字
             if (keys[i] != null) 
-                StdDraw.text(start + i*(halfWidth*2), y, keys[i].toString());
+                StdDraw.text(start + i*(halfWidth*2), y-.005, keys[i].toString());
             // 绘引用
             if (pages[i] != null) {
                 double px = pages[i].getX();
@@ -255,6 +255,10 @@ public class PageDraw<Key extends Comparable<Key>> {
                 StdDraw.line(x, y-halfHeight, px, py+halfHeight);
             }
         }
+    }
+    
+    public void reArrange(int i) {
+        x = .05 + (halfWidth * 2 * M + offsetX) * i;
     }
     
     public String toString() {

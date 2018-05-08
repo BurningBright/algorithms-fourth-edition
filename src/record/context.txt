@@ -11,6 +11,7 @@ context01	collision
 	Science.java						c.1.6		温度、布朗运动
 	SpaceJPCT.java						c.1.0		JPCT空间构件
 context02	B-tree
+	BStarTree.java						c.2.20		B*-Tree 结合兄弟节点，提高空间利用率
 	BTreeDraw.java						c.2.17		画的不够均匀，可能从下而上的思路会更好
 	BTreeSET.java						c.2.15		B-Tree型不重复集合
 	BTreeST.java						c.2.16		符号表完整接口，部分实现不够优雅

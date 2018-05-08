@@ -104,6 +104,23 @@ public class BTreeDraw<Key extends Comparable<Key>> {
         StdDraw.show();
     }
     
+    public void reArrange() {
+        Queue<PageDraw<Key>> q = new Queue<PageDraw<Key>>();
+        q.enqueue(root);
+        // 广度遍历取外节点
+        while(!q.peek().isExternal()) {
+            PageDraw<Key> p = q.dequeue();
+            for (PageDraw<Key> pa: p.pages())
+                q.enqueue(pa);
+        }
+        int i = 0;
+        while(!q.isEmpty()) {
+            PageDraw<Key> p = q.dequeue();
+            p.reArrange(i++);
+        }
+        draw();
+    }
+    
     public int size() {
         Queue<PageDraw<Key>> q = new Queue<PageDraw<Key>>();
         q.enqueue(root);
@@ -164,5 +181,6 @@ public class BTreeDraw<Key extends Comparable<Key>> {
             StdOut.println(s);
         }
         
+        tree.reArrange();
     }
 }
