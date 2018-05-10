@@ -18,3 +18,7 @@ context02	B-tree
 	Page.java							c.2.15		B-Tree型不重复集合
 	PageDraw.java						c.2.17		绘制B-Tree
 	PageST.java							c.2.16		B-Tree符号表，节点对象
+context03	suffix arrays
+	BurrowsWheelerTransform.java		c.3.31		字符矩阵转换、还原
+	LCS.java							c.3.0/30	寻找最长共同字符串
+	SuffixArray.java					c.3.0		后缀数组ADT
