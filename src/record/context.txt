@@ -19,6 +19,9 @@ context02	B-tree
 	PageDraw.java						c.2.17		绘制B-Tree
 	PageST.java							c.2.16		B-Tree符号表，节点对象
 context03	suffix arrays
-	BurrowsWheelerTransform.java		c.3.31		字符矩阵转换、还原
+	BurrowsWheelerTransform.java		c.3.31		回环变位字符矩阵转换、还原
+	CircularString.java					c.3.32		最短k的最短回环变位
 	LCS.java							c.3.0/30	寻找最长共同字符串
+	LongestRepeated.java				c.3.33		至少k次重复的最长子串
+	LongRepeated.java					c.3.34		至少l长的所有子串
 	SuffixArray.java					c.3.0		后缀数组ADT
