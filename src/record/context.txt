@@ -25,3 +25,9 @@ context03	suffix arrays
 	LongestRepeated.java				c.3.33		至少k次重复的最长子串
 	LongRepeated.java					c.3.34		至少l长的所有子串
 	SuffixArray.java					c.3.0		后缀数组ADT
+context04	maxflow
+	CapacityGenerator.java				c.4.41		容量随机生成
+	EuclideanFlowNetwork.java			c.4.42		欧几里德流量图
+	FlowEdge.java						c.4.0		无向流边
+	FlowNetwork.java					c.4.0		无向流图
+	FordFulkerson.java					c.4.0		最小路径步数-最大流量算法
